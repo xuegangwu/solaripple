@@ -42,16 +42,17 @@
       z-index: 1;
     }
     .hero-bg {
-      position: absolute; inset: 0; overflow: hidden; pointer-events: none;
+      position: absolute; inset: 0; overflow: visible; pointer-events: none;
       background: #080B14;
-      z-index: 0;
+      z-index: -1;
     }
     /* Radial gold glow */
     .hero-bg::before {
       content: ''; position: absolute; inset: 0;
       background: radial-gradient(ellipse 80% 60% at 50% 30%, rgba(255,215,0,0.1) 0%, rgba(255,140,0,0.03) 45%, transparent 70%);
       animation: goldGlow 5s ease-in-out infinite;
-      z-index: 1;
+      z-index: 0;
+      pointer-events: none;
     }
     @keyframes goldGlow {
       0%,100% { opacity: 0.6; transform: scale(1); }
