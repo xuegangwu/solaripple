@@ -211,15 +211,35 @@
     .card-group .icon-svg circle:nth-child(3) { animation-delay: 0.6s; }
     .card-group .icon-svg line { animation: nodeConnect 2s ease-in-out infinite; stroke-dasharray: 4 4; }
 
-    /* 3. Master — AGC sine wave */
-    @keyframes waveMove {
-      from { stroke-dashoffset: 0; }
-      to   { stroke-dashoffset: -40; }
+    /* 3. Master — AI agent network pulse */
+    @keyframes pulseDot {
+      0%   { opacity: 0.3; transform: scale(0.8); }
+      50%  { opacity: 1;   transform: scale(1.3); }
+      100% { opacity: 0.3; transform: scale(0.8); }
     }
-    .card-master .icon-svg path {
-      stroke-dasharray: 10 6;
-      animation: waveMove 1.5s linear infinite;
+    @keyframes agentLine {
+      0%,100% { opacity: 0.3; }
+      50%      { opacity: 0.9; }
     }
+    .card-master .icon-svg .pulse-dot {
+      animation: pulseDot 2s ease-in-out infinite;
+      transform-origin: center;
+    }
+    .card-master .icon-svg .pulse-dot:nth-child(7)  { animation-delay: 0s; }
+    .card-master .icon-svg .pulse-dot:nth-child(8)  { animation-delay: 0.33s; }
+    .card-master .icon-svg .pulse-dot:nth-child(9)  { animation-delay: 0.66s; }
+    .card-master .icon-svg .pulse-dot:nth-child(10) { animation-delay: 1s; }
+    .card-master .icon-svg .pulse-dot:nth-child(11) { animation-delay: 1.33s; }
+    .card-master .icon-svg .pulse-dot:nth-child(12) { animation-delay: 1.66s; }
+    .card-master .icon-svg .agent-line {
+      animation: agentLine 2s ease-in-out infinite;
+    }
+    .card-master .icon-svg .agent-line:nth-child(6)  { animation-delay: 0s; }
+    .card-master .icon-svg .agent-line:nth-child(7)  { animation-delay: 0.3s; }
+    .card-master .icon-svg .agent-line:nth-child(8)  { animation-delay: 0.6s; }
+    .card-master .icon-svg .agent-line:nth-child(9)  { animation-delay: 0.9s; }
+    .card-master .icon-svg .agent-line:nth-child(10) { animation-delay: 1.2s; }
+    .card-master .icon-svg .agent-line:nth-child(11) { animation-delay: 1.5s; }
 
     /* 4. Monitor — Growing bars */
     @keyframes barGrow {
@@ -449,14 +469,35 @@
       <div class="card-accent-bar"></div>
       <div class="card-icon">
         <svg class="icon-svg" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M4 20 Q10 8 16 20 Q22 32 28 20 Q34 8 40 20" stroke="#AB7FE8" stroke-width="2" fill="none" stroke-linecap="round"/>
-          <path d="M4 14 Q10 2 16 14 Q22 26 28 14 Q34 2 40 14" stroke="#AB7FE8" stroke-width="1" fill="none" stroke-linecap="round" opacity="0.3"/>
-          <path d="M4 26 Q10 14 16 26 Q22 38 28 26 Q34 14 40 26" stroke="#AB7FE8" stroke-width="1" fill="none" stroke-linecap="round" opacity="0.3"/>
+          <!-- 5 agent nodes orbiting a central brain -->
+          <circle cx="20" cy="20" r="5" fill="rgba(171,127,232,0.25)" stroke="#AB7FE8" stroke-width="1.5"/>
+          <circle cx="20" cy="20" r="2.5" fill="#AB7FE8"/>
+          <!-- Agent nodes -->
+          <circle cx="20" cy="6" r="3.5" fill="rgba(171,127,232,0.15)" stroke="#AB7FE8" stroke-width="1"/>
+          <circle cx="33" cy="13" r="3.5" fill="rgba(171,127,232,0.15)" stroke="#AB7FE8" stroke-width="1"/>
+          <circle cx="33" cy="27" r="3.5" fill="rgba(171,127,232,0.15)" stroke="#AB7FE8" stroke-width="1"/>
+          <circle cx="20" cy="34" r="3.5" fill="rgba(171,127,232,0.15)" stroke="#AB7FE8" stroke-width="1"/>
+          <circle cx="7" cy="27" r="3.5" fill="rgba(171,127,232,0.15)" stroke="#AB7FE8" stroke-width="1"/>
+          <circle cx="7" cy="13" r="3.5" fill="rgba(171,127,232,0.15)" stroke="#AB7FE8" stroke-width="1"/>
+          <!-- Connection lines to center -->
+          <line class="agent-line" x1="20" y1="9" x2="20" y2="15" stroke="#AB7FE8" stroke-width="1" opacity="0.5"/>
+          <line class="agent-line" x1="30" y1="15" x2="24" y2="18" stroke="#AB7FE8" stroke-width="1" opacity="0.5"/>
+          <line class="agent-line" x1="30" y1="25" x2="24" y2="22" stroke="#AB7FE8" stroke-width="1" opacity="0.5"/>
+          <line class="agent-line" x1="20" y1="31" x2="20" y2="25" stroke="#AB7FE8" stroke-width="1" opacity="0.5"/>
+          <line class="agent-line" x1="10" y1="25" x2="16" y2="22" stroke="#AB7FE8" stroke-width="1" opacity="0.5"/>
+          <line class="agent-line" x1="10" y1="15" x2="16" y2="18" stroke="#AB7FE8" stroke-width="1" opacity="0.5"/>
+          <!-- Data pulse dots on lines -->
+          <circle class="pulse-dot" cx="20" cy="12" r="1.5" fill="#AB7FE8"/>
+          <circle class="pulse-dot" cx="27" cy="16.5" r="1.5" fill="#AB7FE8"/>
+          <circle class="pulse-dot" cx="27" cy="23.5" r="1.5" fill="#AB7FE8"/>
+          <circle class="pulse-dot" cx="20" cy="28" r="1.5" fill="#AB7FE8"/>
+          <circle class="pulse-dot" cx="13" cy="23.5" r="1.5" fill="#AB7FE8"/>
+          <circle class="pulse-dot" cx="13" cy="16.5" r="1.5" fill="#AB7FE8"/>
         </svg>
       </div>
-      <span class="card-tag">硬件</span>
-      <h3 data-i18n="products.master.name">RippleMaster 储能一体机</h3>
-      <p data-i18n="products.master.desc">AGC调频 / BMS储能管理 / 五角色Agent模拟器，自研核心部件，成本领先，4.8MWh标准配置。</p>
+      <span class="card-tag">AI智能体</span>
+      <h3 data-i18n="products.master.name">RippleMaster 智能调度Agent</h3>
+      <p data-i18n="products.master.desc">五角色Agent智能调度：AGC调频 / BMS管理 / 需量控制 / 峰谷套利 / 紧急响应，自研算法，4.8MWh储能适配。</p>
       <span class="card-link" data-i18n="products.master.link">了解产品 →</span>
     </a>
 
@@ -614,7 +655,7 @@ var I18N = {
     "products.label": "Core Products", "products.title": "Seven Energy Digital Capabilities", "products.subtitle": "From hardware to software, from real-time monitoring to intelligent decisions — building a complete smart energy loop for industrial parks.",
     "products.enos.name": "EnOS Digital Twin Platform", "products.enos.desc": "Three.js-powered real-time 3D mapping of industrial parks with device status and energy flow visualization, AI forecasting, dispatch and VPP trading.", "products.enos.link": "Open Platform →",
     "products.group.name": "Solar+Storage Group Buy", "products.group.desc": "Commercial & industrial solar-storage group purchasing with IRR calculator, smart matching by region and capacity, credit-rated transaction security.", "products.group.link": "Join Group Buy →",
-    "products.master.name": "RippleMaster Storage System", "products.master.desc": "AGC frequency regulation / BMS storage management / 5-role Agent simulator, self-developed core components, 4.8MWh standard configuration.", "products.master.link": "Learn More →",
+    "products.master.name": "RippleMaster AI Dispatch Agent", "products.master.desc": "Five-role Agent dispatch: AGC regulation / BMS management / Demand control / Peak-valley arbitrage / Emergency response. Self-developed algorithms, 4.8MWh energy storage.", "products.master.link": "Learn More →",
     "products.monitor.name": "Energy Monitoring Center", "products.monitor.desc": "Multi-park, multi-device real-time monitoring, energy intelligence analytics, digital dashboard, ESG carbon emission tracking.", "products.monitor.link": "View Monitor →",
     "products.text.name": "RippleText AI Writer", "products.text.desc": "Enterprise AI text generation engine with multi-language support, auto-drafting energy reports, analysis and marketing copy.", "products.text.link": "Try Demo →",
     "products.ops.name": "Ops Management Platform", "products.ops.desc": "Seven-dimensional ops system: live monitoring, work orders, business dashboard, software assets, production, supply chain, cost analysis.", "products.ops.link": "Open Ops →",
@@ -637,7 +678,7 @@ var I18N = {
     "products.label": "コア製品", "products.title": "七大エネルギーデジタル能力", "products.subtitle": "ハードウェアからソフトウェアへ、リアルタイム監視からインテリジェントな意思決定へmdash;工業団地向けの完全なスマートエネルギーループを構築します。",
     "products.enos.name": "EnOS デジタルツインプラットフォーム", "products.enos.desc": "Three.jsベースの工業団地リアルタイム3Dマッピング、設備状態とエネルギー流れの可視化、AI予測调度とVPP仮想発電所取引。", "products.enos.link": "プラットフォームを開く →",
     "products.group.name": "太陽光・蓄電团购プラットフォーム", "products.group.desc": "工商業用太陽光・蓄電設備团购購入、IRR試算、同省同容量自動マッチング、信用格付けによる取引安全保障。", "products.group.link": "团购に参加 →",
-    "products.master.name": "RippleMaster 蓄電一体機", "products.master.desc": "AGC周波数調整/BMS蓄電管理/5役Agentシミュレーター、自研核心部品、4.8MWh標準構成。", "products.master.link": "製品詳細 →",
+    "products.master.name": "RippleMaster AIディスパッチAgent", "products.master.desc": "5役Agentディスパッチ：AGC周波数調整/BMS管理/デマンド制御/ピークバレーアービトラージ/緊急対応。自研アルゴリズム、4.8MWh蓄電対応。", "products.master.link": "製品詳細 →",
     "products.monitor.name": "エネルギーモニタリングセンター", "products.monitor.desc": "複数団地・複数設備リアルタイム監視、エネルギーインテリジェンス分析、ESG二酸化炭素排出量追跡。", "products.monitor.link": "監視を見る →",
     "products.text.name": "RippleText AIライティング", "products.text.desc": "企業向けAI文章生成エンジン、多言語対応、能源レポート・分析文・マーケティングコピーの自動作成。", "products.text.link": "Demoを試す →",
     "products.ops.name": "運用管理プラットフォーム", "products.ops.desc": "7次元運用体系：ライブ監視/作業チケット/ビジネスダッシュボード/ソフトウェア資産/生産管理/サプライチェーン/コスト分析。", "products.ops.link": "運用プラットフォームを開く →",
