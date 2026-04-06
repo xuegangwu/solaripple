@@ -39,6 +39,7 @@
     .hero {
       min-height: 100vh; display: flex; flex-direction: column; justify-content: center;
       align-items: center; text-align: center; padding: 120px 24px 100px; position: relative; overflow: hidden;
+      z-index: 1;
     }
     .hero-bg {
       position: absolute; inset: 0; overflow: hidden; pointer-events: none;
@@ -93,6 +94,7 @@
     /* Rising gold particles */
     .particles {
       position: absolute; inset: 0; overflow: hidden; pointer-events: none;
+      z-index: 0;
     }
     .particle {
       position: absolute; bottom: -10px;
@@ -479,7 +481,7 @@
         </svg>
       </div>
     </div><div class="particles"><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div></div></div>
-  <div class="hero-eyebrow">⚡ 数字化能源基金 · Digital Energy Fund</div>
+  <div class="hero-eyebrow" style="position:relative;z-index:2">⚡ 数字化能源基金 · Digital Energy Fund</div>
   <h1>全链路数字化<br/>赋能<em>新能源资产</em></h1>
   <p class="hero-sub">RippleFund 以数字化平台为核心，专注中国及亚太工商业光储项目的开发投资、运营管理与电力交易，构建能源资产与金融服务闭环生态。</p>
   <div class="hero-fund-stat">
