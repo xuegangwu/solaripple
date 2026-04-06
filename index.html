@@ -241,15 +241,26 @@
     .card-master .icon-svg .agent-line:nth-child(10) { animation-delay: 1.2s; }
     .card-master .icon-svg .agent-line:nth-child(11) { animation-delay: 1.5s; }
 
-    /* 4. Monitor — Growing bars */
-    @keyframes barGrow {
-      0%,100% { transform: scaleY(1); }
-      50%      { transform: scaleY(1.25); }
+    /* 4. Monitor — Radar sweep */
+    @keyframes radarSweep {
+      from { transform: rotate(0deg); transform-origin: 20px 20px; }
+      to   { transform: rotate(360deg); transform-origin: 20px 20px; }
     }
-    .card-monitor .icon-svg rect { transform-origin: bottom; animation: barGrow 1.8s ease-in-out infinite; }
-    .card-monitor .icon-svg rect:nth-child(1) { animation-delay: 0s; }
-    .card-monitor .icon-svg rect:nth-child(2) { animation-delay: 0.2s; }
-    .card-monitor .icon-svg rect:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes radarDot {
+      0%,100% { opacity: 0.3; }
+      50%      { opacity: 1; }
+    }
+    .card-monitor .icon-svg .radar-sweep {
+      animation: radarSweep 3s linear infinite;
+      transform-origin: 20px 20px;
+    }
+    .card-monitor .icon-svg .radar-dot { animation: radarDot 2s ease-in-out infinite; }
+    .card-monitor .icon-svg .radar-dot:nth-child(4) { animation-delay: 0s; }
+    .card-monitor .icon-svg .radar-dot:nth-child(5) { animation-delay: 0.4s; }
+    .card-monitor .icon-svg .radar-dot:nth-child(6) { animation-delay: 0.8s; }
+    .card-monitor .icon-svg .radar-dot:nth-child(7) { animation-delay: 1.2s; }
+    .card-monitor .icon-svg .radar-dot:nth-child(8) { animation-delay: 1.6s; }
+    .card-monitor .icon-svg .radar-dot:nth-child(9) { animation-delay: 2s; }
 
     /* 5. RippleText — Typewriter cursor */
     @keyframes cursorBlink {
@@ -506,15 +517,25 @@
       <div class="card-accent-bar"></div>
       <div class="card-icon">
         <svg class="icon-svg" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="4" y="22" width="8" height="14" rx="2" fill="rgba(66,165,245,0.4)" stroke="#42A5F5" stroke-width="1"/>
-          <rect x="16" y="14" width="8" height="22" rx="2" fill="rgba(66,165,245,0.6)" stroke="#42A5F5" stroke-width="1"/>
-          <rect x="28" y="8" width="8" height="28" rx="2" fill="rgba(66,165,245,0.9)" stroke="#42A5F5" stroke-width="1"/>
+          <!-- Radar sweep circle -->
+          <circle cx="20" cy="20" r="14" stroke="rgba(66,165,245,0.2)" stroke-width="1.5" fill="none"/>
+          <circle cx="20" cy="20" r="9" stroke="rgba(66,165,245,0.15)" stroke-width="1" fill="none"/>
+          <circle cx="20" cy="20" r="4" stroke="rgba(66,165,245,0.3)" stroke-width="1" fill="none"/>
+          <!-- Sweep line rotating -->
+          <line class="radar-sweep" x1="20" y1="20" x2="34" y2="20" stroke="#42A5F5" stroke-width="1.5" stroke-linecap="round"/>
+          <!-- Pulse dots on rings -->
+          <circle class="radar-dot" cx="20" cy="6" r="2" fill="#42A5F5"/>
+          <circle class="radar-dot" cx="30" cy="14" r="1.5" fill="#42A5F5" opacity="0.7"/>
+          <circle class="radar-dot" cx="34" cy="26" r="2" fill="#42A5F5"/>
+          <circle class="radar-dot" cx="24" cy="34" r="1.5" fill="#42A5F5" opacity="0.7"/>
+          <circle class="radar-dot" cx="10" cy="30" r="1.5" fill="#42A5F5" opacity="0.7"/>
+          <circle class="radar-dot" cx="6" cy="14" r="2" fill="#42A5F5"/>
         </svg>
       </div>
-      <span class="card-tag">监控</span>
-      <h3 data-i18n="products.monitor.name">能源监控中心</h3>
-      <p data-i18n="products.monitor.desc">多园区多设备实时监控，能源情报实时分析，数字统计面板，ESG碳排放追踪。</p>
-      <span class="card-link" data-i18n="products.monitor.link">查看监控 →</span>
+      <span class="card-tag">情报</span>
+      <h3 data-i18n="products.monitor.name">RippleMonitor 能源情报</h3>
+      <p data-i18n="products.monitor.desc">实时追踪政策动向、大宗商品价格、碳市场动态与行业舆情。AI聚合分析，为投资决策与战略规划提供情报支撑。</p>
+      <span class="card-link" data-i18n="products.monitor.link">查看情报 →</span>
     </a>
 
     <!-- RippleText -->
@@ -618,7 +639,7 @@
         <li><a href="https://enos.solaripple.com" data-i18n="footer.enos">EnOS 数字孪生</a></li>
         <li><a href="https://group.solaripple.com" data-i18n="footer.groupbuy">光储团购</a></li>
         <li><a href="https://master.solaripple.com" data-i18n="footer.master">RippleMaster</a></li>
-        <li><a href="https://monitor.solaripple.com" data-i18n="footer.monitor">能源监控</a></li>
+        <li><a href="https://monitor.solaripple.com" data-i18n="footer.monitor">能源情报</a></li>
         <li><a href="https://rippletext.solaripple.com" data-i18n="footer.text">RippleText</a></li>
       </ul>
     </div>
@@ -656,14 +677,14 @@ var I18N = {
     "products.enos.name": "EnOS Digital Twin Platform", "products.enos.desc": "Three.js-powered real-time 3D mapping of industrial parks with device status and energy flow visualization, AI forecasting, dispatch and VPP trading.", "products.enos.link": "Open Platform →",
     "products.group.name": "Solar+Storage Group Buy", "products.group.desc": "Commercial & industrial solar-storage group purchasing with IRR calculator, smart matching by region and capacity, credit-rated transaction security.", "products.group.link": "Join Group Buy →",
     "products.master.name": "RippleMaster AI Dispatch Agent", "products.master.desc": "Five-role Agent dispatch: AGC regulation / BMS management / Demand control / Peak-valley arbitrage / Emergency response. Self-developed algorithms, 4.8MWh energy storage.", "products.master.link": "Learn More →",
-    "products.monitor.name": "Energy Monitoring Center", "products.monitor.desc": "Multi-park, multi-device real-time monitoring, energy intelligence analytics, digital dashboard, ESG carbon emission tracking.", "products.monitor.link": "View Monitor →",
+    "products.monitor.name": "RippleMonitor Energy Intelligence", "products.monitor.desc": "Real-time tracking of policy trends, commodity prices, carbon market dynamics and industry sentiment. AI-powered analysis supporting investment decisions and strategic planning.", "products.monitor.link": "View Intelligence →",
     "products.text.name": "RippleText AI Writer", "products.text.desc": "Enterprise AI text generation engine with multi-language support, auto-drafting energy reports, analysis and marketing copy.", "products.text.link": "Try Demo →",
     "products.ops.name": "Ops Management Platform", "products.ops.desc": "Seven-dimensional ops system: live monitoring, work orders, business dashboard, software assets, production, supply chain, cost analysis.", "products.ops.link": "Open Ops →",
     "products.storage.name": "RippleStorage 3D Demo", "products.storage.desc": "RippleStorage library powered commercial & industrial energy storage 3D digital twin demo with battery cluster, PCS, HVAC and fire system visualization.", "products.storage.link": "View 3D Demo →",
     "features.0": "Digital Twin · Real-time 3D Visualization", "features.1": "AI Prediction · LSTM Time-series Optimization", "features.2": "VPP Trading · Virtual Power Plant Aggregation", "features.3": "Solar-Storage-Charging · Energy Management Loop", "features.4": "7×24 Ops · 99.9% Uptime",
     "cta.title": "Ready to Upgrade Your Energy Management?", "cta.desc": "Whether for new parks or existing facilities, Solaripple provides full-process services from planning to operation.", "cta.experience": "🌐 Experience EnOS", "cta.group": "🔥 Group Buy Inquiry", "cta.contact": "📧 Contact Us",
     "footer.brand": "Guangzhilian · Dedicated to industrial clean energy digitization, serving Yangtze River Delta industrial parks.", "footer.product": "Products", "footer.solution": "Solutions", "footer.contact": "Contact",
-    "footer.enos": "EnOS Digital Twin", "footer.groupbuy": "Group Buy", "footer.master": "RippleMaster", "footer.monitor": "Energy Monitor", "footer.text": "RippleText",
+    "footer.enos": "EnOS Digital Twin", "footer.groupbuy": "Group Buy", "footer.master": "RippleMaster", "footer.monitor": "Energy Intelligence", "footer.text": "RippleText",
     "footer.solar": "Solar-Storage", "footer.demand": "Demand Management", "footer.peak": "Peak Shaving", "footer.vpp": "VPP Virtual Power Plant",
     "footer.email": "contact@solaripple.com", "footer.location": "Suzhou, Jiangsu",
     "footer.copyright": "© 2026 Guangzhilian (Solaripple) · All Rights Reserved"
@@ -679,14 +700,14 @@ var I18N = {
     "products.enos.name": "EnOS デジタルツインプラットフォーム", "products.enos.desc": "Three.jsベースの工業団地リアルタイム3Dマッピング、設備状態とエネルギー流れの可視化、AI予測调度とVPP仮想発電所取引。", "products.enos.link": "プラットフォームを開く →",
     "products.group.name": "太陽光・蓄電团购プラットフォーム", "products.group.desc": "工商業用太陽光・蓄電設備团购購入、IRR試算、同省同容量自動マッチング、信用格付けによる取引安全保障。", "products.group.link": "团购に参加 →",
     "products.master.name": "RippleMaster AIディスパッチAgent", "products.master.desc": "5役Agentディスパッチ：AGC周波数調整/BMS管理/デマンド制御/ピークバレーアービトラージ/緊急対応。自研アルゴリズム、4.8MWh蓄電対応。", "products.master.link": "製品詳細 →",
-    "products.monitor.name": "エネルギーモニタリングセンター", "products.monitor.desc": "複数団地・複数設備リアルタイム監視、エネルギーインテリジェンス分析、ESG二酸化炭素排出量追跡。", "products.monitor.link": "監視を見る →",
+    "products.monitor.name": "RippleMonitor エネルギーインテリジェンス", "products.monitor.desc": "政策動向・商品価格・炭素市場ダイナミクス・業界舆情をリアルタイム追跡。AI分析で投資判断と戦略立案を支援。", "products.monitor.link": "インテリジェンスを見る →",
     "products.text.name": "RippleText AIライティング", "products.text.desc": "企業向けAI文章生成エンジン、多言語対応、能源レポート・分析文・マーケティングコピーの自動作成。", "products.text.link": "Demoを試す →",
     "products.ops.name": "運用管理プラットフォーム", "products.ops.desc": "7次元運用体系：ライブ監視/作業チケット/ビジネスダッシュボード/ソフトウェア資産/生産管理/サプライチェーン/コスト分析。", "products.ops.link": "運用プラットフォームを開く →",
     "products.storage.name": "RippleStorage 3Dデモ", "products.storage.desc": "RippleStorageライブラリ駆動の工商業蓄電3Dデジタルツインデモ、バッテリー簇/PCS/空側/消防システム全チェーン可視化。", "products.storage.link": "3Dデモを見る →",
     "features.0": "デジタルツイン · リアルタイム3D可視化", "features.1": "AI予測 · LSTM時系列最適化调度", "features.2": "VPP取引 · 仮想発電所アグリゲーション", "features.3": "光储充一体 · エネルギーマネジメントループ", "features.4": "7×24運用 · 99.9%稼働率",
     "cta.title": "エネルギーマネジメントのアップグレード准备好了か？", "cta.desc": "新規団地でも既存設備改造でも、Solarippleチームが計画設計から運用保守まで全流程提供服务。", "cta.experience": "🌐 EnOS プラットフォーム", "cta.group": "🔥 团购 문의", "cta.contact": "📧 お問い合わせ",
     "footer.brand": "光之涟漪 · 産業クリーンエネルギーデジタル化に專注、長江デルタ地帯の工業団地客户提供。", "footer.product": "製品", "footer.solution": "ソリューション", "footer.contact": "お問い合わせ",
-    "footer.enos": "EnOS デジタルツイン", "footer.groupbuy": "团购", "footer.master": "RippleMaster", "footer.monitor": "エネルギーモニタリング", "footer.text": "RippleText",
+    "footer.enos": "EnOS デジタルツイン", "footer.groupbuy": "团购", "footer.master": "RippleMaster", "footer.monitor": "エネルギーインテリジェンス", "footer.text": "RippleText",
     "footer.solar": "光储充一体", "footer.demand": "デマンド管理", "footer.peak": "ピークシフト", "footer.vpp": "VPP 仮想発電所",
     "footer.email": "contact@solaripple.com", "footer.location": "江蘇省蘇州市",
     "footer.copyright": "© 2026 光之涟漪 (Solaripple) · 全著作権所有"
