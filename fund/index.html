@@ -92,6 +92,26 @@
       0%,100% { opacity: 0.5; }
       50% { opacity: 1; }
     }
+    /* ─── ENERGY ICONS LAYER ─── */
+    .energy-icons {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .energy-icon {
+      position: absolute;
+      pointer-events: none;
+      animation: iconFloat ease-in-out infinite;
+    }
+    .energy-icon svg { display: block; }
+    .energy-icon.grid-icon    { top: -40px; right: -40px; animation-duration: 10s; animation-delay: 0.5s; }
+    .energy-icon.solar-icon  { bottom: -30px; left: -30px; animation-duration: 8s; }
+    .energy-icon.inverter-icon{ bottom: -20px; left: 15%; animation-duration: 7s; animation-delay: 1.5s; }
+    .energy-icon.storage-icon { bottom: -20px; right: 18%; animation-duration: 9s; animation-delay: 3s; }
+    .energy-icon.ev-icon     { bottom: -30px; right: -30px; animation-duration: 11s; animation-delay: 2s; }
+
     /* Rising gold particles */
     .particles {
       position: absolute; inset: 0; overflow: hidden; pointer-events: none;
@@ -104,6 +124,7 @@
       box-shadow: 0 0 4px 1px #FFD700, 0 0 12px 3px rgba(255,215,0,0.5);
       animation: rise linear infinite;
     }
+    @keyframes iconFloat { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
     @keyframes rise {
       0% { transform: translateY(0); opacity: 0; }
       8% { opacity: 1; }
@@ -425,7 +446,7 @@
 <section class="hero">
   <div class="hero-bg"><div class="energy-icons">
       <!-- Grid / Power lines (gold) -->
-      <div class="energy-icon" style="top:3%;left:3%;animation-duration:10s;animation-delay:0.5s">
+      <div class="energy-icon grid-icon">
         <svg width="70" height="90" viewBox="0 0 70 90" fill="none">
           <line x1="35" y1="0" x2="35" y2="90" stroke="#FFD700" stroke-width="1.5" stroke-dasharray="8 6" opacity="0.9"/>
           <line x1="0" y1="18" x2="70" y2="18" stroke="#FFD700" stroke-width="1.5" stroke-dasharray="25 10" opacity="0.8"/>
@@ -437,7 +458,7 @@
         </svg>
       </div>
       <!-- Solar panel (gold) -->
-      <div class="energy-icon" style="bottom:5%;left:2%;width:90px;height:60px;animation-duration:8s">
+      <div class="energy-icon solar-icon">
         <svg width="90" height="60" viewBox="0 0 90 60" fill="none">
           <rect x="1" y="1" width="88" height="58" rx="3" stroke="#FFD700" stroke-width="1.5" fill="rgba(255,215,0,0.04)"/>
           <line x1="1" y1="20" x2="89" y2="20" stroke="#FFD700" stroke-width="0.8" opacity="0.6"/>
@@ -449,7 +470,7 @@
         </svg>
       </div>
       <!-- Inverter (gold) -->
-      <div class="energy-icon" style="bottom:9%;left:17%;animation-duration:7s;animation-delay:1.5s">
+      <div class="energy-icon inverter-icon">
         <svg width="50" height="70" viewBox="0 0 50 70" fill="none">
           <rect x="2" y="2" width="46" height="66" rx="6" stroke="#FFD700" stroke-width="1.5" fill="rgba(255,215,0,0.04)"/>
           <path d="M10 35 Q17 20 24 35 Q31 50 38 35" stroke="#FFD700" stroke-width="2" fill="none" stroke-linecap="round"><animate attributeName="opacity" values="1;0.15;1" dur="1.5s" repeatCount="indefinite"/></path>
@@ -459,7 +480,7 @@
         </svg>
       </div>
       <!-- Battery storage (gold) -->
-      <div class="energy-icon" style="bottom:6%;right:16%;animation-duration:9s;animation-delay:3s">
+      <div class="energy-icon storage-icon">
         <svg width="56" height="36" viewBox="0 0 56 36" fill="none">
           <rect x="1" y="1" width="44" height="34" rx="4" stroke="#FFD700" stroke-width="1.5" fill="rgba(255,215,0,0.04)"/>
           <rect x="45" y="10" width="9" height="16" rx="2" stroke="#FFD700" stroke-width="1.5" fill="rgba(255,215,0,0.06)"/>
@@ -471,7 +492,7 @@
         </svg>
       </div>
       <!-- EV car (gold) -->
-      <div class="energy-icon" style="bottom:3%;right:4%;animation-duration:11s;animation-delay:2s">
+      <div class="energy-icon ev-icon">
         <svg width="90" height="42" viewBox="0 0 90 42" fill="none">
           <rect x="8" y="18" width="74" height="18" rx="9" stroke="#FFD700" stroke-width="1.5" fill="rgba(255,215,0,0.04)"/>
           <path d="M26 18 Q45 4 64 18" stroke="#FFD700" stroke-width="1.5" fill="rgba(255,215,0,0.04)"/>
