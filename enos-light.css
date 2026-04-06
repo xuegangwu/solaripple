@@ -1,0 +1,339 @@
+/* ── Solaripple Shared Light Mode v2 ── */
+
+/* CSS Variable overrides for .light class */
+:root.light,
+html.light {
+  --bg: #F5F7FA !important;
+  --bg2: #FFFFFF !important;
+  --bg3: #F0F2F5 !important;
+  --bg4: #E8EBF0 !important;
+  --text: #1a1a2e !important;
+  --text2: #555570 !important;
+  --text3: #8888A0 !important;
+  --border: rgba(0,0,0,0.1) !important;
+  --accent: #FF8C00 !important;
+  --accent2: #FF6B00 !important;
+  --teal: #00A080 !important;
+  --green: #00A060 !important;
+  --yellow: #CC8800 !important;
+  --red: #DD4444 !important;
+  --blue: #2266BB !important;
+  --purple: #7744CC !important;
+  --gold: #CC8800 !important;
+}
+
+body.light {
+  background-color: #F5F7FA !important;
+  color: #1a1a2e !important;
+}
+body.light * {
+  color: inherit !important;
+}
+
+/* Light overrides - per-element */
+body.light h1, body.light h2, body.light h3, body.light h4 { color: #1a1a2e !important; }
+body.light p, body.light span, body.light div { color: #333 !important; }
+
+/* Nav */
+body.light nav,
+body.light header,
+body.light .topbar,
+body.light .navbar,
+body.light .header,
+body.light [class*="nav"],
+body.light [class*="header"] {
+  background: rgba(245,247,250,0.95) !important;
+  border-bottom-color: rgba(0,0,0,0.08) !important;
+  color: #1a1a2e !important;
+}
+body.light .nav-logo { color: #1a1a2e !important; }
+body.light .nav-links a { color: rgba(0,0,0,0.5) !important; }
+body.light .nav-links a:hover { color: #FF8C00 !important; background: rgba(255,140,0,0.08) !important; }
+
+/* Hero */
+body.light .hero { background: linear-gradient(135deg, rgba(255,140,0,0.04), rgba(255,140,0,0.02)) !important; }
+body.light .hero::before { background-image: linear-gradient(rgba(0,0,0,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.04) 1px, transparent 1px) !important; }
+body.light .hero-badge { background: rgba(255,140,0,0.08) !important; color: #FF8C00 !important; border-color: rgba(255,140,0,0.2) !important; }
+
+/* Text on hero */
+body.light h1 { background: linear-gradient(135deg, #FF8C00, #FF4500, #CC3300) !important; -webkit-background-clip: text !important; }
+body.light .sub { color: rgba(0,0,0,0.45) !important; }
+body.light .tagline { color: rgba(0,0,0,0.3) !important; }
+
+/* Buttons */
+body.light .btn-outline { color: rgba(0,0,0,0.6) !important; border-color: rgba(0,0,0,0.15) !important; }
+body.light .btn-outline:hover { color: #FF8C00 !important; border-color: #FF8C00 !important; }
+body.light .btn-primary { background: linear-gradient(135deg, #FF8C00, #FF4500) !important; }
+
+/* Stats */
+body.light .stat .num { color: #FF8C00 !important; }
+body.light .stat .label { color: rgba(0,0,0,0.35) !important; }
+body.light .divider { background: rgba(0,0,0,0.1) !important; }
+
+/* Section titles */
+body.light .section-label { color: rgba(255,140,0,0.7) !important; }
+body.light .section-title { color: #1a1a2e !important; }
+
+/* Cards */
+body.light .card,
+body.light .product-card,
+body.light .feature-card,
+body.light .feat-card,
+body.light .station-card,
+body.light .news-card,
+body.light .dim-card,
+body.light .spec-card,
+body.light .bms-card,
+body.light .ant-card {
+  background: #fff !important;
+  border-color: rgba(0,0,0,0.08) !important;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.07) !important;
+  color: #1a1a2e !important;
+}
+body.light .card h1,
+body.light .card h2,
+body.light .card h3,
+body.light .card h4 { color: #1a1a2e !important; }
+body.light .card p,
+body.light .card span,
+body.light .card div { color: rgba(0,0,0,0.55) !important; }
+
+/* Product/feature visuals - lighten dark backgrounds */
+body.light .visual-enos,
+body.light .visual-vpp,
+body.light .visual-monitor,
+body.light .visual-rippletext,
+body.light .feature-visual,
+body.light .hero-energy {
+  background: #fff !important;
+  border-color: rgba(0,0,0,0.08) !important;
+}
+
+/* 3D visualizations - adjust element brightness for light bg */
+body.light .solar-panel {
+  background: linear-gradient(135deg, #E8F0F8, #D0E0F0) !important;
+  border-color: rgba(100,150,220,0.3) !important;
+}
+body.light .sun {
+  background: radial-gradient(circle, #FF8C00 30%, rgba(255,140,0,0.2) 70%) !important;
+  box-shadow: 0 0 20px rgba(255,140,0,0.4), 0 0 60px rgba(255,140,0,0.15) !important;
+}
+body.light .battery-level { background: linear-gradient(90deg, #00A060, #00CC80) !important; }
+body.light .vpp-center {
+  background: radial-gradient(circle, #7744CC, #9966EE) !important;
+  box-shadow: 0 0 20px rgba(120,80,200,0.5) !important;
+}
+body.light .vpp-node { box-shadow: 0 0 8px currentColor !important; }
+body.light .vpp-line { background: linear-gradient(90deg, transparent, rgba(120,80,200,0.4), transparent) !important; }
+body.light .orbit-particle { box-shadow: 0 0 6px currentColor !important; }
+body.light .cube-face { border-color: rgba(120,80,200,0.4) !important; }
+body.light .cube-face.top { border-color: rgba(255,140,0,0.4) !important; }
+body.light .monitor-label,
+body.light .soc-display,
+body.light .vpp-label,
+body.light .ripple-label { color: rgba(100,80,180,0.6) !important; }
+body.light .live-dot { background: #00A060 !important; }
+
+/* Bar chart - light bg version */
+body.light .bar {
+  background: linear-gradient(180deg, rgba(0,150,120,0.7), rgba(0,150,120,0.25)) !important;
+}
+body.light .bar:nth-child(4) { background: linear-gradient(180deg, rgba(255,140,0,0.7), rgba(255,140,0,0.25)) !important; }
+body.light .bar:nth-child(6) { background: linear-gradient(180deg, rgba(200,80,80,0.7), rgba(200,80,80,0.25)) !important; }
+
+/* Tab links */
+body.light .tab-link { color: rgba(0,0,0,0.4) !important; }
+body.light .tab-link.active,
+body.light .tab-link:hover { color: #FF8C00 !important; border-bottom-color: #FF8C00 !important; }
+
+/* Tab section */
+body.light .tab-section { background: #F5F7FA !important; }
+
+/* Footer */
+body.light footer,
+body.light .footer {
+  background: #fff !important;
+  border-top-color: rgba(0,0,0,0.08) !important;
+  color: #1a1a2e !important;
+}
+body.light footer a,
+body.light .footer a { color: rgba(0,0,0,0.4) !important; }
+body.light footer a:hover { color: #FF8C00 !important; }
+body.light .footer-bottom { border-top-color: rgba(0,0,0,0.06) !important; color: rgba(0,0,0,0.25) !important; }
+body.light .footer-brand p { color: rgba(0,0,0,0.3) !important; }
+
+/* Data tables */
+body.light .data-table th {
+  color: rgba(0,0,0,0.4) !important;
+  background: rgba(0,0,0,0.02) !important;
+  border-bottom-color: rgba(0,0,0,0.08) !important;
+}
+body.light .data-table td { color: rgba(0,0,0,0.5) !important; border-bottom-color: rgba(0,0,0,0.04) !important; }
+
+/* KPI cards */
+body.light .kpi-card {
+  background: #fff !important;
+  border-color: rgba(0,0,0,0.08) !important;
+}
+body.light .kpi-card .val { color: #FF8C00 !important; }
+body.light .kpi-card .lbl { color: rgba(0,0,0,0.35) !important; }
+
+/* Hamburger */
+body.light .hamburger { background: rgba(0,0,0,0.05) !important; border-color: rgba(0,0,0,0.1) !important; }
+body.light .hamburger span { background: rgba(0,0,0,0.4) !important; }
+
+/* Master specific */
+body.light .bms-metric,
+body.light .bms-name,
+body.light .bms-status { color: rgba(0,0,0,0.6) !important; }
+body.light .bms-btn { color: rgba(0,0,0,0.6) !important; border-color: rgba(0,0,0,0.1) !important; }
+body.light .bms-btn.stop { background: rgba(220,60,60,0.08) !important; color: #DD4444 !important; }
+body.light .bms-btn.charge { background: rgba(0,150,100,0.08) !important; color: #00A060 !important; }
+body.light .bms-btn.discharge { background: rgba(0,120,200,0.08) !important; color: #2266BB !important; }
+body.light .feat-icon,
+body.light .stat-box,
+body.light .agc-item { background: rgba(0,0,0,0.02) !important; border-color: rgba(0,0,0,0.06) !important; }
+body.light .hero-stat .num { color: #FF8C00 !important; }
+body.light .hero-stat .label { color: rgba(0,0,0,0.35) !important; }
+
+/* Monitor specific */
+body.light .station-card { background: #fff !important; }
+body.light .news-card { background: rgba(0,0,0,0.01) !important; border-color: rgba(0,0,0,0.06) !important; }
+body.light .dim-card { background: rgba(0,0,0,0.01) !important; }
+body.light .price-item { background: rgba(0,0,0,0.01) !important; }
+body.light .val.red { color: #DD4444 !important; }
+body.light .val.gold { color: #CC8800 !important; }
+body.light .val.accent { color: #FF8C00 !important; }
+body.light .live-dot { box-shadow: 0 0 6px #00A060 !important; }
+
+/* Storage specific */
+body.light .spec-card { background: rgba(0,0,0,0.01) !important; }
+body.light .spec-row { border-bottom-color: rgba(0,0,0,0.05) !important; }
+body.light .lbl { color: rgba(0,0,0,0.4) !important; }
+body.light .num { color: rgba(0,0,0,0.6) !important; }
+body.light .val { color: #1a1a2e !important; }
+body.light .val.teal { color: #00A080 !important; }
+body.light .val.blue { color: #2266BB !important; }
+body.light .val.accent { color: #FF8C00 !important; }
+body.light .ctrl-btn { background: rgba(0,0,0,0.04) !important; border-color: rgba(0,0,0,0.1) !important; color: rgba(0,0,0,0.6) !important; }
+body.light .viewer-load { color: rgba(0,0,0,0.3) !important; }
+body.light .viewer { background: #fff !important; border-color: rgba(0,0,0,0.08) !important; }
+body.light .trend-title { color: rgba(0,0,0,0.7) !important; }
+body.light .trend-meta { color: rgba(0,0,0,0.35) !important; }
+
+/* EnOS React specific */
+body.light .layout-topbar { background: rgba(245,247,250,0.95) !important; border-bottom-color: rgba(0,0,0,0.08) !important; }
+body.light .sidebar-nav { background: rgba(255,255,255,0.95) !important; border-right-color: rgba(0,0,0,0.08) !important; }
+body.light .sidebar-nav-item { color: rgba(0,0,0,0.6) !important; }
+body.light .sidebar-nav-item:hover,
+body.light .sidebar-nav-item.active { background: rgba(102,126,234,0.08) !important; color: #667EEA !important; }
+body.light .layout-main { background: #F5F7FA !important; }
+body.light .topbar-search { background: rgba(0,0,0,0.04) !important; border-color: rgba(0,0,0,0.1) !important; color: rgba(0,0,0,0.3) !important; }
+
+/* Links */
+body.light a:not(.btn):not([class*="product-link"]) { color: #FF8C00 !important; }
+body.light a:not(.btn):not([class*="product-link"]):hover { color: #FF4500 !important; }
+body.light .product-link { color: rgba(255,140,0,0.6) !important; }
+body.light .product-link:hover { color: #FF8C00 !important; }
+body.light .product-content h3 { color: #1a1a2e !important; }
+body.light .product-content p { color: rgba(0,0,0,0.45) !important; }
+
+/* Feature text */
+body.light .feature-text h3 { color: #1a1a2e !important; }
+body.light .feature-text p { color: rgba(0,0,0,0.5) !important; }
+body.light .feature-list li { color: rgba(0,0,0,0.5) !important; }
+
+/* Speed badge */
+body.light .speed-badge { background: rgba(255,140,0,0.1) !important; color: #FF8C00 !important; border-color: rgba(255,140,0,0.25) !important; }
+
+/* Code demo */
+body.light .code-demo { background: rgba(0,0,0,0.03) !important; border-color: rgba(0,0,0,0.08) !important; }
+body.light .code-text { color: rgba(0,0,0,0.6) !important; }
+body.light .code-keyword { color: #DD4444 !important; }
+body.light .code-fn { color: #CC8800 !important; }
+body.light .code-var { color: #00A060 !important; }
+body.light .code-comment { color: rgba(0,0,0,0.3) !important; }
+
+/* Ant Design overrides for EnOS */
+body.light .ant-tabs-tab { color: rgba(0,0,0,0.45) !important; }
+body.light .ant-tabs-tab-active .ant-tabs-tab-btn { color: #FF8C00 !important; }
+body.light .ant-tabs-ink-bar { background: #FF8C00 !important; }
+body.light .ant-input { background: rgba(0,0,0,0.04) !important; border-color: rgba(0,0,0,0.15) !important; color: rgba(0,0,0,0.85) !important; }
+body.light .ant-modal-content { background: #fff !important; }
+body.light .ant-modal-header { background: #fff !important; border-bottom-color: rgba(0,0,0,0.08) !important; }
+body.light .ant-modal-title { color: rgba(0,0,0,0.85) !important; }
+body.light ::-webkit-scrollbar-thumb { background: rgba(255,140,0,0.2) !important; }
+/* solaripple.com - hero specific */
+body.light .hero {
+  background: linear-gradient(180deg, rgba(255,140,0,0.04) 0%, rgba(255,140,0,0.02) 50%, #F5F7FA 100%) !important;
+}
+body.light .hero::before {
+  background-image: linear-gradient(rgba(0,0,0,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.04) 1px, transparent 1px) !important;
+  opacity: 0.8 !important;
+}
+body.light .hero-badge {
+  background: rgba(255,140,0,0.1) !important;
+  color: #CC6600 !important;
+  border-color: rgba(255,140,0,0.3) !important;
+}
+body.light .stat {
+  background: rgba(255,255,255,0.8) !important;
+  border-radius: 12px !important;
+}
+body.light .stat .num {
+  color: #CC6600 !important;
+}
+body.light .stat .label {
+  color: rgba(0,0,0,0.4) !important;
+}
+body.light .divider {
+  background: rgba(0,0,0,0.1) !important;
+}
+/* Stats row container */
+body.light .stats {
+  background: rgba(255,255,255,0.6) !important;
+  border-radius: 16px !important;
+  padding: 20px !important;
+}
+/* Product card visual dark sections */
+body.light .product-visual {
+  background: #fff !important;
+  border-bottom: 1px solid rgba(0,0,0,0.06) !important;
+}
+/* Make hero text stand out in light mode */
+body.light h1 {
+  background: linear-gradient(135deg, #CC5500, #AA3300) !important;
+  -webkit-background-clip: text !important;
+}
+/* Feature rows - ensure white card look */
+body.light .feature-row {
+  background: transparent !important;
+}
+/* Feature visual dark backgrounds */
+body.light .feature-visual {
+  background: #fff !important;
+  border: 1px solid rgba(0,0,0,0.08) !important;
+}
+/* solaripple.com - override ALL dark inline gradient backgrounds */
+body.light .product-visual,
+body.light [style*='background: linear-gradient(180deg, #060D1A'],
+body.light [style*='background: linear-gradient(180deg, rgb(6, 13, 26)'],
+body.light [style*='background: linear-gradient(180deg, #0A0614'],
+body.light [style*='background: linear-gradient(180deg, rgb(10, 6, 20)'],
+body.light [style*='background: linear-gradient(180deg, #030D1A'],
+body.light [style*='background: linear-gradient(180deg, rgb(3, 13, 26)'],
+body.light [style*='background: linear-gradient(180deg, #08050A'],
+body.light [style*='background: linear-gradient(180deg, rgb(8, 5, 10)'] {
+  background: #fff !important;
+}
+/* More Products card - override dark navy */
+body.light [style*='background: linear-gradient(135deg, #13131E'],
+body.light [style*='background: linear-gradient(135deg, rgb(19, 19, 30)'],
+body.light [style*='background: rgba(255,255,255,0.03)'] {
+  background: rgba(255,255,255,0.95) !important;
+}
+/* Hero grid - make lines more visible */
+body.light .hero::before {
+  background-image: linear-gradient(rgba(0,0,0,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.06) 1px, transparent 1px) !important;
+  opacity: 1 !important;
+}
