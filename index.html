@@ -1066,6 +1066,24 @@
 </div></body>
 </html>
 
+
+<script>
+// ── Scroll Animations (IntersectionObserver) ──
+(function() {
+  var els = document.querySelectorAll('.animate-on-scroll, .product-card');
+  if (!els.length) return;
+  var io = new IntersectionObserver(function(items) {
+    items.forEach(function(item) {
+      if (item.isIntersecting) {
+        item.target.classList.add('in-view');
+        io.unobserve(item.target);
+      }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+  els.forEach(function(el) { io.observe(el); });
+})();
+</script>
+
 <script>
 // ── Auth System ──
 function openAuthModal(tab) {
