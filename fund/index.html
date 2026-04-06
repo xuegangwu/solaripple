@@ -420,7 +420,65 @@
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-bg"><div class="particles"><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div></div></div>
+  <div class="hero-bg"><div class="energy-icons">
+      <!-- Grid / Power lines (gold) -->
+      <div class="energy-icon" style="top:3%;left:3%;animation-duration:10s;animation-delay:0.5s">
+        <svg width="70" height="90" viewBox="0 0 70 90" fill="none">
+          <line x1="35" y1="0" x2="35" y2="90" stroke="#FFD700" stroke-width="1.5" stroke-dasharray="8 6" opacity="0.9"/>
+          <line x1="0" y1="18" x2="70" y2="18" stroke="#FFD700" stroke-width="1.5" stroke-dasharray="25 10" opacity="0.8"/>
+          <line x1="0" y1="42" x2="70" y2="42" stroke="#FFD700" stroke-width="1.5" stroke-dasharray="25 10" opacity="0.7"/>
+          <line x1="0" y1="66" x2="70" y2="66" stroke="#FFD700" stroke-width="1.5" stroke-dasharray="25 10" opacity="0.6"/>
+          <circle cx="35" cy="18" r="3.5" fill="#FFD700"><animate attributeName="opacity" values="0.3;1;0.3" dur="2s" repeatCount="indefinite"/></circle>
+          <circle cx="35" cy="42" r="3.5" fill="#FFD700"><animate attributeName="opacity" values="0.3;1;0.3" dur="2s" begin="0.5s" repeatCount="indefinite"/></circle>
+          <circle cx="35" cy="66" r="3.5" fill="#FFD700"><animate attributeName="opacity" values="0.3;1;0.3" dur="2s" begin="1s" repeatCount="indefinite"/></circle>
+        </svg>
+      </div>
+      <!-- Solar panel (gold) -->
+      <div class="energy-icon" style="bottom:5%;left:2%;width:90px;height:60px;animation-duration:8s">
+        <svg width="90" height="60" viewBox="0 0 90 60" fill="none">
+          <rect x="1" y="1" width="88" height="58" rx="3" stroke="#FFD700" stroke-width="1.5" fill="rgba(255,215,0,0.04)"/>
+          <line x1="1" y1="20" x2="89" y2="20" stroke="#FFD700" stroke-width="0.8" opacity="0.6"/>
+          <line x1="1" y1="40" x2="89" y2="40" stroke="#FFD700" stroke-width="0.8" opacity="0.6"/>
+          <line x1="30" y1="1" x2="30" y2="59" stroke="#FFD700" stroke-width="0.8" opacity="0.6"/>
+          <line x1="60" y1="1" x2="60" y2="59" stroke="#FFD700" stroke-width="0.8" opacity="0.6"/>
+          <rect x="-20" y="0" width="25" height="60" fill="url(#goldSunSweep)" opacity="0.7"><animate attributeName="x" from="-20" to="90" dur="5s" repeatCount="indefinite"/></rect>
+          <defs><linearGradient id="goldSunSweep" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="rgba(255,200,80,0)"/><stop offset="50%" stop-color="rgba(255,200,80,0.5)"/><stop offset="100%" stop-color="rgba(255,200,80,0)"/></linearGradient></defs>
+        </svg>
+      </div>
+      <!-- Inverter (gold) -->
+      <div class="energy-icon" style="bottom:9%;left:17%;animation-duration:7s;animation-delay:1.5s">
+        <svg width="50" height="70" viewBox="0 0 50 70" fill="none">
+          <rect x="2" y="2" width="46" height="66" rx="6" stroke="#FFD700" stroke-width="1.5" fill="rgba(255,215,0,0.04)"/>
+          <path d="M10 35 Q17 20 24 35 Q31 50 38 35" stroke="#FFD700" stroke-width="2" fill="none" stroke-linecap="round"><animate attributeName="opacity" values="1;0.15;1" dur="1.5s" repeatCount="indefinite"/></path>
+          <circle cx="38" cy="14" r="3" fill="#FFD700"><animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite"/></circle>
+          <rect x="8" y="52" width="10" height="8" rx="1" stroke="#FFD700" stroke-width="1.2" opacity="0.8"/>
+          <rect x="32" y="52" width="10" height="8" rx="1" stroke="#FFD700" stroke-width="1.2" opacity="0.8"/>
+        </svg>
+      </div>
+      <!-- Battery storage (gold) -->
+      <div class="energy-icon" style="bottom:6%;right:16%;animation-duration:9s;animation-delay:3s">
+        <svg width="56" height="36" viewBox="0 0 56 36" fill="none">
+          <rect x="1" y="1" width="44" height="34" rx="4" stroke="#FFD700" stroke-width="1.5" fill="rgba(255,215,0,0.04)"/>
+          <rect x="45" y="10" width="9" height="16" rx="2" stroke="#FFD700" stroke-width="1.5" fill="rgba(255,215,0,0.06)"/>
+          <rect x="5" y="26" width="36" height="5" rx="2" fill="rgba(255,215,0,0.1)"/>
+          <rect x="5" y="26" width="30" height="5" rx="2" fill="#FFD700" opacity="0.9"><animate attributeName="width" values="30;38;30" dur="3s" repeatCount="indefinite"/></rect>
+          <line x1="14" y1="8" x2="22" y2="8" stroke="#FFD700" stroke-width="2" stroke-linecap="round"/>
+          <line x1="18" y1="4" x2="18" y2="12" stroke="#FFD700" stroke-width="2" stroke-linecap="round"/>
+          <line x1="14" y1="20" x2="22" y2="20" stroke="#FFD700" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <!-- EV car (gold) -->
+      <div class="energy-icon" style="bottom:3%;right:4%;animation-duration:11s;animation-delay:2s">
+        <svg width="90" height="42" viewBox="0 0 90 42" fill="none">
+          <rect x="8" y="18" width="74" height="18" rx="9" stroke="#FFD700" stroke-width="1.5" fill="rgba(255,215,0,0.04)"/>
+          <path d="M26 18 Q45 4 64 18" stroke="#FFD700" stroke-width="1.5" fill="rgba(255,215,0,0.04)"/>
+          <path d="M30 17 Q45 6 60 17" stroke="#FFD700" stroke-width="1" fill="none" opacity="0.6"/>
+          <circle cx="26" cy="36" r="6" stroke="#FFD700" stroke-width="1.5" fill="rgba(255,215,0,0.06)"><animateTransform attributeName="transform" type="rotate" from="0 26 36" to="360 26 36" dur="3s" repeatCount="indefinite"/></circle>
+          <circle cx="64" cy="36" r="6" stroke="#FFD700" stroke-width="1.5" fill="rgba(255,215,0,0.06)"><animateTransform attributeName="transform" type="rotate" from="0 64 36" to="360 64 36" dur="3s" repeatCount="indefinite"/></circle>
+          <circle cx="8" cy="27" r="3" fill="#FFD700" opacity="0.7"><animate attributeName="opacity" values="0.7;0.2;0.7" dur="2s" repeatCount="indefinite"/></circle>
+        </svg>
+      </div>
+    </div><div class="particles"><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div></div></div>
   <div class="hero-eyebrow">⚡ 数字化能源基金 · Digital Energy Fund</div>
   <h1>全链路数字化<br/>赋能<em>新能源资产</em></h1>
   <p class="hero-sub">RippleFund 以数字化平台为核心，专注中国及亚太工商业光储项目的开发投资、运营管理与电力交易，构建能源资产与金融服务闭环生态。</p>
