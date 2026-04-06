@@ -186,6 +186,76 @@
     .card-ops    { --accent: #FFB74D; --accent-bg: rgba(255,183,77,0.08); --accent-border: rgba(255,183,77,0.2); --accent-glow: rgba(255,183,77,0.12); }
     .card-storage{ --accent: #EF5350; --accent-bg: rgba(239,83,80,0.08); --accent-border: rgba(239,83,80,0.2); --accent-glow: rgba(239,83,80,0.12); }
 
+    /* ─── CARD ICON ANIMATIONS ─── */
+    .card-icon { position: relative; overflow: visible; }
+
+    /* 1. EnOS — 3D rotating cube wireframe */
+    @keyframes cube3d {
+      from { transform: rotateX(-15deg) rotateY(0deg); }
+      to   { transform: rotateX(-15deg) rotateY(360deg); }
+    }
+    .card-enos .card-icon { perspective: 80px; }
+    .card-enos .icon-svg { animation: cube3d 6s linear infinite; transform-style: preserve-3d; }
+
+    /* 2. Group — 3 pulsing nodes with connecting lines */
+    @keyframes nodePulse {
+      0%,100% { r: 4; opacity: 1; }
+      50%      { r: 6; opacity: 0.7; }
+    }
+    @keyframes nodeConnect {
+      0%,100% { stroke-dashoffset: 0; opacity: 0.4; }
+      50%      { stroke-dashoffset: 8; opacity: 0.8; }
+    }
+    .card-group .icon-svg circle { animation: nodePulse 2s ease-in-out infinite; transform-origin: center; }
+    .card-group .icon-svg circle:nth-child(2) { animation-delay: 0.3s; }
+    .card-group .icon-svg circle:nth-child(3) { animation-delay: 0.6s; }
+    .card-group .icon-svg line { animation: nodeConnect 2s ease-in-out infinite; stroke-dasharray: 4 4; }
+
+    /* 3. Master — AGC sine wave */
+    @keyframes waveMove {
+      from { stroke-dashoffset: 0; }
+      to   { stroke-dashoffset: -40; }
+    }
+    .card-master .icon-svg path {
+      stroke-dasharray: 10 6;
+      animation: waveMove 1.5s linear infinite;
+    }
+
+    /* 4. Monitor — Growing bars */
+    @keyframes barGrow {
+      0%,100% { transform: scaleY(1); }
+      50%      { transform: scaleY(1.25); }
+    }
+    .card-monitor .icon-svg rect { transform-origin: bottom; animation: barGrow 1.8s ease-in-out infinite; }
+    .card-monitor .icon-svg rect:nth-child(1) { animation-delay: 0s; }
+    .card-monitor .icon-svg rect:nth-child(2) { animation-delay: 0.2s; }
+    .card-monitor .icon-svg rect:nth-child(3) { animation-delay: 0.4s; }
+
+    /* 5. RippleText — Typewriter cursor */
+    @keyframes cursorBlink {
+      0%,100% { opacity: 1; }
+      50%      { opacity: 0; }
+    }
+    .card-text .icon-svg .tcursor { animation: cursorBlink 0.9s step-end infinite; }
+
+    /* 6. Ops — Rotating gear */
+    @keyframes gearSpin {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+    .card-ops .icon-svg .gear { animation: gearSpin 4s linear infinite; transform-origin: center; }
+
+    /* 7. Storage — Battery charging bars */
+    @keyframes chargeUp {
+      0%   { opacity: 0.4; }
+      50%  { opacity: 1; }
+      100% { opacity: 0.4; }
+    }
+    .card-storage .icon-svg .bat-bar { animation: chargeUp 2s ease-in-out infinite; transform-origin: bottom; }
+    .card-storage .icon-svg .bat-bar:nth-of-type(1) { animation-delay: 0s; }
+    .card-storage .icon-svg .bat-bar:nth-of-type(2) { animation-delay: 0.35s; }
+    .card-storage .icon-svg .bat-bar:nth-of-type(3) { animation-delay: 0.7s; }
+
     /* ─── FEATURE STRIP ─── */
     .feature-strip {
       padding: 60px; background: rgba(0,212,170,0.04);
@@ -334,7 +404,16 @@
     <!-- EnOS 数字孪生 -->
     <a href="https://enos.solaripple.com" class="product-card card-enos" target="_self">
       <div class="card-accent-bar"></div>
-      <div class="card-icon">🪩</div>
+      <div class="card-icon">
+        <svg class="icon-svg" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20 4 L36 12 L36 28 L20 36 L4 28 L4 12 Z" stroke="#00D4AA" stroke-width="1.5" fill="none"/>
+          <path d="M20 4 L20 20 L36 12" stroke="#00D4AA" stroke-width="1" fill="none" opacity="0.5"/>
+          <path d="M20 20 L4 12" stroke="#00D4AA" stroke-width="1" fill="none" opacity="0.5"/>
+          <path d="M20 20 L20 36" stroke="#00D4AA" stroke-width="1" fill="none" opacity="0.5"/>
+          <path d="M20 20 L20 4" stroke="#00D4AA" stroke-width="1" fill="none" opacity="0.5"/>
+          <circle cx="20" cy="20" r="3" fill="#00D4AA" opacity="0.8"/>
+        </svg>
+      </div>
       <span class="card-tag">⭐ 核心平台</span>
       <h3 data-i18n="products.enos.name">EnOS 数字孪生平台</h3>
       <p data-i18n="products.enos.desc">Three.js驱动的工业园区三维实时映射，设备状态与能量流动可视化，AI预测调度与VPP虚拟电厂交易。</p>
@@ -344,7 +423,21 @@
     <!-- Groupbuy -->
     <a href="https://group.solaripple.com" class="product-card card-group" target="_self">
       <div class="card-accent-bar"></div>
-      <div class="card-icon">🤝</div>
+      <div class="card-icon">
+        <svg class="icon-svg" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <line x1="8" y1="20" x2="32" y2="20" stroke="#FF7043" stroke-width="1.5" stroke-dasharray="4 4"/>
+          <line x1="14" y1="10" x2="26" y2="30" stroke="#FF7043" stroke-width="1.5" stroke-dasharray="4 4"/>
+          <line x1="26" y1="10" x2="14" y2="30" stroke="#FF7043" stroke-width="1.5" stroke-dasharray="4 4"/>
+          <circle cx="8" cy="20" r="5" fill="rgba(255,112,67,0.2)" stroke="#FF7043" stroke-width="1.5"/>
+          <circle cx="32" cy="20" r="5" fill="rgba(255,112,67,0.2)" stroke="#FF7043" stroke-width="1.5"/>
+          <circle cx="20" cy="7" r="5" fill="rgba(255,112,67,0.2)" stroke="#FF7043" stroke-width="1.5"/>
+          <circle cx="20" cy="33" r="5" fill="rgba(255,112,67,0.2)" stroke="#FF7043" stroke-width="1.5"/>
+          <circle cx="8" cy="20" r="2.5" fill="#FF7043"/>
+          <circle cx="32" cy="20" r="2.5" fill="#FF7043"/>
+          <circle cx="20" cy="7" r="2.5" fill="#FF7043"/>
+          <circle cx="20" cy="33" r="2.5" fill="#FF7043"/>
+        </svg>
+      </div>
       <span class="card-tag">🔥 团购</span>
       <h3 data-i18n="products.group.name">光储团购平台</h3>
       <p data-i18n="products.group.desc">工商业光储设备拼团购买，IRR智能测算，同省同容量自动匹配，信用评级保障交易安全。</p>
@@ -354,7 +447,13 @@
     <!-- Master -->
     <a href="https://master.solaripple.com" class="product-card card-master" target="_self">
       <div class="card-accent-bar"></div>
-      <div class="card-icon">⚡</div>
+      <div class="card-icon">
+        <svg class="icon-svg" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M4 20 Q10 8 16 20 Q22 32 28 20 Q34 8 40 20" stroke="#AB7FE8" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <path d="M4 14 Q10 2 16 14 Q22 26 28 14 Q34 2 40 14" stroke="#AB7FE8" stroke-width="1" fill="none" stroke-linecap="round" opacity="0.3"/>
+          <path d="M4 26 Q10 14 16 26 Q22 38 28 26 Q34 14 40 26" stroke="#AB7FE8" stroke-width="1" fill="none" stroke-linecap="round" opacity="0.3"/>
+        </svg>
+      </div>
       <span class="card-tag">硬件</span>
       <h3 data-i18n="products.master.name">RippleMaster 储能一体机</h3>
       <p data-i18n="products.master.desc">AGC调频 / BMS储能管理 / 五角色Agent模拟器，自研核心部件，成本领先，4.8MWh标准配置。</p>
@@ -364,7 +463,13 @@
     <!-- Monitor -->
     <a href="https://monitor.solaripple.com" class="product-card card-monitor" target="_self">
       <div class="card-accent-bar"></div>
-      <div class="card-icon">📊</div>
+      <div class="card-icon">
+        <svg class="icon-svg" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="4" y="22" width="8" height="14" rx="2" fill="rgba(66,165,245,0.4)" stroke="#42A5F5" stroke-width="1"/>
+          <rect x="16" y="14" width="8" height="22" rx="2" fill="rgba(66,165,245,0.6)" stroke="#42A5F5" stroke-width="1"/>
+          <rect x="28" y="8" width="8" height="28" rx="2" fill="rgba(66,165,245,0.9)" stroke="#42A5F5" stroke-width="1"/>
+        </svg>
+      </div>
       <span class="card-tag">监控</span>
       <h3 data-i18n="products.monitor.name">能源监控中心</h3>
       <p data-i18n="products.monitor.desc">多园区多设备实时监控，能源情报实时分析，数字统计面板，ESG碳排放追踪。</p>
@@ -374,7 +479,15 @@
     <!-- RippleText -->
     <a href="https://rippletext.solaripple.com" class="product-card card-text" target="_self">
       <div class="card-accent-bar"></div>
-      <div class="card-icon">✍️</div>
+      <div class="card-icon">
+        <svg class="icon-svg" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="4" y="8" width="32" height="24" rx="4" fill="rgba(38,198,169,0.1)" stroke="#26C6A9" stroke-width="1.5"/>
+          <line x1="8" y1="14" x2="22" y2="14" stroke="#26C6A9" stroke-width="2" stroke-linecap="round"/>
+          <line x1="8" y1="20" x2="30" y2="20" stroke="#26C6A9" stroke-width="2" stroke-linecap="round"/>
+          <line x1="8" y1="26" x2="18" y2="26" stroke="#26C6A9" stroke-width="2" stroke-linecap="round"/>
+          <rect class="tcursor" x="28" y="12" width="2" height="14" rx="1" fill="#26C6A9"/>
+        </svg>
+      </div>
       <span class="card-tag">AI</span>
       <h3 data-i18n="products.text.name">RippleText 文本引擎</h3>
       <p data-i18n="products.text.desc">企业级AI文本生成引擎，支持多语言，自动撰写能源报告、分析文案与营销内容。</p>
@@ -384,7 +497,22 @@
     <!-- Ops -->
     <a href="https://ops.solaripple.com" class="product-card card-ops" target="_self">
       <div class="card-accent-bar"></div>
-      <div class="card-icon">🛠️</div>
+      <div class="card-icon">
+        <svg class="icon-svg" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g class="gear">
+            <circle cx="20" cy="20" r="7" fill="rgba(255,183,77,0.15)" stroke="#FFB74D" stroke-width="2"/>
+            <circle cx="20" cy="20" r="3" fill="#FFB74D"/>
+            <rect x="18" y="4" width="4" height="8" rx="2" fill="#FFB74D"/>
+            <rect x="18" y="28" width="4" height="8" rx="2" fill="#FFB74D"/>
+            <rect x="4" y="18" width="8" height="4" rx="2" fill="#FFB74D"/>
+            <rect x="28" y="18" width="8" height="4" rx="2" fill="#FFB74D"/>
+            <rect x="7" y="7" width="4" height="8" rx="2" fill="#FFB74D" transform="rotate(45 9 11)"/>
+            <rect x="29" y="7" width="4" height="8" rx="2" fill="#FFB74D" transform="rotate(-45 31 11)"/>
+            <rect x="7" y="25" width="4" height="8" rx="2" fill="#FFB74D" transform="rotate(-45 9 29)"/>
+            <rect x="29" y="25" width="4" height="8" rx="2" fill="#FFB74D" transform="rotate(45 31 29)"/>
+          </g>
+        </svg>
+      </div>
       <span class="card-tag">运维</span>
       <h3 data-i18n="products.ops.name">运维管理平台</h3>
       <p data-i18n="products.ops.desc">七维度运维体系：live监控 / 运维工单 / 业务驾驶舱 / 软件资产 / 生产管理 / 供应链 / 成本分析。</p>
@@ -394,7 +522,18 @@
     <!-- Storage -->
     <a href="https://storage.solaripple.com" class="product-card card-storage" target="_self">
       <div class="card-accent-bar"></div>
-      <div class="card-icon">🔋</div>
+      <div class="card-icon">
+        <svg class="icon-svg" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="4" y="10" width="26" height="20" rx="4" fill="rgba(239,83,80,0.1)" stroke="#EF5350" stroke-width="1.5"/>
+          <rect x="30" y="16" width="4" height="8" rx="2" fill="rgba(239,83,80,0.3)" stroke="#EF5350" stroke-width="1"/>
+          <rect class="bat-bar" x="7" y="20" width="5" height="7" rx="1.5" fill="#EF5350"/>
+          <rect class="bat-bar" x="14" y="16" width="5" height="11" rx="1.5" fill="#EF5350"/>
+          <rect class="bat-bar" x="21" y="12" width="5" height="15" rx="1.5" fill="#EF5350"/>
+          <path d="M5 10 L13 10" stroke="#EF5350" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M5 30 L13 30" stroke="#EF5350" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M5 10 L5 30" stroke="#EF5350" stroke-width="1.5"/>
+        </svg>
+      </div>
       <span class="card-tag">储能</span>
       <h3 data-i18n="products.storage.name">RippleStorage 储能3D</h3>
       <p data-i18n="products.storage.desc">RippleStorage 库驱动的工商业储能3D数字孪生演示，支持电池簇、PCS、空调、消防系统全链路可视化。</p>
