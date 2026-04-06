@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RippleFund — 数字化能源基金 | 光之涟漪</title>
+  <meta name="description" content="RippleFund 专注中国及亚太工商业光储开发投资、运维与交易，初始基金2亿元人民币，以全链路数字化赋能新能源资产。" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+      background: #080B14; color: #E4E8F0; overflow-x: hidden; line-height: 1.6;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0 60px; height: 64px;
+      background: rgba(8,11,20,0.9); backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .nav-logo { font-size: 20px; font-weight: 800; letter-spacing: -0.3px; }
+    .nav-logo span { color: #FFD700; }
+    .nav-links { display: flex; gap: 36px; list-style: none; }
+    .nav-links a { font-size: 14px; color: rgba(255,255,255,0.5); transition: color 0.2s; }
+    .nav-links a:hover { color: #fff; }
+    .nav-back {
+      padding: 8px 20px; background: rgba(255,215,0,0.1); color: #FFD700;
+      border: 1px solid rgba(255,215,0,0.25); border-radius: 6px;
+      font-size: 13px; font-weight: 600; transition: all 0.2s;
+    }
+    .nav-back:hover { background: rgba(255,215,0,0.2); }
+
+    /* ─── HERO ─── */
+    .hero {
+      min-height: 100vh; display: flex; flex-direction: column; justify-content: center;
+      align-items: center; text-align: center; padding: 120px 24px 100px; position: relative; overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0; pointer-events: none;
+      background: radial-gradient(ellipse 70% 60% at 50% -5%, rgba(255,215,0,0.08) 0%, transparent 65%);
+    }
+    .hero-bg::before {
+      content: ''; position: absolute;
+      width: 700px; height: 700px; border-radius: 50%;
+      top: -150px; left: 50%; transform: translateX(-50%);
+      background: radial-gradient(circle, rgba(255,215,0,0.05) 0%, transparent 70%);
+      animation: heroGlow 6s ease-in-out infinite;
+    }
+    @keyframes heroGlow {
+      0%,100% { opacity: 0.6; transform: translateX(-50%) scale(1); }
+      50% { opacity: 1; transform: translateX(-50%) scale(1.06); }
+    }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 6px 16px; border-radius: 20px;
+      background: rgba(255,215,0,0.08); border: 1px solid rgba(255,215,0,0.2);
+      font-size: 12px; color: #FFD700; letter-spacing: 1px; margin-bottom: 32px; position: relative; z-index: 1;
+    }
+    .hero h1 {
+      font-size: clamp(36px, 5.5vw, 64px); font-weight: 800; line-height: 1.15;
+      background: linear-gradient(135deg, #FFFFFF 0%, #D4AF37 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      max-width: 800px; margin-bottom: 24px; position: relative; z-index: 1;
+    }
+    .hero h1 em { font-style: normal; background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .hero-sub {
+      font-size: 17px; color: rgba(255,255,255,0.42); max-width: 600px;
+      line-height: 1.75; margin-bottom: 48px; position: relative; z-index: 1;
+    }
+    .hero-fund-stat {
+      display: flex; gap: 40px; justify-content: center; flex-wrap: wrap;
+      position: relative; z-index: 1; margin-bottom: 48px;
+    }
+    .fund-stat {
+      text-align: center; padding: 20px 32px;
+      background: rgba(255,215,0,0.05); border: 1px solid rgba(255,215,0,0.12);
+      border-radius: 16px; min-width: 160px;
+    }
+    .fund-stat-num {
+      font-size: 36px; font-weight: 800; color: #FFD700; line-height: 1;
+      background: linear-gradient(135deg, #FFD700, #FFA500);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .fund-stat-label { font-size: 13px; color: rgba(255,255,255,0.4); margin-top: 6px; }
+    .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; position: relative; z-index: 1; }
+    .btn-primary {
+      padding: 14px 32px; background: #FFD700; color: #080B14;
+      border-radius: 8px; font-size: 15px; font-weight: 700; transition: all 0.2s;
+      display: inline-flex; align-items: center; gap: 8px;
+    }
+    .btn-primary:hover { background: #FFE44D; transform: translateY(-1px); box-shadow: 0 8px 24px rgba(255,215,0,0.25); }
+    .btn-ghost {
+      padding: 14px 32px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+      color: rgba(255,255,255,0.7); border-radius: 8px; font-size: 15px; font-weight: 500; transition: all 0.2s;
+    }
+    .btn-ghost:hover { background: rgba(255,255,255,0.09); color: #fff; }
+
+    /* ─── CORE THESIS ─── */
+    .thesis-section { padding: 100px 60px; }
+    .section-header { text-align: center; margin-bottom: 64px; }
+    .section-label {
+      font-size: 11px; font-weight: 700; color: #FFD700; letter-spacing: 2.5px;
+      text-transform: uppercase; margin-bottom: 16px;
+    }
+    .section-title {
+      font-size: clamp(26px, 3.5vw, 42px); font-weight: 800; margin-bottom: 16px;
+      background: linear-gradient(135deg, #FFFFFF 0%, #9BAABB 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .section-desc { font-size: 15px; color: rgba(255,255,255,0.38); max-width: 580px; margin: 0 auto; line-height: 1.7; }
+
+    .thesis-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px; max-width: 1100px; margin: 0 auto;
+    }
+    .thesis-card {
+      background: rgba(255,255,255,0.025); border: 1px solid rgba(255,215,0,0.08);
+      border-radius: 20px; padding: 36px 32px; position: relative; overflow: hidden;
+      transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1), border-color 0.3s;
+    }
+    .thesis-card:hover { transform: translateY(-6px); border-color: rgba(255,215,0,0.3); }
+    .thesis-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, #FFD700, #FFA500);
+    }
+    .thesis-icon {
+      width: 48px; height: 48px; border-radius: 12px; margin-bottom: 20px;
+      display: flex; align-items: center; justify-content: center; font-size: 24px;
+      background: rgba(255,215,0,0.08); border: 1px solid rgba(255,215,0,0.15);
+    }
+    .thesis-card h3 { font-size: 18px; font-weight: 800; margin-bottom: 12px; color: #FFD700; }
+    .thesis-card p { font-size: 13.5px; color: rgba(255,255,255,0.38); line-height: 1.7; }
+
+    /* ─── CHAIN STRIP ─── */
+    .chain-section {
+      padding: 80px 60px; background: rgba(255,215,0,0.03);
+      border-top: 1px solid rgba(255,215,0,0.08);
+      border-bottom: 1px solid rgba(255,215,0,0.08);
+    }
+    .chain-strip {
+      display: flex; justify-content: center; align-items: center; gap: 0;
+      flex-wrap: wrap; max-width: 1000px; margin: 0 auto;
+    }
+    .chain-step {
+      display: flex; flex-direction: column; align-items: center; text-align: center;
+      padding: 24px 36px; position: relative;
+    }
+    .chain-step::after {
+      content: '→'; position: absolute; right: -12px; top: 50%;
+      transform: translateY(-50%); font-size: 20px; color: rgba(255,215,0,0.4);
+    }
+    .chain-step:last-child::after { display: none; }
+    .chain-num {
+      width: 40px; height: 40px; border-radius: 50%; background: rgba(255,215,0,0.12);
+      border: 1px solid rgba(255,215,0,0.3); display: flex; align-items: center;
+      justify-content: center; font-size: 16px; font-weight: 800; color: #FFD700; margin-bottom: 12px;
+    }
+    .chain-step h4 { font-size: 15px; font-weight: 700; color: #FFD700; margin-bottom: 6px; }
+    .chain-step p { font-size: 12px; color: rgba(255,255,255,0.35); }
+
+    /* ─── FOCUS AREAS ─── */
+    .focus-section { padding: 100px 60px; }
+    .focus-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px; max-width: 1100px; margin: 0 auto;
+    }
+    .focus-card {
+      background: rgba(255,255,255,0.025); border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 20px; padding: 32px; transition: transform 0.3s, border-color 0.3s;
+    }
+    .focus-card:hover { transform: translateY(-4px); border-color: rgba(255,215,0,0.25); }
+    .focus-card h3 { font-size: 17px; font-weight: 800; margin-bottom: 10px; color: #fff; }
+    .focus-card p { font-size: 13px; color: rgba(255,255,255,0.38); line-height: 1.7; margin-bottom: 16px; }
+    .focus-tag {
+      display: inline-block; padding: 3px 10px; border-radius: 6px;
+      font-size: 11px; font-weight: 600;
+      background: rgba(255,215,0,0.08); color: #FFD700; border: 1px solid rgba(255,215,0,0.2);
+    }
+
+    /* ─── PLATFORM ─── */
+    .platform-section {
+      padding: 100px 60px;
+      background: linear-gradient(180deg, rgba(255,215,0,0.04) 0%, transparent 100%);
+      border-top: 1px solid rgba(255,215,0,0.08);
+    }
+    .platform-content {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 80px;
+      max-width: 1100px; margin: 0 auto; align-items: center;
+    }
+    .platform-text h2 {
+      font-size: clamp(24px, 3vw, 38px); font-weight: 800; margin-bottom: 20px;
+      background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .platform-text p { font-size: 15px; color: rgba(255,255,255,0.45); line-height: 1.8; margin-bottom: 24px; }
+    .platform-features { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+    .platform-features li {
+      display: flex; align-items: center; gap: 12px;
+      font-size: 14px; color: rgba(255,255,255,0.6);
+    }
+    .platform-features li::before {
+      content: '✓'; width: 22px; height: 22px; background: rgba(255,215,0,0.12);
+      color: #FFD700; border-radius: 50%; display: flex; align-items: center;
+      justify-content: center; font-size: 11px; flex-shrink: 0;
+    }
+    .platform-visual {
+      background: rgba(255,255,255,0.02); border: 1px solid rgba(255,215,0,0.1);
+      border-radius: 20px; padding: 32px;
+    }
+    .platform-visual pre {
+      font-family: 'Fira Code', 'SF Mono', monospace; font-size: 12px;
+      color: rgba(255,215,0,0.7); line-height: 1.8;
+    }
+    .platform-visual .comment { color: rgba(255,255,255,0.3); }
+    .platform-visual .key { color: #FFD700; }
+    .platform-visual .val { color: #90EE90; }
+
+    /* ─── CTA ─── */
+    .cta-section {
+      text-align: center; padding: 100px 24px;
+      background: radial-gradient(ellipse 60% 50% at 50% 100%, rgba(255,215,0,0.06) 0%, transparent 70%);
+    }
+    .cta-section h2 {
+      font-size: clamp(24px, 3.5vw, 42px); font-weight: 800; margin-bottom: 20px;
+      background: linear-gradient(135deg, #FFFFFF 0%, #9BAABB 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .cta-section p { font-size: 15px; color: rgba(255,255,255,0.38); margin-bottom: 48px; max-width: 480px; margin-left: auto; margin-right: auto; }
+    .cta-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+    /* ─── FOOTER ─── */
+    footer {
+      border-top: 1px solid rgba(255,255,255,0.05); padding: 60px 60px 40px;
+    }
+    .footer-grid {
+      display: grid; grid-template-columns: 2fr 1fr 1fr;
+      gap: 60px; max-width: 1100px; margin: 0 auto 60px;
+    }
+    .footer-brand p { font-size: 13px; color: rgba(255,255,255,0.28); line-height: 1.7; margin-top: 16px; max-width: 280px; }
+    .footer-col h4 { font-size: 12px; font-weight: 700; color: rgba(255,255,255,0.4); letter-spacing: 1.5px; margin-bottom: 20px; text-transform: uppercase; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+    .footer-col a { font-size: 13px; color: rgba(255,255,255,0.3); transition: color 0.2s; }
+    .footer-col a:hover { color: #FFD700; }
+    .footer-bottom {
+      text-align: center; padding-top: 40px; border-top: 1px solid rgba(255,255,255,0.05);
+      font-size: 12px; color: rgba(255,255,255,0.18); max-width: 1100px; margin: 0 auto;
+    }
+
+    /* ─── MOBILE ─── */
+    @media (max-width: 1024px) {
+      .platform-content { grid-template-columns: 1fr; gap: 40px; }
+      .chain-step::after { display: none; }
+    }
+    @media (max-width: 768px) {
+      nav { padding: 0 20px; height: 56px; }
+      .nav-links { display: none; }
+      .hero { padding: 100px 20px 72px; min-height: auto; }
+      .hero h1 { font-size: clamp(28px, 8vw, 40px); }
+      .hero-fund-stat { gap: 16px; }
+      .fund-stat { padding: 16px 20px; min-width: 130px; }
+      .fund-stat-num { font-size: 28px; }
+      .thesis-section, .focus-section, .platform-section, .cta-section { padding: 64px 20px; }
+      .chain-section { padding: 60px 20px; }
+      footer { padding: 48px 20px 32px; }
+      .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+      .footer-brand { grid-column: 1 / -1; }
+    }
+
+    /* ─── ANIMATIONS ─── */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-on-scroll {
+      opacity: 0; transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .animate-on-scroll.in-view { opacity: 1; transform: translateY(0); }
+    .section-header { opacity: 0; transform: translateY(20px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .section-header.in-view { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Solar<span>ipple</span></div>
+  <ul class="nav-links">
+    <li><a href="https://solaripple.com/#products">产品方案</a></li>
+    <li><a href="https://enos.solaripple.com">数字孪生平台</a></li>
+    <li><a href="https://solaripple.com/#about">关于我们</a></li>
+  </ul>
+  <a href="https://solaripple.com" class="nav-back">← 返回首页</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-eyebrow">⚡ 数字化能源基金 · Digital Energy Fund</div>
+  <h1>全链路数字化<br/>赋能<em>新能源资产</em></h1>
+  <p class="hero-sub">RippleFund 以数字化平台为核心，专注中国及亚太工商业光储项目的开发投资、运营管理与电力交易，构建能源资产与金融服务闭环生态。</p>
+  <div class="hero-fund-stat">
+    <div class="fund-stat">
+      <div class="fund-stat-num">2亿</div>
+      <div class="fund-stat-label">初始基金规模（人民币）</div>
+    </div>
+    <div class="fund-stat">
+      <div class="fund-stat-num">C·APAC</div>
+      <div class="fund-stat-label">投资区域</div>
+    </div>
+    <div class="fund-stat">
+      <div class="fund-stat-num">4+1</div>
+      <div class="fund-stat-label">核心业务模式</div>
+    </div>
+  </div>
+  <div class="hero-actions">
+    <a href="https://enos.solaripple.com" class="btn-primary">🌐 进入 EnOS 平台</a>
+    <a href="#thesis" class="btn-ghost">了解投资理念 →</a>
+  </div>
+</section>
+
+<!-- CORE THESIS -->
+<section class="thesis-section" id="thesis">
+  <div class="section-header animate-on-scroll">
+    <div class="section-label">核心理念</div>
+    <h2 class="section-title">为什么是数字化基金？</h2>
+    <p class="section-desc">传统能源基金依赖人工尽调与线下管理，RippleFund 以全链路数字化平台重构从项目筛选到收益分配的全流程，实现规模化、标准化、高透明度的基金运营。</p>
+  </div>
+  <div class="thesis-grid">
+    <div class="thesis-card animate-on-scroll">
+      <div class="thesis-icon">📡</div>
+      <h3>实时感知资产状态</h3>
+      <p>IoT + 数字孪生技术实现储能资产7×24小时实时监控，数据驱动投资决策，消除信息不对称，降低运维风险。</p>
+    </div>
+    <div class="thesis-card animate-on-scroll">
+      <div class="thesis-icon">🤖</div>
+      <h3>AI驱动智能调度</h3>
+      <p>LSTM预测与MILP优化算法自动生成充放电策略，最大化峰谷套利与辅助服务收益，资产收益率提升20-30%。</p>
+    </div>
+    <div class="thesis-card animate-on-scroll">
+      <div class="thesis-icon">🔗</div>
+      <h3>区块链资产确权</h3>
+      <p>每个储能单元对应唯一数字资产凭证，份额持有、收益分配全程可溯，构建透明可信的基金治理结构。</p>
+    </div>
+    <div class="thesis-card animate-on-scroll">
+      <div class="thesis-icon">📊</div>
+      <h3>全流程数字化运营</h3>
+      <p>从项目筛选、尽职调查、合同签署到收益分配，所有节点在线完成，基金管理者与投资人共享实时仪表盘。</p>
+    </div>
+    <div class="thesis-card animate-on-scroll">
+      <div class="thesis-icon">🌏</div>
+      <h3>跨境合规框架</h3>
+      <p>符合中国及亚太主要经济体新能源投资监管要求，标准化合规文档模板，合规团队全程支撑。</p>
+    </div>
+    <div class="thesis-card animate-on-scroll">
+      <div class="thesis-icon">⚡</div>
+      <h3>VPP电力市场对接</h3>
+      <p>所投项目一键接入虚拟电厂聚合平台，实时参与电力现货市场与辅助服务市场，扩大收入来源。</p>
+    </div>
+  </div>
+</section>
+
+<!-- FULL CHAIN STRIP -->
+<section class="chain-section">
+  <div class="section-header animate-on-scroll">
+    <div class="section-label">全链路赋能</div>
+    <h2 class="section-title">从项目开发到收益分配，数字化贯穿每个环节</h2>
+  </div>
+  <div class="chain-strip">
+    <div class="chain-step">
+      <div class="chain-num">01</div>
+      <h4>项目筛选</h4>
+      <p>数字地图 + 资源评估</p>
+    </div>
+    <div class="chain-step">
+      <div class="chain-num">02</div>
+      <h4>投资决策</h4>
+      <p>AI尽调 + 收益测算</p>
+    </div>
+    <div class="chain-step">
+      <div class="chain-num">03</div>
+      <h4>建设管理</h4>
+      <p>数字孪生 + 进度追踪</p>
+    </div>
+    <div class="chain-step">
+      <div class="chain-num">04</div>
+      <h4>运营监控</h4>
+      <p>实时数据 + 预警系统</p>
+    </div>
+    <div class="chain-step">
+      <div class="chain-num">05</div>
+      <h4>电力交易</h4>
+      <p>VPP聚合 + 市场报价</p>
+    </div>
+    <div class="chain-step">
+      <div class="chain-num">06</div>
+      <h4>收益分配</h4>
+      <p>链上结算 + 实时分账</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOCUS AREAS -->
+<section class="focus-section">
+  <div class="section-header animate-on-scroll">
+    <div class="section-label">四大业务方向</div>
+    <h2 class="section-title">专注工商业光储垂直赛道</h2>
+    <p class="section-desc">聚焦工业园区、数据中心、高耗能制造业等场景，锚定高电价、高需量、高峰谷差客户群体。</p>
+  </div>
+  <div class="focus-grid">
+    <div class="focus-card animate-on-scroll">
+      <h3>🔋 开发投资</h3>
+      <p>工商业分布式光伏+储能联合开发，基金直投或跟投，IRR目标12-18%，投资周期3-7年。</p>
+      <span class="focus-tag">项目开发</span>
+    </div>
+    <div class="focus-card animate-on-scroll">
+      <h3>🛠️ 运维托管</h3>
+      <p>AIoT远程监控 + 本地化运维团队，7×24保障资产可用率≥99%，按资产规模收取运维服务费。</p>
+      <span class="focus-tag">资产管理</span>
+    </div>
+    <div class="focus-card animate-on-scroll">
+      <h3>⚡ 电力交易</h3>
+      <p>VPP虚拟电厂聚合，代理储能资产参与电力现货、调频调峰、需求响应，挖掘电力市场超额收益。</p>
+      <span class="focus-tag">市场交易</span>
+    </div>
+    <div class="focus-card animate-on-scroll">
+      <h3>📈 退出通道</h3>
+      <p>成熟资产打包REITs上市、战略买家并购、碳资产衍生品退出，构建多元化退出路径。</p>
+      <span class="focus-tag">资本运作</span>
+    </div>
+  </div>
+</section>
+
+<!-- DIGITAL PLATFORM -->
+<section class="platform-section">
+  <div class="section-header animate-on-scroll">
+    <div class="section-label">数字化平台支撑</div>
+    <h2 class="section-title">EnOS + AIoT 赋能基金全流程</h2>
+  </div>
+  <div class="platform-content">
+    <div class="platform-text">
+      <h2>同一个平台，同一份资产视图</h2>
+      <p>所投项目统一接入 EnOS 数字孪生平台，基金管理者与投资人共享同一套数据底座，从宏观组合管理到微观设备状态，一切尽在掌握。</p>
+      <ul class="platform-features">
+        <li>资产组合实时总览：容量、发电、收益、SOC一目了然</li>
+        <li>AI收益预测：LSTM模型预测未来30天各项目充放电收益</li>
+        <li>VPP聚合状态：各项目参与电力市场实时收益贡献</li>
+        <li>风险预警系统：设备异常、电网限电、交易偏差实时推送</li>
+        <li>投资组合报告：自动生成月度/季度基金运营报告</li>
+      </ul>
+    </div>
+    <div class="platform-visual animate-on-scroll">
+      <pre>
+<span class="comment">// EnOS Fund Dashboard API</span>
+<span class="key">GET</span> /api/fund/portfolio
+
+{
+  <span class="key">"fundSize"</span>: <span class="val">200000000</span>,
+  <span class="key">"deployed"</span>: <span class="val">142000000</span>,
+  <span class="key">"projects"</span>: [
+    {
+      <span class="key">"id"</span>: <span class="val">"SUZ-001"</span>,
+      <span class="key">"type"</span>: <span class="val">"solar_storage"</span>,
+      <span class="key">"capacity"</span>: <span class="val">"4.8MWh"</span>,
+      <span class="key">"annualRevenue"</span>: <span class="val">"¥3.2M"</span>,
+      <span class="key">"status"</span>: <span class="val">"operational"</span>,
+      <span class="key">"soc"</span>: <span class="val">78</span>,
+      <span class="key">"vppIncome"</span>: <span class="val">"¥480K"</span>
+    }
+  ],
+  <span class="key">"totalRevenue"</span>: <span class="val">"¥12.8M"</span>,
+  <span class="key">"portfolioIRR"</span>: <span class="val">15.3</span>
+}
+
+<span class="comment">// 实时数据 · 3秒刷新 · WebSocket</span></pre>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <h2>携手数字化能源基金，共赢碳中和时代</h2>
+  <p>无论是LP投资、产业资本合作，还是资产方寻求股权融资，欢迎联系我们。</p>
+  <div class="cta-actions">
+    <a href="mailto:fund@solaripple.com" class="btn-primary">📧 联系基金团队</a>
+    <a href="https://enos.solaripple.com" class="btn-ghost">🌐 体验 EnOS 平台</a>
+    <a href="https://solaripple.com" class="btn-ghost">← 返回首页</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="nav-logo" style="font-size:18px">Solar<span>ipple</span></div>
+      <p>光之涟漪 · 专注于工业清洁能源数字化，服务中国及亚太区域。</p>
+    </div>
+    <div class="footer-col">
+      <h4>产品</h4>
+      <ul>
+        <li><a href="https://enos.solaripple.com">EnOS</a></li>
+        <li><a href="https://group.solaripple.com">RippleGroup</a></li>
+        <li><a href="https://master.solaripple.com">RippleMaster</a></li>
+        <li><a href="https://monitor.solaripple.com">RippleMonitor</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>联系</h4>
+      <ul>
+        <li><a href="mailto:fund@solaripple.com">fund@solaripple.com</a></li>
+        <li><a href="mailto:contact@solaripple.com">contact@solaripple.com</a></li>
+        <li><a href="#">江苏省苏州市</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">© 2026 光之涟漪 (Solaripple) · 苏ICP备xxxxxxxx号 · 版权所有</div>
+</footer>
+
+<script>
+var observer = new IntersectionObserver(function(entries) {
+  entries.forEach(function(entry) {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('in-view');
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.animate-on-scroll, .section-header').forEach(function(el) {
+  observer.observe(el);
+});
+
+document.querySelectorAll('.thesis-card, .focus-card').forEach(function(card, i) {
+  card.style.transitionDelay = (i * 0.08) + 's';
+});
+</script>
+</body>
+</html>
