@@ -77,6 +77,93 @@
       50% { opacity: 1; transform: scale(1.04); }
     }
     /* Rising energy particles */
+    /* ─── ENERGY DEVICE ICONS LAYER ─── */
+    .energy-icons {
+      position: absolute; inset: 0; overflow: hidden; pointer-events: none;
+      z-index: 1;
+    }
+    .energy-icon {
+      position: absolute;
+      opacity: 0.15;
+      animation: iconFloat ease-in-out infinite;
+    }
+    /* Solar panel */
+    .solar-icon { bottom: 5%; left: 2%; width: 110px; height: 74px; animation-duration: 8s; }
+    .solar-icon::before {
+      content: ''; position: absolute; inset: 0;
+      border: 2px solid rgba(0,212,170,0.9); border-radius: 3px;
+      background:
+        repeating-linear-gradient(0deg, transparent, transparent 17px, rgba(0,212,170,0.25) 17px, rgba(0,212,170,0.25) 19px),
+        repeating-linear-gradient(90deg, transparent, transparent 27px, rgba(0,212,170,0.25) 27px, rgba(0,212,170,0.25) 29px);
+    }
+    .solar-icon::after {
+      content: ''; position: absolute; top: 0; left: -30%;
+      width: 30%; height: 100%;
+      background: linear-gradient(105deg, transparent 30%, rgba(255,220,100,0.4) 50%, transparent 70%);
+      background-size: 200% 100%;
+      animation: solarSweep 5s ease-in-out infinite;
+    }
+    @keyframes solarSweep { 0% { left: -30%; } 100% { left: 110%; } }
+    /* Inverter */
+    .inverter-icon { bottom: 9%; left: 17%; width: 44px; height: 62px; animation-duration: 7s; animation-delay: 1.5s; }
+    .inverter-icon::before {
+      content: ''; position: absolute; inset: 0;
+      border: 2px solid rgba(0,212,170,0.9); border-radius: 6px; background: rgba(0,212,170,0.05);
+    }
+    .inverter-icon::after {
+      content: '~'; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+      font-size: 24px; font-weight: 800; color: #00D4AA; animation: inverterBlink 1.4s ease-in-out infinite;
+    }
+    @keyframes inverterBlink { 0%,100% { opacity: 1; } 50% { opacity: 0.1; } }
+    /* Battery storage */
+    .storage-icon { bottom: 6%; right: 15%; width: 52px; height: 32px; animation-duration: 9s; animation-delay: 3s; }
+    .storage-icon::before {
+      content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%);
+      width: 43px; height: 26px; border: 2px solid rgba(0,212,170,0.9); border-radius: 3px; background: rgba(0,212,170,0.05);
+    }
+    .storage-icon::after {
+      content: ''; position: absolute; right: 0; top: 50%; transform: translateY(-50%);
+      width: 7px; height: 12px; border: 2px solid rgba(0,212,170,0.9); border-radius: 0 3px 3px 0;
+    }
+    .storage-bar { position: absolute; bottom: 4px; left: 3px; right: 11px; height: 3px; border-radius: 2px; background: rgba(0,212,170,0.1); overflow: hidden; }
+    .storage-bar::after {
+      content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 72%;
+      background: #00D4AA; box-shadow: 0 0 5px #00D4AA;
+      animation: socCharge 3s ease-in-out infinite;
+    }
+    @keyframes socCharge { 0%,100% { width: 72%; } 50% { width: 92%; } }
+    /* EV car */
+    .ev-icon { bottom: 3%; right: 3%; width: 82px; height: 36px; animation-duration: 11s; animation-delay: 2s; }
+    .ev-icon::before {
+      content: ''; position: absolute; bottom: 0; left: 6px;
+      width: 70px; height: 16px; border: 2px solid rgba(0,212,170,0.9); border-radius: 26px 26px 3px 3px; background: rgba(0,212,170,0.05);
+    }
+    .ev-icon::after {
+      content: ''; position: absolute; bottom: 14px; left: 18px;
+      width: 46px; height: 12px; border: 2px solid rgba(0,212,170,0.9); border-bottom: none; border-radius: 10px 10px 0 0;
+    }
+    .ev-wheel { position: absolute; bottom: -2px; width: 11px; height: 11px; border-radius: 50%; background: rgba(0,212,170,0.7); box-shadow: 0 0 5px rgba(0,212,170,0.4); }
+    .ev-wheel:nth-child(1) { left: 10px; }
+    .ev-wheel:nth-child(2) { right: 10px; }
+    /* Grid tower */
+    .grid-icon { top: 3%; left: 3%; width: 70px; height: 90px; animation-duration: 10s; animation-delay: 0.5s; }
+    .grid-icon::before {
+      content: ''; position: absolute; left: 50%; top: 0; bottom: 0; width: 2px; transform: translateX(-50%);
+      background: repeating-linear-gradient(to bottom, rgba(0,212,170,0.9) 0px, rgba(0,212,170,0.9) 7px, transparent 7px, transparent 14px);
+      box-shadow: 0 0 5px rgba(0,212,170,0.3);
+    }
+    .grid-icon::after {
+      content: ''; position: absolute; top: 16px; left: 0; right: 0; height: 2px;
+      background: repeating-linear-gradient(to right, rgba(0,212,170,0.9) 0px, rgba(0,212,170,0.9) 22px, transparent 22px, transparent 32px);
+      box-shadow: 0 0 5px rgba(0,212,170,0.3);
+    }
+    .grid-node { position: absolute; width: 5px; height: 5px; border-radius: 50%; background: #00D4AA; box-shadow: 0 0 7px #00D4AA; animation: nodePulse 2s ease-in-out infinite; }
+    .grid-node:nth-child(1) { top: 14px; left: 48%; animation-delay: 0s; }
+    .grid-node:nth-child(2) { top: 38px; left: 48%; animation-delay: 0.5s; }
+    .grid-node:nth-child(3) { top: 62px; left: 48%; animation-delay: 1s; }
+    @keyframes iconFloat { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
+    @keyframes nodePulse { 0%,100% { opacity: 0.3; transform: scale(0.8); } 50% { opacity: 1; transform: scale(1.4); } }
+
     .particles {
       position: absolute; inset: 0; overflow: hidden; pointer-events: none;
     }
@@ -562,7 +649,7 @@
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-bg"><div class="particles"><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div></div></div>
+  <div class="hero-bg"><div class="energy-icons"><div class="energy-icon grid-icon"><div class="grid-node"></div><div class="grid-node"></div><div class="grid-node"></div></div><div class="energy-icon solar-icon"></div><div class="energy-icon inverter-icon"></div><div class="energy-icon storage-icon"><div class="storage-bar"></div></div><div class="energy-icon ev-icon"><div class="ev-wheel"></div><div class="ev-wheel"></div></div></div><div class="particles"><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div></div></div>
   <div class="hero-eyebrow" data-i18n="hero.badge">⚡ 工业清洁能源数字基础设施</div>
   <h1 data-i18n="hero.title">让每一座工业园区<br/>拥有<em>智慧能源大脑</em></h1>
   <p class="hero-sub" data-i18n="hero.subtitle">Solaripple 基于数字孪生、人工智能与优化算法，为工商业园区提供光储充一体化管理和虚拟电厂交易服务，降低电费、提升资产收益。</p>
