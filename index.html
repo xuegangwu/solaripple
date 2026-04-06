@@ -3,210 +3,289 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Solaripple — 工业清洁能源数字基础设施</title>
+  <title>Solaripple — 让每一座工业园区拥有智慧能源大脑</title>
   <meta name="description" content="Solaripple（光之涟漪）专注于工业园区光储充一体化数字孪生平台，为工商业客户提供新能源资产智能管理与虚拟电厂交易服务。" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
       font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
-      background: #0A0E1A; color: #E8EAF0; overflow-x: hidden;
+      background: #080B14; color: #E4E8F0; overflow-x: hidden;
+      line-height: 1.6;
     }
     a { color: inherit; text-decoration: none; }
 
-    /* Nav */
+    /* ─── NAV ─── */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       display: flex; justify-content: space-between; align-items: center;
       padding: 0 60px; height: 64px;
-      background: rgba(10,14,26,0.85); backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(255,255,255,0.06);
+      background: rgba(8,11,20,0.85); backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
     }
-    .nav-logo { font-size: 20px; font-weight: 700; color: white; }
+    .nav-logo { font-size: 20px; font-weight: 800; letter-spacing: -0.3px; }
     .nav-logo span { color: #00D4AA; }
     .nav-links { display: flex; gap: 36px; list-style: none; }
-    .nav-links a { font-size: 14px; color: rgba(255,255,255,0.6); transition: color 0.2s; }
-    .nav-links a:hover { color: white; }
+    .nav-links a { font-size: 14px; color: rgba(255,255,255,0.5); transition: color 0.2s; }
+    .nav-links a:hover { color: #fff; }
     .nav-cta {
-      padding: 8px 20px; background: #00D4AA; color: #0A0E1A;
-      border-radius: 6px; font-size: 14px; font-weight: 600; transition: opacity 0.2s;
+      padding: 8px 20px; background: #00D4AA; color: #080B14;
+      border-radius: 6px; font-size: 14px; font-weight: 700; transition: all 0.2s;
     }
-    .nav-cta:hover { opacity: 0.85; }
+    .nav-cta:hover { background: #00EBC0; }
     .lang-switch {
       display: flex; gap: 4px; align-items: center;
-      padding: 4px 8px; background: rgba(255,255,255,0.06);
+      padding: 4px 8px; background: rgba(255,255,255,0.05);
       border-radius: 6px; border: none; cursor: pointer;
     }
-    .lang-switch span { font-size: 12px; color: rgba(255,255,255,0.5); padding: 2px 6px; border-radius: 4px; transition: all 0.2s; }
-    .lang-switch span.active { background: rgba(0,212,170,0.2); color: #00D4AA; }
+    .lang-switch span { font-size: 12px; color: rgba(255,255,255,0.4); padding: 2px 6px; border-radius: 4px; transition: all 0.2s; }
+    .lang-switch span.active { background: rgba(0,212,170,0.15); color: #00D4AA; }
 
-    /* Hero */
+    /* ─── HERO ─── */
     .hero {
       min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
-      text-align: center; padding: 120px 24px 80px; position: relative;
-      background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(0,212,170,0.12) 0%, transparent 70%);
+      text-align: center; padding: 120px 24px 100px; position: relative;
     }
-    .hero-badge {
-      display: inline-flex; align-items: center; gap: 6px; padding: 6px 16px; border-radius: 20px;
-      background: rgba(0,212,170,0.1); border: 1px solid rgba(0,212,170,0.25);
-      font-size: 12px; color: #00D4AA; margin-bottom: 32px; letter-spacing: 0.5px;
+    .hero-bg {
+      position: absolute; inset: 0; overflow: hidden; pointer-events: none;
+      background: radial-gradient(ellipse 70% 60% at 50% -10%, rgba(0,212,170,0.1) 0%, transparent 65%);
+    }
+    .hero-bg::before {
+      content: ''; position: absolute;
+      width: 800px; height: 800px; border-radius: 50%;
+      top: -200px; left: 50%; transform: translateX(-50%);
+      background: radial-gradient(circle, rgba(0,212,170,0.06) 0%, transparent 70%);
+      animation: heroGlow 6s ease-in-out infinite;
+    }
+    @keyframes heroGlow {
+      0%, 100% { opacity: 0.6; transform: translateX(-50%) scale(1); }
+      50% { opacity: 1; transform: translateX(-50%) scale(1.08); }
+    }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 6px 16px; border-radius: 20px;
+      background: rgba(0,212,170,0.08); border: 1px solid rgba(0,212,170,0.2);
+      font-size: 12px; color: #00D4AA; letter-spacing: 1px; margin-bottom: 32px;
+      position: relative; z-index: 1;
     }
     .hero h1 {
-      font-size: clamp(40px, 6vw, 72px); font-weight: 800; line-height: 1.1; margin-bottom: 24px;
-      background: linear-gradient(135deg, #FFFFFF 0%, #A8B4C8 100%);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent; max-width: 800px;
+      font-size: clamp(36px, 5.5vw, 68px); font-weight: 800; line-height: 1.15;
+      background: linear-gradient(135deg, #FFFFFF 0%, #B8C4D8 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      max-width: 820px; margin-bottom: 24px; position: relative; z-index: 1;
     }
-    .hero h1 em { font-style: normal; background: linear-gradient(135deg, #00D4AA 0%, #00A890 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-    .hero-sub { font-size: 18px; color: rgba(255,255,255,0.5); max-width: 560px; line-height: 1.7; margin-bottom: 48px; }
-    .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; }
-    .btn-primary { padding: 14px 32px; background: #00D4AA; color: #0A0E1A; border-radius: 8px; font-size: 15px; font-weight: 600; transition: all 0.2s; display: inline-flex; align-items: center; gap: 8px; }
-    .btn-primary:hover { background: #00EBC0; transform: translateY(-1px); }
-    .btn-secondary { padding: 14px 32px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); color: white; border-radius: 8px; font-size: 15px; font-weight: 500; transition: all 0.2s; }
-    .btn-secondary:hover { background: rgba(255,255,255,0.1); }
+    .hero h1 em { font-style: normal; background: linear-gradient(135deg, #00D4AA 0%, #00A085 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .hero-sub {
+      font-size: 17px; color: rgba(255,255,255,0.42); max-width: 560px;
+      line-height: 1.75; margin-bottom: 48px; position: relative; z-index: 1;
+    }
+    .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; position: relative; z-index: 1; }
+    .btn-primary {
+      padding: 14px 32px; background: #00D4AA; color: #080B14;
+      border-radius: 8px; font-size: 15px; font-weight: 700; transition: all 0.2s;
+      display: inline-flex; align-items: center; gap: 8px;
+    }
+    .btn-primary:hover { background: #00EBC0; transform: translateY(-1px); box-shadow: 0 8px 24px rgba(0,212,170,0.25); }
+    .btn-ghost {
+      padding: 14px 32px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+      color: rgba(255,255,255,0.7); border-radius: 8px; font-size: 15px; font-weight: 500; transition: all 0.2s;
+    }
+    .btn-ghost:hover { background: rgba(255,255,255,0.09); color: #fff; }
 
-    /* Stats */
-    .stats { display: flex; justify-content: center; padding: 60px 40px; border-top: 1px solid rgba(255,255,255,0.06); border-bottom: 1px solid rgba(255,255,255,0.06); flex-wrap: wrap; }
-    .stat-item { flex: 1; min-width: 160px; text-align: center; padding: 20px 40px; }
-    .stat-num { font-size: 40px; font-weight: 800; color: #00D4AA; line-height: 1; margin-bottom: 8px; }
-    .stat-num span { font-size: 20px; font-weight: 500; }
-    .stat-label { font-size: 13px; color: rgba(255,255,255,0.4); letter-spacing: 0.5px; }
+    /* ─── STATS ─── */
+    .stats-bar {
+      display: flex; justify-content: center; gap: 0;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .stat-item {
+      flex: 1; max-width: 240px; text-align: center; padding: 40px 24px;
+      border-right: 1px solid rgba(255,255,255,0.05);
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-num {
+      font-size: 40px; font-weight: 800; line-height: 1; margin-bottom: 8px;
+      background: linear-gradient(135deg, #00D4AA 0%, #00EBC0 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .stat-label { font-size: 13px; color: rgba(255,255,255,0.35); letter-spacing: 0.3px; }
 
-    /* Products */
-    .section { padding: 100px 60px; }
-    .section-label { font-size: 12px; font-weight: 600; color: #00D4AA; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 16px; }
-    .section-title { font-size: clamp(28px, 4vw, 44px); font-weight: 700; margin-bottom: 16px; line-height: 1.2; }
-    .section-desc { font-size: 16px; color: rgba(255,255,255,0.45); max-width: 560px; line-height: 1.7; margin-bottom: 64px; }
+    /* ─── PRODUCTS ─── */
+    .products-section { padding: 100px 60px; }
+    .section-header { text-align: center; margin-bottom: 64px; }
+    .section-label {
+      font-size: 11px; font-weight: 700; color: #00D4AA; letter-spacing: 2.5px;
+      text-transform: uppercase; margin-bottom: 16px;
+    }
+    .section-title {
+      font-size: clamp(26px, 3.5vw, 42px); font-weight: 800; margin-bottom: 16px;
+      background: linear-gradient(135deg, #FFFFFF 0%, #9BAABB 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .section-desc { font-size: 15px; color: rgba(255,255,255,0.38); max-width: 500px; margin: 0 auto; line-height: 1.7; }
 
-    .products-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; max-width: 1200px; margin: 0 auto; }
-    .product-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 40px 36px; transition: all 0.3s; }
-    .product-card:hover { background: rgba(255,255,255,0.06); border-color: rgba(0,212,170,0.25); transform: translateY(-4px); }
-    .product-icon { width: 56px; height: 56px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 28px; margin-bottom: 24px; }
-    .product-card h3 { font-size: 22px; font-weight: 700; margin-bottom: 12px; }
-    .product-card p { font-size: 14px; color: rgba(255,255,255,0.4); line-height: 1.7; margin-bottom: 20px; }
-    .product-tags { display: flex; gap: 8px; flex-wrap: wrap; }
-    .tag { padding: 4px 10px; border-radius: 6px; font-size: 11px; font-weight: 500; background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.5); border: 1px solid rgba(255,255,255,0.08); }
-    .tag.green { background: rgba(0,212,170,0.1); color: #00D4AA; border-color: rgba(0,212,170,0.2); }
-    .tag.orange { background: rgba(255,149,0,0.1); color: #FF9500; border-color: rgba(255,149,0,0.2); }
-    .tag.blue { background: rgba(0,102,255,0.1); color: #5B9EFF; border-color: rgba(0,102,255,0.2); }
-    .tag.purple { background: rgba(155,89,182,0.1); color: #B07FDB; border-color: rgba(155,89,182,0.2); }
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px; max-width: 1280px; margin: 0 auto;
+    }
 
-    /* Platform */
-    .platform-section { background: linear-gradient(180deg, rgba(0,212,170,0.06) 0%, transparent 100%); border-top: 1px solid rgba(0,212,170,0.1); border-bottom: 1px solid rgba(0,212,170,0.1); }
-    .platform-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; max-width: 1200px; margin: 0 auto; align-items: center; }
-    .platform-text h2 { font-size: 36px; font-weight: 700; margin-bottom: 20px; line-height: 1.3; }
-    .platform-text p { font-size: 15px; color: rgba(255,255,255,0.45); line-height: 1.8; margin-bottom: 32px; }
-    .platform-features { list-style: none; display: flex; flex-direction: column; gap: 16px; margin-bottom: 40px; }
-    .platform-features li { display: flex; align-items: center; gap: 12px; font-size: 15px; color: rgba(255,255,255,0.7); }
-    .platform-features li::before { content: '✓'; width: 22px; height: 22px; background: rgba(0,212,170,0.15); color: #00D4AA; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; flex-shrink: 0; }
-    .platform-visual { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 32px; font-size: 13px; color: rgba(255,255,255,0.3); }
-    .platform-visual pre { font-family: 'Fira Code', 'SF Mono', monospace; font-size: 12px; color: rgba(0,212,170,0.7); line-height: 1.8; }
+    .product-card {
+      background: rgba(255,255,255,0.025); border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 20px; padding: 36px 32px; position: relative; overflow: hidden;
+      transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1), border-color 0.3s, box-shadow 0.3s;
+      cursor: pointer;
+      opacity: 0; transform: translateY(20px);
+    }
+    .product-card.visible { animation: cardReveal 0.6s cubic-bezier(0.22,1,0.36,1) forwards; }
+    @keyframes cardReveal {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .product-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--accent);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 40px var(--accent-glow);
+    }
 
-    /* CTA */
-    .cta-section { text-align: center; padding: 120px 60px; background: radial-gradient(ellipse 60% 50% at 50% 100%, rgba(0,212,170,0.1) 0%, transparent 70%); }
-    .cta-section h2 { font-size: clamp(28px, 4vw, 48px); font-weight: 800; margin-bottom: 20px; }
-    .cta-section p { font-size: 16px; color: rgba(255,255,255,0.4); margin-bottom: 48px; }
+    .card-accent-bar {
+      position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: var(--accent);
+    }
+    .card-icon {
+      width: 56px; height: 56px; border-radius: 14px; margin-bottom: 24px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 26px;
+      background: var(--accent-bg);
+      border: 1px solid var(--accent-border);
+      transition: transform 0.3s;
+    }
+    .product-card:hover .card-icon { transform: scale(1.08); }
+    .card-tag {
+      display: inline-block; padding: 3px 10px; border-radius: 6px;
+      font-size: 11px; font-weight: 600; margin-bottom: 16px;
+      background: var(--accent-bg); color: var(--accent); border: 1px solid var(--accent-border);
+      letter-spacing: 0.3px;
+    }
+    .product-card h3 { font-size: 20px; font-weight: 800; margin-bottom: 12px; color: #fff; }
+    .product-card p { font-size: 13.5px; color: rgba(255,255,255,0.38); line-height: 1.7; margin-bottom: 24px; }
+    .card-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 13px; font-weight: 600; color: var(--accent);
+      transition: gap 0.2s;
+    }
+    .product-card:hover .card-link { gap: 10px; }
 
-    /* Footer */
-    footer { border-top: 1px solid rgba(255,255,255,0.06); padding: 60px 60px 40px; }
-    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 60px; max-width: 1200px; margin: 0 auto 60px; }
-    .footer-brand p { font-size: 13px; color: rgba(255,255,255,0.35); line-height: 1.7; margin-top: 16px; max-width: 280px; }
-    .footer-col h4 { font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.5); letter-spacing: 1px; margin-bottom: 20px; }
+    /* Product color tokens */
+    .card-enos   { --accent: #00D4AA; --accent-bg: rgba(0,212,170,0.08); --accent-border: rgba(0,212,170,0.2); --accent-glow: rgba(0,212,170,0.12); }
+    .card-group  { --accent: #FF7043; --accent-bg: rgba(255,112,67,0.08); --accent-border: rgba(255,112,67,0.2); --accent-glow: rgba(255,112,67,0.12); }
+    .card-master { --accent: #AB7FE8; --accent-bg: rgba(171,127,232,0.08); --accent-border: rgba(171,127,232,0.2); --accent-glow: rgba(171,127,232,0.12); }
+    .card-monitor{ --accent: #42A5F5; --accent-bg: rgba(66,165,245,0.08); --accent-border: rgba(66,165,245,0.2); --accent-glow: rgba(66,165,245,0.12); }
+    .card-text   { --accent: #26C6A9; --accent-bg: rgba(38,198,169,0.08); --accent-border: rgba(38,198,169,0.2); --accent-glow: rgba(38,198,169,0.12); }
+
+    /* ─── FEATURE STRIP ─── */
+    .feature-strip {
+      padding: 60px; background: rgba(0,212,170,0.04);
+      border-top: 1px solid rgba(0,212,170,0.08); border-bottom: 1px solid rgba(0,212,170,0.08);
+    }
+    .feature-list {
+      display: flex; justify-content: center; gap: 60px; flex-wrap: wrap; max-width: 1100px; margin: 0 auto;
+    }
+    .feature-item {
+      display: flex; align-items: center; gap: 12px;
+      font-size: 14px; color: rgba(255,255,255,0.5);
+    }
+    .feature-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: #00D4AA; flex-shrink: 0;
+    }
+
+    /* ─── CTA ─── */
+    .cta-section {
+      text-align: center; padding: 120px 24px;
+      background: radial-gradient(ellipse 60% 50% at 50% 100%, rgba(0,212,170,0.08) 0%, transparent 70%);
+    }
+    .cta-section h2 {
+      font-size: clamp(24px, 3.5vw, 44px); font-weight: 800; margin-bottom: 20px;
+      background: linear-gradient(135deg, #FFFFFF 0%, #9BAABB 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .cta-section p { font-size: 15px; color: rgba(255,255,255,0.38); margin-bottom: 48px; max-width: 480px; margin-left: auto; margin-right: auto; }
+    .cta-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+    /* ─── FOOTER ─── */
+    footer {
+      border-top: 1px solid rgba(255,255,255,0.05); padding: 60px 60px 40px;
+    }
+    .footer-grid {
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 60px; max-width: 1200px; margin: 0 auto 60px;
+    }
+    .footer-brand p { font-size: 13px; color: rgba(255,255,255,0.28); line-height: 1.7; margin-top: 16px; max-width: 280px; }
+    .footer-col h4 { font-size: 12px; font-weight: 700; color: rgba(255,255,255,0.4); letter-spacing: 1.5px; margin-bottom: 20px; text-transform: uppercase; }
     .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
-    .footer-col a { font-size: 13px; color: rgba(255,255,255,0.35); transition: color 0.2s; }
+    .footer-col a { font-size: 13px; color: rgba(255,255,255,0.3); transition: color 0.2s; }
     .footer-col a:hover { color: #00D4AA; }
-    .footer-bottom { text-align: center; padding-top: 40px; border-top: 1px solid rgba(255,255,255,0.06); font-size: 12px; color: rgba(255,255,255,0.2); max-width: 1200px; margin: 0 auto; }
+    .footer-bottom {
+      text-align: center; padding-top: 40px; border-top: 1px solid rgba(255,255,255,0.05);
+      font-size: 12px; color: rgba(255,255,255,0.18); max-width: 1200px; margin: 0 auto;
+    }
 
-    /* Mobile */
-    @media (max-width: 1024px) { nav { padding: 0 40px; } .section { padding: 80px 40px; } .hero h1 { font-size: clamp(36px, 5vw, 56px); } .products-grid { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); } .platform-grid { gap: 60px; } .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; } .stats { padding: 48px 32px; } }
-    @media (max-width: 900px) { .platform-grid { grid-template-columns: 1fr; gap: 40px; } .platform-visual { display: none; } }
-    @media (max-width: 768px) { nav { padding: 0 20px; height: 56px; } .nav-links { display: none; } .nav-cta { padding: 7px 16px; font-size: 13px; } .hero { padding: 100px 20px 60px; min-height: auto; } .hero h1 { font-size: clamp(28px, 8vw, 40px); margin-bottom: 16px; } .hero-sub { font-size: 14px; margin-bottom: 32px; } .hero-badge { font-size: 11px; padding: 5px 12px; } .hero-actions { flex-direction: column; align-items: stretch; gap: 12px; } .stats { flex-wrap: wrap; padding: 40px 20px; gap: 0; } .stat-item { min-width: 50%; padding: 16px 12px; border-bottom: 1px solid rgba(255,255,255,0.04); } .stat-num { font-size: 28px; } .section { padding: 64px 20px; } .section-label { font-size: 11px; } .section-title { font-size: clamp(22px, 6vw, 32px); margin-bottom: 12px; } .section-desc { font-size: 14px; margin-bottom: 40px; } .products-grid { grid-template-columns: 1fr; gap: 16px; } .product-card { padding: 28px 24px; } .product-icon { width: 48px; height: 48px; font-size: 24px; margin-bottom: 16px; } .product-card h3 { font-size: 18px; } .product-card p { font-size: 13px; } .platform-section { padding: 64px 20px; } .platform-text h2 { font-size: 26px; } .platform-text p { font-size: 14px; } .platform-features li { font-size: 13px; } .platform-features { gap: 12px; margin-bottom: 28px; } .cta-section { padding: 80px 20px; } .cta-section h2 { font-size: clamp(22px, 6vw, 34px); } .cta-section p { font-size: 14px; } .footer { padding: 48px 20px 32px; } .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; } .footer-brand { grid-column: 1 / -1; } .footer-brand p { max-width: 100%; } .footer-col h4 { margin-bottom: 14px; } .footer-col ul { gap: 10px; } .footer-bottom { font-size: 11px; } }
-    @media (max-width: 480px) { .hero { padding: 88px 16px 48px; } .stat-item { min-width: 100%; } .section { padding: 48px 16px; } .products-grid { gap: 12px; } .product-card { padding: 20px 16px; } .footer-grid { grid-template-columns: 1fr; gap: 28px; } }
+    /* ─── I18N LANG SWITCH ─── */
+    .lang-switch { cursor: pointer; }
 
-    /* ============================================
-       SOLARIPPLE ANIMATIONS — Pure CSS, Zero Dependency
-       9 animations + 13 keyframes
-       ============================================ */
+    /* ─── MOBILE ─── */
+    @media (max-width: 1024px) {
+      nav { padding: 0 40px; }
+      .products-section { padding: 80px 40px; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
+      .stat-item { padding: 32px 16px; }
+      .stat-num { font-size: 32px; }
+    }
+    @media (max-width: 768px) {
+      nav { padding: 0 20px; height: 56px; }
+      .nav-links { display: none; }
+      .hero { padding: 100px 20px 72px; min-height: auto; }
+      .hero h1 { font-size: clamp(28px, 8vw, 40px); }
+      .hero-sub { font-size: 14px; }
+      .hero-actions { flex-direction: column; align-items: stretch; gap: 12px; }
+      .stats-bar { flex-wrap: wrap; }
+      .stat-item { min-width: 50%; border-right: none; border-bottom: 1px solid rgba(255,255,255,0.05); }
+      .stat-item:last-child { border-bottom: none; }
+      .products-section { padding: 64px 20px; }
+      .products-grid { grid-template-columns: 1fr; gap: 16px; }
+      .product-card { padding: 28px 24px; }
+      .feature-strip { padding: 40px 20px; }
+      .feature-list { gap: 24px; }
+      .cta-section { padding: 80px 20px; }
+      .cta-actions { flex-direction: column; align-items: center; }
+      footer { padding: 48px 20px 32px; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+      .footer-brand { grid-column: 1 / -1; }
+    }
+    @media (max-width: 480px) {
+      .hero h1 { font-size: clamp(24px, 9vw, 34px); }
+      .footer-grid { grid-template-columns: 1fr; }
+    }
 
-    /* 1. Hero光球 */
-    @keyframes heroPulse { 0%,100%{opacity:.6;transform:scale(1)} 50%{opacity:1;transform:scale(1.08)} }
-    .hero::before{content:'';position:absolute;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(0,212,170,.25) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);animation:heroPulse 4s ease-in-out infinite;pointer-events:none}
-    @keyframes heroFloat { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
-    .hero-badge{animation:heroFloat 3s ease-in-out infinite}
-
-    /* 2. Nav Logo呼吸 */
-    @keyframes logoBreathe { 0%,100%{text-shadow:0 0 8px rgba(0,212,170,.3)} 50%{text-shadow:0 0 20px rgba(0,212,170,.7),0 0 40px rgba(0,212,170,.3)} }
-    .nav-logo span{animation:logoBreathe 2.5s ease-in-out infinite;display:inline-block}
-
-    /* 3. 产品旋转太阳 */
-    @keyframes rotate3d{from{transform:rotateY(0deg)}to{transform:rotateY(360deg)}}
-    .product-icon:first-child{animation:rotate3d 8s linear infinite}
-    .product-card:hover .product-icon:first-child{animation-play-state:paused}
-
-    /* 4. 光伏面板光线扫过 */
-    @keyframes lightSweep{0%{background-position:-200% center}100%{background-position:200% center}}
-    .product-card{position:relative;overflow:hidden}
-    .product-card::after{content:'';position:absolute;inset:0;border-radius:16px;background:linear-gradient(105deg,transparent 40%,rgba(255,200,0,.08) 50%,transparent 60%);background-size:200% 100%;animation:lightSweep 3s ease-in-out infinite;pointer-events:none;z-index:0}
-    .product-card>*{position:relative;z-index:1}
-
-    /* 5. 电池SOC充电动画 */
-    @keyframes socCharge{0%,100%{box-shadow:0 0 0 0 rgba(0,212,170,0)}50%{box-shadow:0 0 16px 4px rgba(0,212,170,.4)} }
-    .product-card:nth-child(2) .product-icon{animation:socCharge 2s ease-in-out infinite}
-
-    /* 6. 能量粒子流 */
-    @keyframes particleFlow{0%{transform:translateY(0) scale(1);opacity:.8}100%{transform:translateY(-20px) scale(.5);opacity:0} }
-    .platform-visual{position:relative;overflow:hidden}
-    .platform-visual::before{content:'● ● ●';position:absolute;bottom:8px;left:50%;font-size:6px;letter-spacing:4px;color:#00D4AA;animation:particleFlow 1.5s ease-out infinite;opacity:.6;transform:translateX(-50%)}
-
-    /* 7. VPP数据脉冲 */
-    @keyframes vppPulse{0%,100%{opacity:.3}50%{opacity:.9} }
-    @keyframes vppPulsePurple{0%,100%{opacity:.3;text-shadow:none}50%{opacity:1;text-shadow:0 0 12px rgba(155,89,182,.8)} }
-    .platform-visual pre span{animation:vppPulse 2s ease-in-out infinite;display:inline-block}
-    .platform-visual pre span:nth-child(3){animation-delay:.3s;color:#9B59B6;animation-name:vppPulsePurple}
-
-    /* 8. 数字跳动 */
-    @keyframes barJump{0%,100%{transform:scaleY(1)}50%{transform:scaleY(1.15)} }
-    .stat-num{animation:barJump 2s ease-in-out infinite;transform-origin:bottom}
-    .stat-item:nth-child(1) .stat-num{animation-delay:0s}
-    .stat-item:nth-child(2) .stat-num{animation-delay:.5s}
-    .stat-item:nth-child(3) .stat-num{animation-delay:1s}
-    .stat-item:nth-child(4) .stat-num{animation-delay:1.5s}
-
-    /* 9. 卡片入场动画 */
-    @keyframes cardIn{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)} }
-    .product-card{animation:cardIn .6s ease-out both}
-    .product-card:nth-child(1){animation-delay:.1s}
-    .product-card:nth-child(2){animation-delay:.2s}
-    .product-card:nth-child(3){animation-delay:.3s}
-    .product-card:nth-child(4){animation-delay:.4s}
-
-    /* 10. 3D旋转能量立方体 */
-    @keyframes cubeRotate{0%{transform:rotateX(-20deg) rotateY(0deg)}100%{transform:rotateX(-20deg) rotateY(360deg)} }
-    .platform-visual pre{animation:cubeRotate 12s linear infinite;transform-style:preserve-3d;perspective:800px}
-
-    /* 11. CTA呼吸光晕 */
-    @keyframes ctaGlow{0%,100%{box-shadow:0 0 8px rgba(0,212,170,.3)}50%{box-shadow:0 0 24px rgba(0,212,170,.6),0 0 48px rgba(0,212,170,.2)} }
-    .btn-primary{animation:ctaGlow 2s ease-in-out infinite}
-
-    /* 12. Hero光斑漂移 */
-    @keyframes orbDrift{0%{transform:translate(-50%,-50%) translate(0,0)}33%{transform:translate(-50%,-50%) translate(30px,-20px)}66%{transform:translate(-50%,-50%) translate(-20px,15px)}100%{transform:translate(-50%,-50%) translate(0,0)} }
-    .hero::after{content:'';position:absolute;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(0,212,170,.15) 0%,transparent 70%);top:30%;left:60%;transform:translate(-50%,-50%);animation:orbDrift 8s ease-in-out infinite;pointer-events:none}
-
-    /* 13. 产品图标悬停脉冲 */
-    @keyframes iconPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.12)} }
-    .product-card:hover .product-icon{animation:iconPulse .6s ease-in-out}
-
-    /* Mobile */
-    @media(max-width:768px){.hero::before{width:300px;height:300px}.hero::after{width:180px;height:180px}.product-icon:first-child{animation-duration:12s}.platform-visual pre{animation-duration:18s} }
+    /* ─── SCROLL ANIMATIONS ─── */
+    .animate-on-scroll {
+      opacity: 0; transform: translateY(24px);
+      transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1);
+    }
+    .animate-on-scroll.in-view { opacity: 1; transform: translateY(0); }
+    .section-header { opacity: 0; transform: translateY(20px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .section-header.in-view { opacity: 1; transform: translateY(0); }
   </style>
 </head>
 <body>
 
-<!-- Nav -->
+<!-- NAV -->
 <nav>
   <div class="nav-logo">Solar<span>ipple</span></div>
   <ul class="nav-links">
     <li><a href="#products" data-i18n="nav.products">产品方案</a></li>
-    <li><a href="#platform" data-i18n="nav.platform">数字孪生平台</a></li>
+    <li><a href="https://enos.solaripple.com" data-i18n="nav.platform">数字孪生平台</a></li>
     <li><a href="#about" data-i18n="nav.about">关于我们</a></li>
     <li><a href="https://enos.solaripple.com" data-i18n="nav.enter" style="color:#00D4AA">进入平台 →</a></li>
   </ul>
@@ -220,126 +299,110 @@
   </div>
 </nav>
 
-<!-- Hero -->
+<!-- HERO -->
 <section class="hero">
-  <div class="hero-badge" data-i18n="hero.badge">⚡ 工业清洁能源数字基础设施</div>
+  <div class="hero-bg"></div>
+  <div class="hero-eyebrow" data-i18n="hero.badge">⚡ 工业清洁能源数字基础设施</div>
   <h1 data-i18n="hero.title">让每一座工业园区<br/>拥有<em>智慧能源大脑</em></h1>
-  <p class="hero-sub" data-i18n="hero.subtitle">Solaripple 基于数字孪生、人工智能与优化算法，为工商业园区提供光储充一体化管理与虚拟电厂交易服务，降低电费、提升资产收益。</p>
+  <p class="hero-sub" data-i18n="hero.subtitle">Solaripple 基于数字孪生、人工智能与优化算法，为工商业园区提供光储充一体化管理和虚拟电厂交易服务，降低电费、提升资产收益。</p>
   <div class="hero-actions">
     <a href="https://enos.solaripple.com" class="btn-primary" data-i18n="hero.enterEnos">🌐 进入 EnOS 平台</a>
-    <a href="#products" class="btn-secondary" data-i18n="hero.learnMore">了解产品方案</a>
+    <a href="#products" class="btn-ghost" data-i18n="hero.learnMore">了解产品方案</a>
   </div>
 </section>
 
-<!-- Stats -->
-<div class="stats">
-  <div class="stat-item"><div class="stat-num">500<span>+ MW</span></div><div class="stat-label" data-i18n="stats.capacity">管理装机容量</div></div>
-  <div class="stat-item"><div class="stat-num">50<span>+ 园区</span></div><div class="stat-label" data-i18n="stats.parks">服务工业客户</div></div>
-  <div class="stat-item"><div class="stat-num">15<span>-25%</span></div><div class="stat-label" data-i18n="stats.saving">平均电费节约</div></div>
-  <div class="stat-item"><div class="stat-num">99.9<span>%</span></div><div class="stat-label" data-i18n="stats.uptime">系统可用率</div></div>
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat-item"><div class="stat-num">500<span style="font-size:18px;font-weight:500">+ MW</span></div><div class="stat-label" data-i18n="stats.capacity">管理装机容量</div></div>
+  <div class="stat-item"><div class="stat-num">50<span style="font-size:18px;font-weight:500">+</span></div><div class="stat-label" data-i18n="stats.parks">服务工业园区</div></div>
+  <div class="stat-item"><div class="stat-num">15<span style="font-size:18px;font-weight:500">-25%</span></div><div class="stat-label" data-i18n="stats.saving">平均电费节约</div></div>
+  <div class="stat-item"><div class="stat-num">99.9<span style="font-size:18px;font-weight:500">%</span></div><div class="stat-label" data-i18n="stats.uptime">系统可用率</div></div>
 </div>
 
-<!-- Products -->
-<section class="section" id="products">
-  <div class="section-label" data-i18n="products.label">核心产品</div>
-  <h2 class="section-title" data-i18n="products.title">三位一体能源管理体系</h2>
-  <p class="section-desc" data-i18n="products.subtitle">从硬件层到应用层，从实时监控到智能决策，构建完整的工业园区智慧能源闭环。</p>
+<!-- PRODUCTS -->
+<section class="products-section" id="products">
+  <div class="section-header animate-on-scroll">
+    <div class="section-label" data-i18n="products.label">核心产品</div>
+    <h2 class="section-title" data-i18n="products.title">五大能源数字化能力</h2>
+    <p class="section-desc" data-i18n="products.subtitle">从硬件到软件，从实时监控到智能决策，构建完整的工业园区智慧能源闭环。</p>
+  </div>
 
   <div class="products-grid">
-    <div class="product-card">
-      <div class="product-icon" style="background:rgba(255,200,0,0.12)">☀️🔋</div>
-      <h3 data-i18n="products.solarStorage.name">光储充一体化</h3>
-      <p data-i18n="products.solarStorage.desc">集成光伏、储能、充电桩三大模块，实时监测设备运行状态，智能调度能量流向，提升自发自用率与系统效率。</p>
-      <div class="product-tags">
-        <span class="tag orange" data-i18n="products.solarStorage.tags.0">光伏监控</span>
-        <span class="tag green" data-i18n="products.solarStorage.tags.1">储能BMS</span>
-        <span class="tag blue" data-i18n="products.solarStorage.tags.2">有序充电</span>
-        <span class="tag" data-i18n="products.solarStorage.tags.3">需量管理</span>
-      </div>
-    </div>
-    <div class="product-card">
-      <div class="product-icon" style="background:rgba(0,212,170,0.12)">🪩</div>
-      <h3 data-i18n="products.digitalTwin.name">数字孪生平台</h3>
-      <p data-i18n="products.digitalTwin.desc">基于 Three.js 的工业园区三维实时映射，设备状态与能量流动可视化，支持移动端随时随地查看运行全景。</p>
-      <div class="product-tags">
-        <span class="tag green" data-i18n="products.digitalTwin.tags.0">3D 可视化</span>
-        <span class="tag blue" data-i18n="products.digitalTwin.tags.1">实时数据</span>
-        <span class="tag purple" data-i18n="products.digitalTwin.tags.2">VPP 聚合</span>
-        <span class="tag" data-i18n="products.digitalTwin.tags.3">AI 预测</span>
-      </div>
-    </div>
-    <div class="product-card">
-      <div class="product-icon" style="background:rgba(102,126,234,0.12)">🏭</div>
-      <h3 data-i18n="products.vpp.name">虚拟电厂 (VPP)</h3>
-      <p data-i18n="products.vpp.desc">聚合分布式储能、充电桩、可中断负荷，参与电网调峰调频与需求响应，获取辅助服务收益与需求响应补贴。</p>
-      <div class="product-tags">
-        <span class="tag purple" data-i18n="products.vpp.tags.0">容量聚合</span>
-        <span class="tag green" data-i18n="products.vpp.tags.1">市场交易</span>
-        <span class="tag orange" data-i18n="products.vpp.tags.2">收益分配</span>
-        <span class="tag" data-i18n="products.vpp.tags.3">辅助服务</span>
-      </div>
-    </div>
-    <div class="product-card">
-      <div class="product-icon" style="background:rgba(255,77,79,0.08)">🤖</div>
-      <h3 data-i18n="products.ai.name">AI 调度引擎</h3>
-      <p data-i18n="products.ai.desc">LSTM 时序预测 + MILP 优化算法，提前预测负荷与光伏出力，制定次日充放电计划与需量控制策略。</p>
-      <div class="product-tags">
-        <span class="tag orange" data-i18n="products.ai.tags.0">LSTM 预测</span>
-        <span class="tag green" data-i18n="products.ai.tags.1">削峰填谷</span>
-        <span class="tag purple" data-i18n="products.ai.tags.2">MILP 调度</span>
-        <span class="tag" data-i18n="products.ai.tags.3">需量控制</span>
-      </div>
-    </div>
+    <!-- EnOS 数字孪生 -->
+    <a href="https://enos.solaripple.com" class="product-card card-enos" target="_self">
+      <div class="card-accent-bar"></div>
+      <div class="card-icon">🪩</div>
+      <span class="card-tag">⭐ 核心平台</span>
+      <h3 data-i18n="products.enos.name">EnOS 数字孪生平台</h3>
+      <p data-i18n="products.enos.desc">Three.js驱动的工业园区三维实时映射，设备状态与能量流动可视化，AI预测调度与VPP虚拟电厂交易。</p>
+      <span class="card-link" data-i18n="products.enos.link">打开平台 →</span>
+    </a>
+
+    <!-- Groupbuy -->
+    <a href="https://group.solaripple.com" class="product-card card-group" target="_self">
+      <div class="card-accent-bar"></div>
+      <div class="card-icon">🤝</div>
+      <span class="card-tag">🔥 团购</span>
+      <h3 data-i18n="products.group.name">光储团购平台</h3>
+      <p data-i18n="products.group.desc">工商业光储设备拼团购买，IRR智能测算，同省同容量自动匹配，信用评级保障交易安全。</p>
+      <span class="card-link" data-i18n="products.group.link">参与团购 →</span>
+    </a>
+
+    <!-- Master -->
+    <a href="https://master.solaripple.com" class="product-card card-master" target="_self">
+      <div class="card-accent-bar"></div>
+      <div class="card-icon">⚡</div>
+      <span class="card-tag">硬件</span>
+      <h3 data-i18n="products.master.name">RippleMaster 储能一体机</h3>
+      <p data-i18n="products.master.desc">AGC调频 / BMS储能管理 / 五角色Agent模拟器，自研核心部件，成本领先，4.8MWh标准配置。</p>
+      <span class="card-link" data-i18n="products.master.link">了解产品 →</span>
+    </a>
+
+    <!-- Monitor -->
+    <a href="https://monitor.solaripple.com" class="product-card card-monitor" target="_self">
+      <div class="card-accent-bar"></div>
+      <div class="card-icon">📊</div>
+      <span class="card-tag">监控</span>
+      <h3 data-i18n="products.monitor.name">能源监控中心</h3>
+      <p data-i18n="products.monitor.desc">多园区多设备实时监控，能源情报实时分析，数字统计面板，ESG碳排放追踪。</p>
+      <span class="card-link" data-i18n="products.monitor.link">查看监控 →</span>
+    </a>
+
+    <!-- RippleText -->
+    <a href="https://rippletext.solaripple.com" class="product-card card-text" target="_self">
+      <div class="card-accent-bar"></div>
+      <div class="card-icon">✍️</div>
+      <span class="card-tag">AI</span>
+      <h3 data-i18n="products.text.name">RippleText 文本引擎</h3>
+      <p data-i18n="products.text.desc">企业级AI文本生成引擎，支持多语言，自动撰写能源报告、分析文案与营销内容。</p>
+      <span class="card-link" data-i18n="products.text.link">体验Demo →</span>
+    </a>
   </div>
 </section>
 
-<!-- Platform -->
-<section class="section platform-section" id="platform">
-  <div class="platform-grid">
-    <div class="platform-text">
-      <div class="section-label" data-i18n="platform.label">数字孪生平台</div>
-      <h2 data-i18n="platform.title">EnOS — 园区综合能源管理</h2>
-      <p data-i18n="platform.desc">EnOS (Energy Operating System) 是 Solaripple 打造的工业能源数字底座，将物理世界的能源设备完整映射到数字空间。</p>
-      <ul class="platform-features">
-        <li data-i18n="platform.features.0">实时 3D 可视化园区全景，设备状态一目了然</li>
-        <li data-i18n="platform.features.1">光伏/储能/充电桩/电网全量数据接入，3 秒级刷新</li>
-        <li data-i18n="platform.features.2">AI 负荷与光伏出力预测，提前调度决策</li>
-        <li data-i18n="platform.features.3">VPP 虚拟电厂聚合，实时对接电力交易中心</li>
-        <li data-i18n="platform.features.4">移动端自适应，随时随地掌控能源资产</li>
-      </ul>
-      <a href="https://enos.solaripple.com" class="btn-primary" style="display:inline-flex;width:fit-content;" data-i18n="platform.enter">🌐 打开 EnOS 平台 →</a>
-    </div>
-    <div class="platform-visual">
-      <pre>$ curl https://enos.solaripple.com/api/stations
-{
-  "data": [
-    {
-      "id": "station-001",
-      "name": "苏州工业园光储充",
-      "type": "solar_storage",
-      <span style="color:#FFD700">      "generation": 4032,   ← 实时发电 kW</span>
-      <span style="color:#9B59B6">      "consumption": 2800,  ← 负载 kW</span>
-      <span style="color:#00D4AA">      "storageSoc": 78,     ← 储能 SOC %</span>
-      <span style="color:#38A169">      "evCharging": 60,     ← 充电桩 kW</span>
-    }
-  ]
-}
-<span style="color:rgba(255,255,255,0.3)">// 3秒自动刷新 · RESTful + WebSocket</span></pre>
-    </div>
+<!-- FEATURE STRIP -->
+<div class="feature-strip">
+  <div class="feature-list">
+    <div class="feature-item"><div class="feature-dot"></div><span data-i18n="features.0">数字孪生 · 实时3D可视化</span></div>
+    <div class="feature-item"><div class="feature-dot"></div><span data-i18n="features.1">AI预测 · LSTM时序优化调度</span></div>
+    <div class="feature-item"><div class="feature-dot"></div><span data-i18n="features.2">VPP交易 · 虚拟电厂聚合运营</span></div>
+    <div class="feature-item"><div class="feature-dot"></div><span data-i18n="features.3">光储充一体 · 能量管理闭环</span></div>
+    <div class="feature-item"><div class="feature-dot"></div><span data-i18n="features.4">7×24运维 · 99.9%可用率</span></div>
   </div>
-</section>
+</div>
 
 <!-- CTA -->
 <section class="cta-section" id="about">
   <h2 data-i18n="cta.title">准备好升级你的能源管理了吗？</h2>
-  <p data-i18n="cta.desc">无论是新建园区还是存量改造，Solaripple 团队提供从方案设计到运营维护的全流程服务。</p>
-  <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+  <p data-i18n="cta.desc">无论是新建园区还是存量改造，Solaripple 提供从方案设计到运营维护的全流程服务。</p>
+  <div class="cta-actions">
     <a href="https://enos.solaripple.com" class="btn-primary" data-i18n="cta.experience">🌐 体验 EnOS 平台</a>
-    <a href="mailto:contact@solaripple.com" class="btn-secondary" data-i18n="cta.contact">📧 联系我们</a>
+    <a href="https://group.solaripple.com" class="btn-ghost" data-i18n="cta.group">🔥 光储团购咨询</a>
+    <a href="mailto:contact@solaripple.com" class="btn-ghost" data-i18n="cta.contact">📧 联系我们</a>
   </div>
 </section>
 
-<!-- Footer -->
+<!-- FOOTER -->
 <footer>
   <div class="footer-grid">
     <div class="footer-brand">
@@ -349,19 +412,20 @@
     <div class="footer-col">
       <h4 data-i18n="footer.product">产品</h4>
       <ul>
-        <li><a href="https://enos.solaripple.com" data-i18n="footer.enosPlatform">EnOS 数字孪生</a></li>
-        <li><a href="https://enos.solaripple.com/digital-twin" data-i18n="footer.digitalTwin3d">3D 可视化</a></li>
-        <li><a href="https://enos.solaripple.com/vpp" data-i18n="footer.vpp">VPP 虚拟电厂</a></li>
-        <li><a href="https://enos.solaripple.com/ai-prediction" data-i18n="footer.aiPrediction">AI 预测引擎</a></li>
+        <li><a href="https://enos.solaripple.com" data-i18n="footer.enos">EnOS 数字孪生</a></li>
+        <li><a href="https://group.solaripple.com" data-i18n="footer.groupbuy">光储团购</a></li>
+        <li><a href="https://master.solaripple.com" data-i18n="footer.master">RippleMaster</a></li>
+        <li><a href="https://monitor.solaripple.com" data-i18n="footer.monitor">能源监控</a></li>
+        <li><a href="https://rippletext.solaripple.com" data-i18n="footer.text">RippleText</a></li>
       </ul>
     </div>
     <div class="footer-col">
       <h4 data-i18n="footer.solution">方案</h4>
       <ul>
-        <li><a href="#products" data-i18n="footer.solarStorage">光储充一体</a></li>
-        <li><a href="#products" data-i18n="footer.demandManagement">需量管理</a></li>
-        <li><a href="#products" data-i18n="footer.peakShaving">削峰填谷</a></li>
-        <li><a href="#products" data-i18n="footer.demandResponse">需求响应</a></li>
+        <li><a href="#products" data-i18n="footer.solar">光储充一体</a></li>
+        <li><a href="#products" data-i18n="footer.demand">需量管理</a></li>
+        <li><a href="#products" data-i18n="footer.peak">削峰填谷</a></li>
+        <li><a href="#products" data-i18n="footer.vpp">VPP虚拟电厂</a></li>
       </ul>
     </div>
     <div class="footer-col">
@@ -382,31 +446,20 @@ var I18N = {
     "nav.products": "Products", "nav.platform": "Digital Twin Platform", "nav.about": "About", "nav.enter": "Enter Platform →", "nav.startUsing": "Start Using",
     "hero.badge": "⚡ Industrial Clean Energy Digital Infrastructure",
     "hero.title": "Give Every Industrial Park an<br/><em>Intelligent Energy Brain</em>",
-    "hero.subtitle": "Solaripple leverages digital twin, AI and optimization algorithms to provide integrated solar-storage-charging management and VPP trading services for commercial and industrial parks, reducing costs and maximizing asset returns.",
+    "hero.subtitle": "Solaripple leverages digital twin, AI and optimization algorithms to provide integrated solar-storage-charging management and VPP trading services for commercial and industrial parks.",
     "hero.enterEnos": "🌐 Enter EnOS Platform", "hero.learnMore": "Learn More",
-    "stats.capacity": "Managed Capacity", "stats.parks": "Industrial Clients", "stats.saving": "Avg. Cost Reduction", "stats.uptime": "System Uptime",
-    "products.label": "Core Products", "products.title": "Integrated Energy Management System",
-    "products.subtitle": "From hardware to application, from real-time monitoring to intelligent decisions — building a complete smart energy loop for industrial parks.",
-    "products.solarStorage.name": "Solar-Storage-Charging", "products.solarStorage.desc": "Integrated solar, storage and EV charging modules with real-time monitoring and intelligent dispatch, improving self-consumption and system efficiency.",
-    "products.solarStorage.tags.0": "Solar Monitor", "products.solarStorage.tags.1": "Storage BMS", "products.solarStorage.tags.2": "Smart Charging", "products.solarStorage.tags.3": "Demand Mgmt",
-    "products.digitalTwin.name": "Digital Twin Platform", "products.digitalTwin.desc": "Three.js-powered real-time 3D mapping of industrial parks with device status and energy flow visualization, fully mobile-responsive.",
-    "products.digitalTwin.tags.0": "3D Visualization", "products.digitalTwin.tags.1": "Real-time Data", "products.digitalTwin.tags.2": "VPP Aggregation", "products.digitalTwin.tags.3": "AI Prediction",
-    "products.vpp.name": "Virtual Power Plant (VPP)", "products.vpp.desc": "Aggregating distributed storage, EV chargers and interruptible loads for grid peak shaving, frequency regulation and demand response to earn ancillary service revenue.",
-    "products.vpp.tags.0": "Capacity Agg.", "products.vpp.tags.1": "Market Trading", "products.vpp.tags.2": "Revenue Share", "products.vpp.tags.3": "Ancillary Svc",
-    "products.ai.name": "AI Dispatch Engine", "products.ai.desc": "LSTM time-series forecasting combined with MILP optimization algorithms to predict load and solar output, enabling next-day dispatch planning.",
-    "products.ai.tags.0": "LSTM Forecast", "products.ai.tags.1": "Peak Shaving", "products.ai.tags.2": "MILP Optimization", "products.ai.tags.3": "Demand Control",
-    "platform.label": "Digital Twin Platform", "platform.title": "EnOS — All-in-One Park Energy Management",
-    "platform.desc": "EnOS (Energy Operating System) is Solaripple's industrial energy digital foundation, mapping physical energy assets into the digital world.",
-    "platform.features.0": "Real-time 3D visualization of park with instant device status",
-    "platform.features.1": "Solar/storage/charging/grid data integration, 3-second refresh",
-    "platform.features.2": "AI load & solar forecasting for proactive dispatch decisions",
-    "platform.features.3": "VPP aggregation with real-time power market connectivity",
-    "platform.features.4": "Mobile-responsive, access energy assets anywhere",
-    "platform.enter": "🌐 Open EnOS Platform →",
-    "cta.title": "Ready to Upgrade Your Energy Management?", "cta.desc": "Whether for new parks or existing facilities, Solaripple provides full-process services from planning to operation.", "cta.experience": "🌐 Experience EnOS Platform", "cta.contact": "📧 Contact Us",
-    "footer.brand": "Guangzhilian · Dedicated to industrial clean energy digitization, serving Yangtze River Delta parks.", "footer.product": "Products", "footer.solution": "Solutions", "footer.contact": "Contact",
-    "footer.enosPlatform": "EnOS Digital Twin", "footer.digitalTwin3d": "3D Visualization", "footer.vpp": "VPP Virtual Power Plant", "footer.aiPrediction": "AI Prediction Engine",
-    "footer.solarStorage": "Solar-Storage-Charging", "footer.demandManagement": "Demand Management", "footer.peakShaving": "Peak Shaving", "footer.demandResponse": "Demand Response",
+    "stats.capacity": "Managed Capacity", "stats.parks": "Industrial Parks", "stats.saving": "Avg. Cost Reduction", "stats.uptime": "System Uptime",
+    "products.label": "Core Products", "products.title": "Five Energy Digital Capabilities", "products.subtitle": "From hardware to software, from real-time monitoring to intelligent decisions — building a complete smart energy loop for industrial parks.",
+    "products.enos.name": "EnOS Digital Twin Platform", "products.enos.desc": "Three.js-powered real-time 3D mapping of industrial parks with device status and energy flow visualization, AI forecasting, dispatch and VPP trading.", "products.enos.link": "Open Platform →",
+    "products.group.name": "Solar+Storage Group Buy", "products.group.desc": "Commercial & industrial solar-storage group purchasing with IRR calculator, smart matching by region and capacity, credit-rated transaction security.", "products.group.link": "Join Group Buy →",
+    "products.master.name": "RippleMaster Storage System", "products.master.desc": "AGC frequency regulation / BMS storage management / 5-role Agent simulator, self-developed core components, 4.8MWh standard configuration.", "products.master.link": "Learn More →",
+    "products.monitor.name": "Energy Monitoring Center", "products.monitor.desc": "Multi-park, multi-device real-time monitoring, energy intelligence analytics, digital dashboard, ESG carbon emission tracking.", "products.monitor.link": "View Monitor →",
+    "products.text.name": "RippleText AI Writer", "products.text.desc": "Enterprise AI text generation engine with multi-language support, auto-drafting energy reports, analysis and marketing copy.", "products.text.link": "Try Demo →",
+    "features.0": "Digital Twin · Real-time 3D Visualization", "features.1": "AI Prediction · LSTM Time-series Optimization", "features.2": "VPP Trading · Virtual Power Plant Aggregation", "features.3": "Solar-Storage-Charging · Energy Management Loop", "features.4": "7×24 Ops · 99.9% Uptime",
+    "cta.title": "Ready to Upgrade Your Energy Management?", "cta.desc": "Whether for new parks or existing facilities, Solaripple provides full-process services from planning to operation.", "cta.experience": "🌐 Experience EnOS", "cta.group": "🔥 Group Buy Inquiry", "cta.contact": "📧 Contact Us",
+    "footer.brand": "Guangzhilian · Dedicated to industrial clean energy digitization, serving Yangtze River Delta industrial parks.", "footer.product": "Products", "footer.solution": "Solutions", "footer.contact": "Contact",
+    "footer.enos": "EnOS Digital Twin", "footer.groupbuy": "Group Buy", "footer.master": "RippleMaster", "footer.monitor": "Energy Monitor", "footer.text": "RippleText",
+    "footer.solar": "Solar-Storage", "footer.demand": "Demand Management", "footer.peak": "Peak Shaving", "footer.vpp": "VPP Virtual Power Plant",
     "footer.email": "contact@solaripple.com", "footer.location": "Suzhou, Jiangsu",
     "footer.copyright": "© 2026 Guangzhilian (Solaripple) · All Rights Reserved"
   },
@@ -414,93 +467,21 @@ var I18N = {
     "nav.products": "製品", "nav.platform": "デジタルツイン", "nav.about": "会社概要", "nav.enter": "プラットフォームへ →", "nav.startUsing": "今すぐ始める",
     "hero.badge": "⚡ 産業クリーンエネルギーデジタルインフラ",
     "hero.title": "すべての工業団地に<br/><em>インテリジェントエネルギーブレーンを</em>",
-    "hero.subtitle": "Solarippleはデジタルツイン、AI、最適化アルゴリズムに基づき、商業・工業団地向けに太陽光・蓄電・EV充電一体管理与VPP取引サービスを提供し、光熱費削減と資産収益を向上します。",
+    "hero.subtitle": "Solarippleはデジタルツイン・AI・最適化アルゴリズムに基づき、商業・工業団地向けに光储充一体管理与VPP取引サービスを提供します。",
     "hero.enterEnos": "🌐 EnOS プラットフォームへ", "hero.learnMore": "詳細を見る",
-    "stats.capacity": "管理設備容量", "stats.parks": "工業お客様", "stats.saving": "平均光熱費節約", "stats.uptime": "システム稼働率",
-    "products.label": "コア製品", "products.title": "三位一体エネルギーマネジメントシステム",
-    "products.subtitle": "ハードウェアからアプリケーションへ、リアルタイム監視からインテリジェントな意思決定へmdash;工業団地向けの完全なスマートエネルギーループを構築します。",
-    "products.solarStorage.name": "太陽光・蓄電・EV充電一体", "products.solarStorage.desc": "太陽光、蓄電、EV充電の3大モジュールを統合、リアルタイム設備監視とインテリジェントなエネルギ配送により、自己消費率とシステム効率を向上。",
-    "products.solarStorage.tags.0": "太陽光監視", "products.solarStorage.tags.1": "蓄電BMS", "products.solarStorage.tags.2": "スマート充電", "products.solarStorage.tags.3": "デマンド管理",
-    "products.digitalTwin.name": "デジタルツインプラットフォーム", "products.digitalTwin.desc": "Three.jsベースの工業団地リアルタイム3Dマッピング、設備状態とエネルギー流れの可視化、モバイル対応でいつでも運用状況を把握。",
-    "products.digitalTwin.tags.0": "3D 可視化", "products.digitalTwin.tags.1": "リアルタイムデータ", "products.digitalTwin.tags.2": "VPP アグリゲーション", "products.digitalTwin.tags.3": "AI 予測",
-    "products.vpp.name": "仮想発電所 (VPP)", "products.vpp.desc": "分散型蓄電、EV充電器、中断可能負荷を集約し、電力系統のピークシフト・周波数調整・需要応答に参加、輔助サービス収益を獲得。",
-    "products.vpp.tags.0": "容量アグリゲーション", "products.vpp.tags.1": "市場取引", "products.vpp.tags.2": "収益分配", "products.vpp.tags.3": "輔助サービス",
-    "products.ai.name": "AI ディスパッチエンジン", "products.ai.desc": "LSTM時系列予測とMILP最適化アルゴリズムを組み合わせ、負荷と太陽光出力を予測し、翌日の充放電計画とデマンド制御戦略を策定。",
-    "products.ai.tags.0": "LSTM 予測", "products.ai.tags.1": "ピークシフト", "products.ai.tags.2": "MILP 最適化", "products.ai.tags.3": "デマンド制御",
-    "platform.label": "デジタルツインプラットフォーム", "platform.title": "EnOS — 団地エネルギー一括管理",
-    "platform.desc": "EnOS（Energy Operating System）はSolarippleが打造的産業エネルギーデジタル基盤で、物理世界のエネルギー資産をデジタル空間に完全マッピング。",
-    "platform.features.0": "リアルタイム3D可視化mdash;設備状態がすぐわかる", "platform.features.1": "太陽光/蓄電/EV充電/電力系統データ統合、3秒更新",
-    "platform.features.2": "AI負荷・太陽光出力予測による先回りスケジューリング", "platform.features.3": "VPPアグリゲーションで電力交易中心とリアルタイム接続",
-    "platform.features.4": "モバイル対応、どこでもエネルギー資産を掌控",
-    "platform.enter": "🌐 EnOS プラットフォームを開く →",
-    "cta.title": "エネルギーマネジメントのアップグレード准备好了か？", "cta.desc": "新規団地でも既存設備改造でも、Solarippleチームが計画設計から運用保守まで全流程提供服务。",
-    "cta.experience": "🌐 EnOS プラットフォームを体験", "cta.contact": "📧 お問い合わせ",
-    "footer.brand": "光之涟漪（クウジシャ）· 産業クリーンエネルギーデジタル化に專注、長江デルタ地帯の工業団地客户提供。",
-    "footer.product": "製品", "footer.solution": "ソリューション", "footer.contact": "お問い合わせ",
-    "footer.enosPlatform": "EnOS デジタルツイン", "footer.digitalTwin3d": "3D 可視化", "footer.vpp": "VPP 仮想発電所", "footer.aiPrediction": "AI 予測エンジン",
-    "footer.solarStorage": "太陽光・蓄電・EV充電", "footer.demandManagement": "デマンド管理", "footer.peakShaving": "ピークシフト", "footer.demandResponse": "デマンド応答",
+    "stats.capacity": "管理設備容量", "stats.parks": "工業団地", "stats.saving": "平均光熱費節約", "stats.uptime": "システム稼働率",
+    "products.label": "コア製品", "products.title": "五大エネルギーデジタル能力", "products.subtitle": "ハードウェアからソフトウェアへ、リアルタイム監視からインテリジェントな意思決定へmdash;工業団地向けの完全なスマートエネルギーループを構築します。",
+    "products.enos.name": "EnOS デジタルツインプラットフォーム", "products.enos.desc": "Three.jsベースの工業団地リアルタイム3Dマッピング、設備状態とエネルギー流れの可視化、AI予測调度とVPP仮想発電所取引。", "products.enos.link": "プラットフォームを開く →",
+    "products.group.name": "太陽光・蓄電团购プラットフォーム", "products.group.desc": "工商業用太陽光・蓄電設備团购購入、IRR試算、同省同容量自動マッチング、信用格付けによる取引安全保障。", "products.group.link": "团购に参加 →",
+    "products.master.name": "RippleMaster 蓄電一体機", "products.master.desc": "AGC周波数調整/BMS蓄電管理/5役Agentシミュレーター、自研核心部品、4.8MWh標準構成。", "products.master.link": "製品詳細 →",
+    "products.monitor.name": "エネルギーモニタリングセンター", "products.monitor.desc": "複数団地・複数設備リアルタイム監視、エネルギーインテリジェンス分析、ESG二酸化炭素排出量追跡。", "products.monitor.link": "監視を見る →",
+    "products.text.name": "RippleText AIライティング", "products.text.desc": "企業向けAI文章生成エンジン、多言語対応、能源レポート・分析文・マーケティングコピーの自動作成。", "products.text.link": "Demoを試す →",
+    "features.0": "デジタルツイン · リアルタイム3D可視化", "features.1": "AI予測 · LSTM時系列最適化调度", "features.2": "VPP取引 · 仮想発電所アグリゲーション", "features.3": "光储充一体 · エネルギーマネジメントループ", "features.4": "7×24運用 · 99.9%稼働率",
+    "cta.title": "エネルギーマネジメントのアップグレード准备好了か？", "cta.desc": "新規団地でも既存設備改造でも、Solarippleチームが計画設計から運用保守まで全流程提供服务。", "cta.experience": "🌐 EnOS プラットフォーム", "cta.group": "🔥 团购 문의", "cta.contact": "📧 お問い合わせ",
+    "footer.brand": "光之涟漪 · 産業クリーンエネルギーデジタル化に專注、長江デルタ地帯の工業団地客户提供。", "footer.product": "製品", "footer.solution": "ソリューション", "footer.contact": "お問い合わせ",
+    "footer.enos": "EnOS デジタルツイン", "footer.groupbuy": "团购", "footer.master": "RippleMaster", "footer.monitor": "エネルギーモニタリング", "footer.text": "RippleText",
+    "footer.solar": "光储充一体", "footer.demand": "デマンド管理", "footer.peak": "ピークシフト", "footer.vpp": "VPP 仮想発電所",
     "footer.email": "contact@solaripple.com", "footer.location": "江蘇省蘇州市",
-    "footer.copyright": "© 2026 光之涟漪 (Solaripple) · 全著作権所有"
-<script>
-var I18N = {
-  zh: {},
-  en: {
-    "hero.title": "Give Every Industrial Park an<br/><em>Intelligent Energy Brain</em>",
-    "hero.subtitle": "Solaripple leverages digital twin, AI and optimization algorithms to provide integrated solar-storage-charging management and VPP trading services for commercial and industrial parks, reducing costs and maximizing asset returns.",
-    "hero.enterEnos": "Enter EnOS Platform", "hero.learnMore": "Learn More",
-    "stats.capacity": "Managed Capacity", "stats.parks": "Industrial Clients", "stats.saving": "Avg. Cost Reduction", "stats.uptime": "System Uptime",
-    "products.label": "Core Products", "products.title": "Integrated Energy Management System",
-    "products.subtitle": "From hardware to application, from real-time monitoring to intelligent decisions — building a complete smart energy loop for industrial parks.",
-    "products.solarStorage.name": "Solar-Storage-Charging", "products.solarStorage.desc": "Integrated solar, storage and EV charging modules with real-time monitoring and intelligent dispatch.",
-    "products.solarStorage.tags.0": "Solar Monitor", "products.solarStorage.tags.1": "Storage BMS", "products.solarStorage.tags.2": "Smart Charging", "products.solarStorage.tags.3": "Demand Mgmt",
-    "products.digitalTwin.name": "Digital Twin Platform", "products.digitalTwin.desc": "Three.js-powered real-time 3D mapping of industrial parks with device status and energy flow visualization.",
-    "products.digitalTwin.tags.0": "3D Visualization", "products.digitalTwin.tags.1": "Real-time Data", "products.digitalTwin.tags.2": "VPP Aggregation", "products.digitalTwin.tags.3": "AI Prediction",
-    "products.vpp.name": "Virtual Power Plant (VPP)", "products.vpp.desc": "Aggregating distributed storage, EV chargers and interruptible loads for grid peak shaving and demand response.",
-    "products.vpp.tags.0": "Capacity Agg.", "products.vpp.tags.1": "Market Trading", "products.vpp.tags.2": "Revenue Share", "products.vpp.tags.3": "Ancillary Svc",
-    "products.ai.name": "AI Dispatch Engine", "products.ai.desc": "LSTM time-series forecasting combined with MILP optimization algorithms to predict load and solar output.",
-    "products.ai.tags.0": "LSTM Forecast", "products.ai.tags.1": "Peak Shaving", "products.ai.tags.2": "MILP Optimization", "products.ai.tags.3": "Demand Control",
-    "platform.label": "Digital Twin Platform", "platform.title": "EnOS — All-in-One Park Energy Management",
-    "platform.desc": "EnOS (Energy Operating System) is Solaripple's industrial energy digital foundation.",
-    "platform.features.0": "Real-time 3D visualization of park with instant device status",
-    "platform.features.1": "Solar/storage/charging/grid data integration, 3-second refresh",
-    "platform.features.2": "AI load & solar forecasting for proactive dispatch decisions",
-    "platform.features.3": "VPP aggregation with real-time power market connectivity",
-    "platform.features.4": "Mobile-responsive, access energy assets anywhere",
-    "platform.enter": "Open EnOS Platform →",
-    "cta.title": "Ready to Upgrade Your Energy Management?", "cta.desc": "Whether for new parks or existing facilities, Solaripple provides full-process services from planning to operation.", "cta.experience": "Experience EnOS Platform", "cta.contact": "Contact Us",
-    "footer.brand": "Guangzhilian · Dedicated to industrial clean energy digitization, serving Yangtze River Delta parks.",
-    "footer.product": "Products", "footer.solution": "Solutions", "footer.contact": "Contact",
-    "footer.enosPlatform": "EnOS Digital Twin", "footer.digitalTwin3d": "3D Visualization", "footer.vpp": "VPP Virtual Power Plant", "footer.aiPrediction": "AI Prediction Engine",
-    "footer.solarStorage": "Solar-Storage-Charging", "footer.demandManagement": "Demand Management", "footer.peakShaving": "Peak Shaving", "footer.demandResponse": "Demand Response",
-    "footer.copyright": "© 2026 Guangzhilian (Solaripple) · All Rights Reserved"
-  },
-  ja: {
-    "hero.title": "すべての工業団地に<br/><em>インテリジェントエネルギーブレーンを</em>",
-    "hero.subtitle": "Solarippleはデジタルツイン、AI、最適化アルゴリズムに基づき、商業・工業団地向けに太陽光・蓄電・EV充電一体管理与VPP取引サービスを提供します。",
-    "hero.enterEnos": "EnOS プラットフォームへ", "hero.learnMore": "詳細を見る",
-    "stats.capacity": "管理設備容量", "stats.parks": "工業お客様", "stats.saving": "平均光熱費節約", "stats.uptime": "システム稼働率",
-    "products.label": "コア製品", "products.title": "三位一体エネルギーマネジメントシステム",
-    "products.subtitle": "ハードウェアからアプリケーションへ、リアルタイム監視からインテリジェントな意思決定へmdash;工業団地向けの完全なスマートエネルギーループを構築します。",
-    "products.solarStorage.name": "太陽光・蓄電・EV充電一体", "products.solarStorage.desc": "太陽光、蓄電、EV充電の3大モジュールを統合、リアルタイム設備監視とインテリジェントなエネルギ配送により、自己消費率とシステム効率を向上。",
-    "products.solarStorage.tags.0": "太陽光監視", "products.solarStorage.tags.1": "蓄電BMS", "products.solarStorage.tags.2": "スマート充電", "products.solarStorage.tags.3": "デマンド管理",
-    "products.digitalTwin.name": "デジタルツインプラットフォーム", "products.digitalTwin.desc": "Three.jsベースの工業団地リアルタイム3Dマッピング、設備状態とエネルギー流れの可視化、モバイル対応でいつでも運用状況を把握。",
-    "products.digitalTwin.tags.0": "3D 可視化", "products.digitalTwin.tags.1": "リアルタイムデータ", "products.digitalTwin.tags.2": "VPP アグリゲーション", "products.digitalTwin.tags.3": "AI 予測",
-    "products.vpp.name": "仮想発電所 (VPP)", "products.vpp.desc": "分散型蓄電、EV充電器、中断可能負荷を集約し、電力系統のピークシフト・周波数調整・需要応答に参加、輔助サービス収益を獲得。",
-    "products.vpp.tags.0": "容量アグリゲーション", "products.vpp.tags.1": "市場取引", "products.vpp.tags.2": "収益分配", "products.vpp.tags.3": "輔助サービス",
-    "products.ai.name": "AI ディスパッチエンジン", "products.ai.desc": "LSTM時系列予測とMILP最適化アルゴリズムを組み合わせ、負荷と太陽光出力を予測し、翌日の充放電計画とデマンド制御戦略を策定。",
-    "products.ai.tags.0": "LSTM 予測", "products.ai.tags.1": "ピークシフト", "products.ai.tags.2": "MILP 最適化", "products.ai.tags.3": "デマンド制御",
-    "platform.label": "デジタルツインプラットフォーム", "platform.title": "EnOS — 団地エネルギー一括管理",
-    "platform.desc": "EnOS（Energy Operating System）はSolarippleが打造的産業エネルギーデジタル基盤で、物理世界のエネルギー資産をデジタル空間に完全マッピング。",
-    "platform.features.0": "リアルタイム3D可視化mdash;設備状態がすぐわかる", "platform.features.1": "太陽光/蓄電/EV充電/電力系統データ統合、3秒更新",
-    "platform.features.2": "AI負荷・太陽光出力予測による先回りスケジューリング", "platform.features.3": "VPPアグリゲーションで電力交易中心とリアルタイム接続",
-    "platform.features.4": "モバイル対応、どこでもエネルギー資産を掌控",
-    "platform.enter": "EnOS プラットフォームを開く →",
-    "cta.title": "エネルギーマネジメントのアップグレード准备好了か？", "cta.desc": "新規団地でも既存設備改造でも、Solarippleチームが計画設計から運用保守まで全流程提供服务。",
-    "cta.experience": "EnOS プラットフォームを体験", "cta.contact": "お問い合わせ",
-    "footer.brand": "光之涟漪（クウジシャ）· 産業クリーンエネルギーデジタル化に專注、長江デルタ地帯の工業団地客户提供。",
-    "footer.product": "製品", "footer.solution": "ソリューション", "footer.contact": "お問い合わせ",
-    "footer.enosPlatform": "EnOS デジタルツイン", "footer.digitalTwin3d": "3D 可視化", "footer.vpp": "VPP 仮想発電所", "footer.aiPrediction": "AI 予測エンジン",
-    "footer.solarStorage": "太陽光・蓄電・EV充電", "footer.demandManagement": "デマンド管理", "footer.peakShaving": "ピークシフト", "footer.demandResponse": "デマンド応答",
     "footer.copyright": "© 2026 光之涟漪 (Solaripple) · 全著作権所有"
   }
 };
@@ -511,18 +492,16 @@ function setActiveLang(lang) {
   document.getElementById("langJa").classList.toggle("active", lang === "ja");
   document.documentElement.lang = lang;
 }
-
 function applyI18n(lang) {
   if (lang === "zh") { setActiveLang("zh"); return; }
   document.querySelectorAll("[data-i18n]").forEach(function(el) {
     var key = el.dataset.i18n;
     var text = I18N[lang] && I18N[lang][key] || I18N.en[key] || "";
-    if (text.indexOf("<em>") >= 0) { el.innerHTML = text; }
+    if (text.indexOf("<em>") >= 0 || text.indexOf("<br/>") >= 0) { el.innerHTML = text; }
     else { el.textContent = text; }
   });
   setActiveLang(lang);
 }
-
 function detectLang() {
   var stored = localStorage.getItem("solaripple-lang");
   if (stored && I18N[stored]) return stored;
@@ -530,9 +509,9 @@ function detectLang() {
   return I18N[nav] ? nav : "zh";
 }
 
+// Init lang
 var currentLang = detectLang();
 applyI18n(currentLang);
-
 document.querySelectorAll("[data-lang-switch]").forEach(function(btn) {
   btn.addEventListener("click", function() {
     var l = this.dataset.langSwitch;
@@ -541,11 +520,31 @@ document.querySelectorAll("[data-lang-switch]").forEach(function(btn) {
   });
 });
 
-document.querySelectorAll("a[href^="#"]").forEach(function(a) {
+// Smooth scroll
+document.querySelectorAll("a[href^='#']").forEach(function(a) {
   a.addEventListener("click", function(e) {
     var t = document.querySelector(this.getAttribute("href"));
-    if (t) { e.preventDefault(); t.scrollIntoView({ behavior: "smooth" }); }
+    if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth' }); }
   });
+});
+
+// Scroll animations
+var observer = new IntersectionObserver(function(entries) {
+  entries.forEach(function(entry) {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('in-view');
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.animate-on-scroll, .section-header').forEach(function(el) {
+  observer.observe(el);
+});
+
+// Stagger card reveals
+document.querySelectorAll('.product-card').forEach(function(card, i) {
+  card.style.animationDelay = (i * 0.1) + 's';
+  observer.observe(card);
 });
 </script>
 </body>
