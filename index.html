@@ -50,6 +50,7 @@
     .hero-bg {
       position: absolute; inset: 0; overflow: hidden; pointer-events: none;
       background: #080B14;
+      min-height: 100vh;
       z-index: 0;
     }
     #heroCanvas {
@@ -507,17 +508,7 @@
 
 <!-- HERO -->
 <section class="hero">
-    <div class="hero-bg">
-      <div class="particle-field">
-        <div class="particle"></div><div class="particle"></div><div class="particle"></div>
-        <div class="particle"></div><div class="particle"></div><div class="particle"></div>
-        <div class="particle"></div><div class="particle"></div><div class="particle"></div>
-        <div class="particle"></div><div class="particle"></div><div class="particle"></div>
-        <div class="particle"></div><div class="particle"></div><div class="particle"></div>
-        <div class="particle"></div><div class="particle"></div><div class="particle"></div>
-        <div class="particle"></div><div class="particle"></div>
-      </div>
-    </div>
+  <div class="hero-bg"><canvas id="heroCanvas"></canvas></div>
   <div class="hero-eyebrow" data-i18n="hero.badge">⚡ 工业清洁能源数字基础设施</div>
   <h1 data-i18n="hero.title">让每一座工业园区<br/>拥有<em>智慧能源大脑</em></h1>
   <p class="hero-sub" data-i18n="hero.subtitle">Solaripple 基于数字孪生、人工智能与优化算法，为工商业园区提供光储充一体化管理和虚拟电厂交易服务，降低电费、提升资产收益。</p>
@@ -1028,7 +1019,152 @@ form.addEventListener('submit', function(e) {
         formMsg.style.display = 'block';
       }
     })
-    .catch</script>
+    .catch(function() {
+      formMsg.className = 'form-msg error';
+      formMsg.textContent = '✗ 网络错误，请检查网络后重试';
+      formMsg.style.display = 'block';
+    })
+    .finally(function() { submitBtn.disabled = false; submitBtn.textContent = '📤 提交咨询'; });
+});
+
+
+// Energy Grid Canvas Animation
+(function() {
+  var canvas = document.getElementById('heroCanvas');
+  if (!canvas) return;
+  var ctx = canvas.getContext('2d');
+  var W, H, particles, nodes, gridSpacing = 80, t = 0;
+
+  function resize() {
+    W = canvas.width = canvas.offsetWidth || window.innerWidth;
+    H = canvas.height = canvas.offsetHeight || window.innerHeight;
+    if (W === 0 || H === 0) {
+      W = window.innerWidth; H = Math.max(window.innerHeight, 700);
+      canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
+    }
+    initGrid();
+  }
+
+  function initGrid() {
+    nodes = [];
+    var cols = Math.ceil(W / gridSpacing) + 2;
+    var rows = Math.ceil(H / gridSpacing) + 2;
+    for (var r = 0; r <= rows; r++) {
+      for (var c = 0; c <= cols; c++) {
+        nodes.push({ x: c * gridSpacing, y: r * gridSpacing, phase: Math.random() * Math.PI * 2 });
+      }
+    }
+  }
+
+  // Particle pool
+  var MAX_PARTICLES = 80;
+  particles = [];
+
+  function spawnParticle() {
+    if (particles.length >= MAX_PARTICLES) return;
+    // Pick a random horizontal line (row)
+    var cols = Math.ceil(W / gridSpacing) + 2;
+    var rows = Math.ceil(H / gridSpacing) + 2;
+    var row = Math.floor(Math.random() * rows);
+    var x = 0;
+    var y = row * gridSpacing;
+    var speed = 0.8 + Math.random() * 1.2;
+    particles.push({ x: x, y: y, speed: speed, alpha: 0, maxAlpha: 0.4 + Math.random() * 0.6, life: 0, maxLife: W / speed });
+  }
+
+  function drawGrid() {
+    var cols = Math.ceil(W / gridSpacing) + 1;
+    var rows = Math.ceil(H / gridSpacing) + 1;
+    ctx.clearRect(0, 0, W, H);
+
+    // Draw grid lines with glow
+    ctx.lineWidth = 0.8;
+    for (var r = 0; r <= rows; r++) {
+      var y = r * gridSpacing;
+      for (var c = 0; c <= cols; c++) {
+        var x = c * gridSpacing;
+        var n = nodes[r * cols + c];
+        if (!n) continue;
+        // Horizontal line
+        if (c < cols) {
+          var alpha = 0.08 + 0.06 * Math.sin(t * 0.5 + n.phase);
+          ctx.strokeStyle = 'rgba(0,212,170,' + alpha + ')';
+          ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x + gridSpacing, y); ctx.stroke();
+        }
+        // Vertical line
+        if (r < rows) {
+          var alpha = 0.08 + 0.06 * Math.sin(t * 0.5 + n.phase + 1);
+          ctx.strokeStyle = 'rgba(0,212,170,' + alpha + ')';
+          ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x, y + gridSpacing); ctx.stroke();
+        }
+      }
+    }
+
+    // Draw node glows
+    for (var r = 0; r <= rows; r++) {
+      for (var c = 0; c <= cols; c++) {
+        var n = nodes[r * cols + c];
+        if (!n) continue;
+        var pulse = 0.5 + 0.5 * Math.sin(t * 1.2 + n.phase);
+        var radius = 2 + pulse * 2;
+        var alpha = 0.3 + pulse * 0.4;
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, radius, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(0,212,170,' + alpha + ')';
+        ctx.fill();
+        // Glow halo
+        var grad = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, radius * 4);
+        grad.addColorStop(0, 'rgba(0,212,170,' + (alpha * 0.7) + ')');
+        grad.addColorStop(1, 'rgba(0,212,170,0)');
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, radius * 4, 0, Math.PI * 2);
+        ctx.fillStyle = grad;
+        ctx.fill();
+      }
+    }
+
+    // Update and draw particles
+    if (Math.random() < 0.3) spawnParticle();
+    for (var i = particles.length - 1; i >= 0; i--) {
+      var p = particles[i];
+      p.life++;
+      p.x += p.speed;
+      // Fade in/out
+      if (p.life < 20) p.alpha = (p.life / 20) * p.maxAlpha;
+      else if (p.life > p.maxLife - 20) p.alpha = ((p.maxLife - p.life) / 20) * p.maxAlpha;
+      else p.alpha = p.maxAlpha;
+      if (p.life >= p.maxLife) { particles.splice(i, 1); continue; }
+      // Draw particle
+      var py = p.y + Math.sin(p.life * 0.1) * 1.5; // slight wave
+      ctx.beginPath();
+      ctx.arc(p.x, py, 1.5, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(0,212,170,' + p.alpha + ')';
+      ctx.fill();
+      // Trail
+      ctx.beginPath();
+      ctx.moveTo(p.x, py);
+      ctx.lineTo(p.x - 12, py);
+      var trailGrad = ctx.createLinearGradient(p.x - 12, py, p.x, py);
+      trailGrad.addColorStop(0, 'rgba(0,212,170,0)');
+      trailGrad.addColorStop(1, 'rgba(0,212,170,' + p.alpha * 0.6 + ')');
+      ctx.strokeStyle = trailGrad;
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+    }
+    t += 0.016;
+    requestAnimationFrame(drawGrid);
+  }
+
+  // Defer first resize to ensure layout is complete
+  requestAnimationFrame(function() {
+    resize();
+  });
+  window.addEventListener('resize', function() {
+    requestAnimationFrame(resize);
+  });
+  drawGrid();
+})();
+</script>
 
 <!-- CONTACT MODAL -->
 <div class="modal-overlay" id="contactModal">
