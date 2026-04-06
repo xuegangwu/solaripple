@@ -575,12 +575,14 @@
     <li><a href="https://enos.solaripple.com" data-i18n="nav.enter" style="color:#00D4AA">进入平台 →</a></li>
   </ul>
   <div style="display:flex;gap:16px;align-items:center">
+    <span id="navUserName" style="display:none;font-size:13px;color:#00D4AA;cursor:pointer;padding:6px 12px;border-radius:6px;background:rgba(0,212,170,0.1);border:1px solid rgba(0,212,170,0.2);"></span>
+    <button id="navLogoutBtn" onclick="logout()" style="display:none;font-size:13px;color:rgba(255,255,255,0.4);background:none;border:1px solid rgba(255,255,255,0.15);border-radius:6px;cursor:pointer;padding:8px 12px;">退出</button>
     <div class="lang-switch" id="langSwitch">
       <span data-lang-switch="zh" class="active" id="langZh">中</span>
       <span data-lang-switch="en" id="langEn">EN</span>
       <span data-lang-switch="ja" id="langJa">日</span>
     </div>
-    <a href="https://enos.solaripple.com" class="nav-cta" data-i18n="nav.startUsing">开始使用</a>
+    <button onclick="openAuthModal('login')" class="nav-cta" data-i18n="nav.startUsing">开始使用</button>
   </div>
 </nav>
 
@@ -1021,243 +1023,167 @@
   <div class="footer-bottom" data-i18n="footer.copyright">© 2026 光之涟漪 (Solaripple) · 沪ICP备2026009101号 · 版权所有</div>
 </footer>
 
+
+
+<!-- AUTH MODAL -->
+<div class="modal-overlay" id="authModal">
+  <div class="modal-box">
+    <button class="modal-close" id="authModalClose">✕</button>
+    <!-- Login -->
+    <div id="loginForm">
+      <div class="modal-title">欢迎回来</div>
+      <div class="modal-sub">登录您的 Solaripple 账户</div>
+      <form onsubmit="handleLogin(event)">
+        <div class="form-group"><label class="form-label">邮箱 <span>*</span></label><input class="form-input" type="email" name="email" placeholder="you@company.com" required /></div>
+        <div class="form-group"><label class="form-label">密码 <span>*</span></label><input class="form-input" type="password" name="password" placeholder="••••••••" required /></div>
+        <button type="submit" class="form-submit" id="loginBtn">🔐 登录</button>
+        <div class="form-msg" id="loginMsg"></div>
+        <div style="text-align:center;margin-top:16px;font-size:13px;color:rgba(255,255,255,0.35)">还没有账户？<a href="#" onclick="switchToRegister();return false" style="color:#00D4AA;text-decoration:none">立即注册</a></div>
+      </form>
+    </div>
+    <!-- Register -->
+    <div id="registerForm" style="display:none">
+      <div class="modal-title">创建账户</div>
+      <div class="modal-sub">注册后即可访问 EnOS 平台和更多服务</div>
+      <form onsubmit="handleRegister(event)">
+        <div class="form-row"><div class="form-group"><label class="form-label">姓名 <span>*</span></label><input class="form-input" type="text" name="name" placeholder="您的姓名" required /></div><div class="form-group"><label class="form-label">公司</label><input class="form-input" type="text" name="company" placeholder="公司名称（选填）" /></div></div>
+        <div class="form-group"><label class="form-label">邮箱 <span>*</span></label><input class="form-input" type="email" name="email" placeholder="you@company.com" required /></div>
+        <div class="form-group"><label class="form-label">密码 <span>*</span>（至少6位）</label><input class="form-input" type="password" name="password" placeholder="设置密码" required minlength="6" /></div>
+        <div class="form-group"><label class="form-label">电话</label><input class="form-input" type="tel" name="phone" placeholder="+86（选填）" /></div>
+        <button type="submit" class="form-submit" id="registerBtn">📝 创建账户</button>
+        <div class="form-msg" id="registerMsg"></div>
+        <div style="text-align:center;margin-top:16px;font-size:13px;color:rgba(255,255,255,0.35)">已有账户？<a href="#" onclick="switchToLogin();return false" style="color:#00D4AA;text-decoration:none">立即登录</a></div>
+      </form>
+    </div>
+    <!-- User Panel -->
+    <div id="userPanel" style="display:none;text-align:center">
+      <div class="modal-title" id="userGreeting"></div>
+      <div class="modal-sub" id="userEmail"></div>
+      <div style="margin:24px 0"><a href="https://enos.solaripple.com" class="form-submit" style="display:inline-flex;text-decoration:none;">🌐 进入 EnOS 平台</a></div>
+      <button onclick="logout()" class="form-submit" style="background:rgba(255,255,255,0.05);color:rgba(255,255,255,0.4);border:1px solid rgba(255,255,255,0.1)">退出登录</button>
+    </div>
+  </div>
+</div></body>
+</html>
+
 <script>
-var I18N = {
-  zh: {},
-  en: {
-    "nav.products": "Products", "nav.platform": "Digital Twin Platform", "nav.about": "About", "nav.enter": "Enter Platform →", "nav.startUsing": "Start Using",
-    "hero.badge": "⚡ Industrial Clean Energy Digital Infrastructure",
-    "hero.title": "Give Every Industrial Park an<br/><em>Intelligent Energy Brain</em>",
-    "hero.subtitle": "Solaripple leverages digital twin, AI and optimization algorithms to provide integrated solar-storage-charging management and VPP trading services for commercial and industrial parks.",
-    "hero.enterEnos": "🌐 Enter EnOS Platform", "hero.learnMore": "Learn More",
-    "stats.capacity": "Managed Capacity", "stats.parks": "Industrial Parks", "stats.saving": "Avg. Cost Reduction", "stats.uptime": "System Uptime",
-    "products.label": "Core Products", "products.title": "Eight Energy Digital Capabilities", "products.subtitle": "From hardware to software, from real-time monitoring to intelligent decisions — building a complete smart energy loop for industrial parks.",
-    "products.enos.name": "EnOS Digital Twin Platform", "products.enos.desc": "Three.js-powered real-time 3D mapping of industrial parks with device status and energy flow visualization, AI forecasting, dispatch and VPP trading.", "products.enos.link": "Open Platform →",
-    "products.group.name": "RippleGroup", "products.group.desc": "Commercial & industrial solar-storage group purchasing with IRR calculator, smart matching by region and capacity, credit-rated transaction security.", "products.group.link": "Join Group Buy →",
-    "products.master.name": "RippleMaster AI Dispatch Agent", "products.master.desc": "Five-role Agent dispatch: AGC regulation / BMS management / Demand control / Peak-valley arbitrage / Emergency response. Self-developed algorithms, 4.8MWh energy storage.", "products.master.link": "Learn More →",
-    "products.monitor.name": "RippleMonitor Energy Intelligence", "products.monitor.desc": "Real-time tracking of policy trends, commodity prices, carbon market dynamics and industry sentiment. AI-powered analysis supporting investment decisions and strategic planning.", "products.monitor.link": "View Intelligence →",
-    "products.text.name": "RippleText AI Writer", "products.text.desc": "Enterprise AI text generation engine with multi-language support, auto-drafting energy reports, analysis and marketing copy.", "products.text.link": "Try Demo →",
-    "products.ops.name": "Ops Management Platform", "products.ops.desc": "Seven-dimensional ops system: live monitoring, work orders, business dashboard, software assets, production, supply chain, cost analysis.", "products.ops.link": "Open Ops →",
-    "products.fund.name": "RippleFund", "products.fund.desc": "专注中国及亚太工商业光储开发投资、运维与交易，初始基金2亿元人民币，构建能源资产与金融服务闭环。", "products.fund.link": "了解更多 →", "products.storage.name": "RippleStorage", "products.storage.desc": "RippleStorage library powered commercial & industrial energy storage 3D digital twin demo with battery cluster, PCS, HVAC and fire system visualization.", "products.storage.link": "View 3D Demo →",
-    "products.fund.name": "RippleFund", "products.fund.desc": "Focused on C\u00b7APAC commercial and industrial solar-storage development, investment, operations and trading. RMB 200M initial fund, building energy asset and financial services loop.", "products.fund.link": "Learn More →",
-    "features.0": "Digital Twin · Real-time 3D Visualization", "features.1": "AI Prediction · LSTM Time-series Optimization", "features.2": "VPP Trading · Virtual Power Plant Aggregation", "features.3": "Solar-Storage-Charging · Energy Management Loop", "features.4": "7×24 Ops · 99.9% Uptime",
-    "cta.title": "Ready to Upgrade Your Energy Management?", "cta.desc": "Whether for new parks or existing facilities, Solaripple provides full-process services from planning to operation.", "cta.experience": "🌐 Experience EnOS", "cta.group": "🔥 Group Buy Inquiry", "cta.contact": "📧 Contact Us",
-    "footer.brand": "Guangzhilian · Dedicated to industrial clean energy digitization, serving China and APAC markets.", "footer.product": "Products", "footer.solution": "Solutions", "footer.contact": "Contact",
-    "footer.enos": "EnOS", "footer.groupbuy": "RippleGroup", "footer.master": "RippleMaster", "footer.monitor": "RippleMonitor", "footer.text": "RippleText", "footer.ops": "RippleOps", "footer.storage": "RippleStorage", "footer.ops": "RippleOps", "footer.storage": "RippleStorage",
-    "footer.solar": "Solar-Storage", "footer.demand": "Demand Management", "footer.peak": "Peak Shaving", "footer.vpp": "VPP Virtual Power Plant",
-    "footer.email": "contact@solaripple.com", "footer.location": "Suzhou, Jiangsu",
-    "footer.copyright": "© 2026 Guangzhilian (Solaripple) · All Rights Reserved"
-  },
-  ja: {
-    "nav.products": "製品", "nav.platform": "デジタルツイン", "nav.about": "会社概要", "nav.enter": "プラットフォームへ →", "nav.startUsing": "今すぐ始める",
-    "hero.badge": "⚡ 産業クリーンエネルギーデジタルインフラ",
-    "hero.title": "すべての工業団地に<br/><em>インテリジェントエネルギーブレーンを</em>",
-    "hero.subtitle": "Solarippleはデジタルツイン・AI・最適化アルゴリズムに基づき、商業・工業団地向けに光储充一体管理与VPP取引サービスを提供します。",
-    "hero.enterEnos": "🌐 EnOS プラットフォームへ", "hero.learnMore": "詳細を見る",
-    "stats.capacity": "管理設備容量", "stats.parks": "工業団地", "stats.saving": "平均光熱費節約", "stats.uptime": "システム稼働率",
-    "products.label": "コア製品", "products.title": "八大エネルギーデジタル能力", "products.subtitle": "ハードウェアからソフトウェアへ、リアルタイム監視からインテリジェントな意思決定へmdash;工業団地向けの完全なスマートエネルギーループを構築します。",
-    "products.enos.name": "EnOS", "products.enos.desc": "Three.jsベースの工業団地リアルタイム3Dマッピング、設備状態とエネルギー流れの可視化、AI予測调度とVPP仮想発電所取引。", "products.enos.link": "プラットフォームを開く →",
-    "products.group.name": "RippleGroup", "products.group.desc": "工商業用太陽光・蓄電設備团购購入、IRR試算、同省同容量自動マッチング、信用格付けによる取引安全保障。", "products.group.link": "团购に参加 →",
-    "products.master.name": "RippleMaster AIディスパッチAgent", "products.master.desc": "5役Agentディスパッチ：AGC周波数調整/BMS管理/デマンド制御/ピークバレーアービトラージ/緊急対応。自研アルゴリズム、4.8MWh蓄電対応。", "products.master.link": "製品詳細 →",
-    "products.monitor.name": "RippleMonitor エネルギーインテリジェンス", "products.monitor.desc": "政策動向・商品価格・炭素市場ダイナミクス・業界舆情をリアルタイム追跡。AI分析で投資判断と戦略立案を支援。", "products.monitor.link": "インテリジェンスを見る →",
-    "products.text.name": "RippleText AIライティング", "products.text.desc": "企業向けAI文章生成エンジン、多言語対応、能源レポート・分析文・マーケティングコピーの自動作成。", "products.text.link": "Demoを試す →",
-    "products.ops.name": "RippleOps", "products.ops.desc": "7次元運用体系：ライブ監視/作業チケット/ビジネスダッシュボード/ソフトウェア資産/生産管理/サプライチェーン/コスト分析。", "products.ops.link": "運用プラットフォームを開く →",
-    "products.fund.name": "RippleFund", "products.fund.desc": "专注中国及亚太工商业光储开发投资、运维与交易，初始基金2亿元人民币，构建能源资产与金融服务闭环。", "products.fund.link": "了解更多 →", "products.storage.name": "RippleStorage", "products.storage.desc": "RippleStorageライブラリ駆動の工商業蓄電3Dデジタルツインデモ、バッテリー簇/PCS/空側/消防システム全チェーン可視化。", "products.storage.link": "3Dデモを見る →",
-    "products.fund.name": "RippleFund", "products.fund.desc": "中国・APAC工商業光储開発・投資・運用・取引に专注、初期ファンド2億元、能源資産と金融サービスのループを構築。", "products.fund.link": "詳細を見る →",
-    "features.0": "デジタルツイン · リアルタイム3D可視化", "features.1": "AI予測 · LSTM時系列最適化调度", "features.2": "VPP取引 · 仮想発電所アグリゲーション", "features.3": "光储充一体 · エネルギーマネジメントループ", "features.4": "7×24運用 · 99.9%稼働率",
-    "cta.title": "エネルギーマネジメントのアップグレード准备好了か？", "cta.desc": "新規団地でも既存設備改造でも、Solarippleチームが計画設計から運用保守まで全流程提供服务。", "cta.experience": "🌐 EnOS プラットフォーム", "cta.group": "🔥 团购 문의", "cta.contact": "📧 お問い合わせ",
-    "footer.brand": "光之涟漪 · 産業クリーンエネルギーデジタル化に專注、長江デルタ地帯の工業団地客户提供。", "footer.product": "製品", "footer.solution": "ソリューション", "footer.contact": "お問い合わせ",
-    "footer.enos": "EnOS", "footer.groupbuy": "RippleGroup", "footer.master": "RippleMaster", "footer.monitor": "RippleMonitor", "footer.text": "RippleText", "footer.ops": "RippleOps", "footer.storage": "RippleStorage", "footer.ops": "RippleOps", "footer.storage": "RippleStorage",
-    "footer.solar": "光储充一体", "footer.demand": "デマンド管理", "footer.peak": "ピークシフト", "footer.vpp": "VPP 仮想発電所",
-    "footer.email": "contact@solaripple.com", "footer.location": "江蘇省蘇州市",
-    "footer.copyright": "© 2026 光之涟漪 (Solaripple) · 全著作権所有"
+// ── Auth System ──
+function openAuthModal(tab) {
+  var m = document.getElementById('authModal');
+  m.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  if (tab === 'register') switchToRegister();
+  else switchToLogin();
+  checkLoginState();
+}
+function closeAuthModal() {
+  document.getElementById('authModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.getElementById('authModalClose').onclick = closeAuthModal;
+document.getElementById('authModal').onclick = function(e){ if(e.target===this) closeAuthModal(); };
+document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeAuthModal(); });
+
+function switchToLogin() {
+  document.getElementById('loginForm').style.display = 'block';
+  document.getElementById('registerForm').style.display = 'none';
+  document.getElementById('userPanel').style.display = 'none';
+}
+function switchToRegister() {
+  document.getElementById('loginForm').style.display = 'none';
+  document.getElementById('registerForm').style.display = 'block';
+  document.getElementById('userPanel').style.display = 'none';
+}
+function showUserPanel(user) {
+  document.getElementById('loginForm').style.display = 'none';
+  document.getElementById('registerForm').style.display = 'none';
+  document.getElementById('userPanel').style.display = 'block';
+  document.getElementById('userGreeting').textContent = '你好，' + user.name;
+  document.getElementById('userEmail').textContent = user.email;
+  document.getElementById('navLoginBtn').style.display = 'none';
+  var un = document.getElementById('navUserName');
+  un.style.display = 'inline-block';
+  un.textContent = user.name;
+  un.onclick = function(){ openAuthModal('login'); };
+  document.getElementById('navLogoutBtn').style.display = 'inline-block';
+}
+function updateNav(user) {
+  if (user) {
+    document.getElementById('navLoginBtn').style.display = 'none';
+    var un = document.getElementById('navUserName');
+    un.style.display = 'inline-block';
+    un.textContent = user.name;
+    un.onclick = function(){ openAuthModal('login'); };
+    document.getElementById('navLogoutBtn').style.display = 'inline-block';
+  } else {
+    document.getElementById('navLoginBtn').style.display = 'inline-block';
+    document.getElementById('navUserName').style.display = 'none';
+    document.getElementById('navLogoutBtn').style.display = 'none';
   }
-};
-
-function setActiveLang(lang) {
-  document.getElementById("langZh").classList.toggle("active", lang === "zh");
-  document.getElementById("langEn").classList.toggle("active", lang === "en");
-  document.getElementById("langJa").classList.toggle("active", lang === "ja");
-  document.documentElement.lang = lang;
 }
-function applyI18n(lang) {
-  if (lang === "zh") { setActiveLang("zh"); return; }
-  document.querySelectorAll("[data-i18n]").forEach(function(el) {
-    var key = el.dataset.i18n;
-    var text = I18N[lang] && I18N[lang][key] || I18N.en[key] || "";
-    if (text.indexOf("<em>") >= 0 || text.indexOf("<br/>") >= 0) { el.innerHTML = text; }
-    else { el.textContent = text; }
-  });
-  setActiveLang(lang);
+function checkLoginState() {
+  fetch('/api/auth/me', { credentials: 'include' })
+    .then(function(r){ return r.json(); })
+    .then(function(res){ if(res.success && res.user) showUserPanel(res.user); })
+    .catch(function(){});
 }
-function detectLang() {
-  var stored = localStorage.getItem("solaripple-lang");
-  if (stored && I18N[stored]) return stored;
-  var nav = (navigator.language || "").split("-")[0];
-  return I18N[nav] ? nav : "zh";
-}
-
-// Init lang
-var currentLang = detectLang();
-applyI18n(currentLang);
-document.querySelectorAll("[data-lang-switch]").forEach(function(btn) {
-  btn.addEventListener("click", function() {
-    var l = this.dataset.langSwitch;
-    localStorage.setItem("solaripple-lang", l);
-    applyI18n(l);
-  });
-});
-
-// Smooth scroll
-document.querySelectorAll("a[href^='#']").forEach(function(a) {
-  a.addEventListener("click", function(e) {
-    var t = document.querySelector(this.getAttribute("href"));
-    if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth' }); }
-  });
-});
-
-// Scroll animations
-var observer = new IntersectionObserver(function(entries) {
-  entries.forEach(function(entry) {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('in-view');
-    }
-  });
-}, { threshold: 0.1 });
-
-document.querySelectorAll('.animate-on-scroll, .section-header').forEach(function(el) {
-  observer.observe(el);
-});
-
-// Stagger card reveals
-document.querySelectorAll('.product-card').forEach(function(card, i) {
-  card.style.animationDelay = (i * 0.1) + 's';
-  observer.observe(card);
-});
-
-// Platform popup on click
-var popupTriggered = false;
-var popup = document.getElementById('platformPopup');
-var enterBtn = document.getElementById('enterEnosBtn');
-
-if (enterBtn && popup) {
-  enterBtn.addEventListener('click', function(e) {
-    e.preventDefault();
-    popupTriggered = !popupTriggered;
-    popup.style.display = popupTriggered ? 'block' : 'none';
-  });
-  document.addEventListener('click', function(e) {
-    if (popupTriggered && !e.target.closest('.hero-popup-trigger')) {
-      popup.style.display = 'none';
-      popupTriggered = false;
-    }
-  });
-}
-
-
-// Contact modal
-var modal = document.getElementById('contactModal');
-var modalClose = document.getElementById('modalClose');
-var contactModalBtn = document.getElementById('contactModalBtn');
-var footerContactBtn = document.getElementById('footerContactBtn');
-function openModal() { modal.classList.add('open'); document.body.style.overflow = 'hidden'; }
-function closeModal() { modal.classList.remove('open'); document.body.style.overflow = ''; }
-if (contactModalBtn) contactModalBtn.addEventListener('click', function(e) { e.preventDefault(); openModal(); });
-if (footerContactBtn) footerContactBtn.addEventListener('click', function(e) { e.preventDefault(); openModal(); });
-if (modalClose) modalClose.addEventListener('click', closeModal);
-modal.addEventListener('click', function(e) { if (e.target === modal) closeModal(); });
-document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeModal(); });
-
-// Form submit
-var form = document.getElementById('contactForm');
-var submitBtn = document.getElementById('submitBtn');
-var formMsg = document.getElementById('formMsg');
-form.addEventListener('submit', function(e) {
+function handleLogin(e) {
   e.preventDefault();
-  var fd = new FormData(form);
+  var btn = document.getElementById('loginBtn');
+  var msg = document.getElementById('loginMsg');
+  var fd = new FormData(e.target);
   var data = Object.fromEntries(fd.entries());
-  submitBtn.disabled = true;
-  submitBtn.textContent = '提交中...';
-  formMsg.style.display = 'none';
-  fetch('/api/store/contact', {
-    method: 'POST',
+  btn.disabled = true; btn.textContent = '登录中...'; msg.style.display = 'none';
+  fetch('/api/auth/login', {
+    method: 'POST', credentials: 'include',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(data)
-  }).then(function(r) { return r.json(); })
+  }).then(function(r){ return r.json(); })
     .then(function(res) {
       if (res.success) {
-        formMsg.className = 'form-msg success';
-        formMsg.textContent = '✓ 提交成功！我们将在24小时内与您联系。';
-        formMsg.style.display = 'block';
-        form.reset();
-        setTimeout(closeModal, 2500);
+        showUserPanel(res.user);
+        msg.className = 'form-msg success'; msg.textContent = '✓ 登录成功！'; msg.style.display = 'block';
+        setTimeout(closeAuthModal, 1200);
       } else {
-        formMsg.className = 'form-msg error';
-        formMsg.textContent = '✗ 提交失败：' + (res.error || '请稍后重试');
-        formMsg.style.display = 'block';
+        msg.className = 'form-msg error'; msg.textContent = '✗ ' + (res.error || '登录失败'); msg.style.display = 'block';
       }
     })
-    .catch(function() {
-      formMsg.className = 'form-msg error';
-      formMsg.textContent = '✗ 网络错误，请检查网络后重试';
-      formMsg.style.display = 'block';
+    .catch(function(){ msg.className = 'form-msg error'; msg.textContent = '✗ 网络错误'; msg.style.display = 'block'; })
+    .finally(function(){ btn.disabled = false; btn.textContent = '🔐 登录'; });
+}
+function handleRegister(e) {
+  e.preventDefault();
+  var btn = document.getElementById('registerBtn');
+  var msg = document.getElementById('registerMsg');
+  var fd = new FormData(e.target);
+  var data = Object.fromEntries(fd.entries());
+  if (data.password.length < 6) {
+    msg.className = 'form-msg error'; msg.textContent = '✗ 密码至少6位'; msg.style.display = 'block'; return;
+  }
+  btn.disabled = true; btn.textContent = '创建中...'; msg.style.display = 'none';
+  fetch('/api/auth/register', {
+    method: 'POST', credentials: 'include',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data)
+  }).then(function(r){ return r.json(); })
+    .then(function(res) {
+      if (res.success) {
+        showUserPanel(res.user);
+        msg.className = 'form-msg success'; msg.textContent = '✓ 账户创建成功！'; msg.style.display = 'block';
+        setTimeout(closeAuthModal, 1500);
+      } else {
+        msg.className = 'form-msg error'; msg.textContent = '✗ ' + (res.error || '注册失败'); msg.style.display = 'block';
+      }
     })
-    .finally(function() { submitBtn.disabled = false; submitBtn.textContent = '📤 提交咨询'; });
-});
-
-
+    .catch(function(){ msg.className = 'form-msg error'; msg.textContent = '✗ 网络错误'; msg.style.display = 'block'; })
+    .finally(function(){ btn.disabled = false; btn.textContent = '📝 创建账户'; });
+}
+function logout() {
+  fetch('/api/auth/logout', { method: 'POST', credentials: 'include' })
+    .then(function(){ updateNav(null); closeAuthModal(); })
+    .catch(function(){ updateNav(null); });
+}
+checkLoginState();
 </script>
-
-<!-- CONTACT MODAL -->
-<div class="modal-overlay" id="contactModal">
-  <div class="modal-box">
-    <button class="modal-close" id="modalClose">✕</button>
-    <div class="modal-title">联系我们</div>
-    <div class="modal-sub">留下您的需求，我们将在24小时内回复您</div>
-    <form id="contactForm" autocomplete="on">
-      <div class="form-row">
-        <div class="form-group">
-          <label class="form-label">姓名 <span>*</span></label>
-          <input class="form-input" type="text" name="name" placeholder="您的姓名" required />
-        </div>
-        <div class="form-group">
-          <label class="form-label">公司</label>
-          <input class="form-input" type="text" name="company" placeholder="公司名称" />
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group">
-          <label class="form-label">邮箱 <span>*</span></label>
-          <input class="form-input" type="email" name="email" placeholder="you@company.com" required />
-        </div>
-        <div class="form-group">
-          <label class="form-label">电话</label>
-          <input class="form-input" type="tel" name="phone" placeholder="+86 138 0000 0000" />
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="form-label">感兴趣的产品</label>
-        <select class="form-select" name="product">
-          <option value="">— 请选择 —</option>
-          <option value="enos">EnOS 数字孪生平台</option>
-          <option value="ripplegroup">RippleGroup 光储团购</option>
-          <option value="ripplemaster">RippleMaster 智能调度Agent</option>
-          <option value="ripplemonitor">RippleMonitor 能源情报</option>
-          <option value="rippletext">RippleText 文本引擎</option>
-          <option value="rippleops">RippleOps 运维管理</option>
-          <option value="ripplestorage">RippleStorage 储能3D</option>
-          <option value="ripplefund">RippleFund 数字化能源基金</option>
-          <option value="other">其他 / 综合咨询</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label class="form-label">留言内容</label>
-        <textarea class="form-textarea" name="message" placeholder="请描述您的需求，例如：园区规模、现有设备情况、期望实现的功能等..."></textarea>
-      </div>
-      <button type="submit" class="form-submit" id="submitBtn">📤 提交咨询</button>
-      <div class="form-msg" id="formMsg"></div>
-    </form>
-  </div>
-</div>
 </body>
 </html>
