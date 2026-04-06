@@ -84,85 +84,22 @@
     }
     .energy-icon {
       position: absolute;
-      opacity: 0.15;
+      opacity: 0.22;
       animation: iconFloat ease-in-out infinite;
     }
     /* Solar panel */
-    .solar-icon { bottom: 5%; left: 2%; width: 110px; height: 74px; animation-duration: 8s; }
-    .solar-icon::before {
-      content: ''; position: absolute; inset: 0;
-      border: 2px solid rgba(0,212,170,0.9); border-radius: 3px;
-      background:
-        repeating-linear-gradient(0deg, transparent, transparent 17px, rgba(0,212,170,0.25) 17px, rgba(0,212,170,0.25) 19px),
-        repeating-linear-gradient(90deg, transparent, transparent 27px, rgba(0,212,170,0.25) 27px, rgba(0,212,170,0.25) 29px);
-    }
-    .solar-icon::after {
-      content: ''; position: absolute; top: 0; left: -30%;
-      width: 30%; height: 100%;
-      background: linear-gradient(105deg, transparent 30%, rgba(255,220,100,0.4) 50%, transparent 70%);
-      background-size: 200% 100%;
-      animation: solarSweep 5s ease-in-out infinite;
-    }
-    @keyframes solarSweep { 0% { left: -30%; } 100% { left: 110%; } }
+    .solar-icon { bottom: 5%; left: 2%; width: 90px; height: 60px; animation-duration: 8s; }
+    .solar-icon svg { width: 100%; height: 100%; }
     /* Inverter */
-    .inverter-icon { bottom: 9%; left: 17%; width: 44px; height: 62px; animation-duration: 7s; animation-delay: 1.5s; }
-    .inverter-icon::before {
-      content: ''; position: absolute; inset: 0;
-      border: 2px solid rgba(0,212,170,0.9); border-radius: 6px; background: rgba(0,212,170,0.05);
-    }
-    .inverter-icon::after {
-      content: '~'; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
-      font-size: 24px; font-weight: 800; color: #00D4AA; animation: inverterBlink 1.4s ease-in-out infinite;
-    }
-    @keyframes inverterBlink { 0%,100% { opacity: 1; } 50% { opacity: 0.1; } }
+    .inverter-icon { bottom: 9%; left: 17%; animation-duration: 7s; animation-delay: 1.5s; }
     /* Battery storage */
-    .storage-icon { bottom: 6%; right: 15%; width: 52px; height: 32px; animation-duration: 9s; animation-delay: 3s; }
-    .storage-icon::before {
-      content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%);
-      width: 43px; height: 26px; border: 2px solid rgba(0,212,170,0.9); border-radius: 3px; background: rgba(0,212,170,0.05);
-    }
-    .storage-icon::after {
-      content: ''; position: absolute; right: 0; top: 50%; transform: translateY(-50%);
-      width: 7px; height: 12px; border: 2px solid rgba(0,212,170,0.9); border-radius: 0 3px 3px 0;
-    }
-    .storage-bar { position: absolute; bottom: 4px; left: 3px; right: 11px; height: 3px; border-radius: 2px; background: rgba(0,212,170,0.1); overflow: hidden; }
-    .storage-bar::after {
-      content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 72%;
-      background: #00D4AA; box-shadow: 0 0 5px #00D4AA;
-      animation: socCharge 3s ease-in-out infinite;
-    }
-    @keyframes socCharge { 0%,100% { width: 72%; } 50% { width: 92%; } }
+    .storage-icon { bottom: 6%; right: 16%; animation-duration: 9s; animation-delay: 3s; }
     /* EV car */
-    .ev-icon { bottom: 3%; right: 3%; width: 82px; height: 36px; animation-duration: 11s; animation-delay: 2s; }
-    .ev-icon::before {
-      content: ''; position: absolute; bottom: 0; left: 6px;
-      width: 70px; height: 16px; border: 2px solid rgba(0,212,170,0.9); border-radius: 26px 26px 3px 3px; background: rgba(0,212,170,0.05);
-    }
-    .ev-icon::after {
-      content: ''; position: absolute; bottom: 14px; left: 18px;
-      width: 46px; height: 12px; border: 2px solid rgba(0,212,170,0.9); border-bottom: none; border-radius: 10px 10px 0 0;
-    }
-    .ev-wheel { position: absolute; bottom: -2px; width: 11px; height: 11px; border-radius: 50%; background: rgba(0,212,170,0.7); box-shadow: 0 0 5px rgba(0,212,170,0.4); }
-    .ev-wheel:nth-child(1) { left: 10px; }
-    .ev-wheel:nth-child(2) { right: 10px; }
+    .ev-icon { bottom: 3%; right: 4%; animation-duration: 11s; animation-delay: 2s; }
     /* Grid tower */
-    .grid-icon { top: 3%; left: 3%; width: 70px; height: 90px; animation-duration: 10s; animation-delay: 0.5s; }
-    .grid-icon::before {
-      content: ''; position: absolute; left: 50%; top: 0; bottom: 0; width: 2px; transform: translateX(-50%);
-      background: repeating-linear-gradient(to bottom, rgba(0,212,170,0.9) 0px, rgba(0,212,170,0.9) 7px, transparent 7px, transparent 14px);
-      box-shadow: 0 0 5px rgba(0,212,170,0.3);
-    }
-    .grid-icon::after {
-      content: ''; position: absolute; top: 16px; left: 0; right: 0; height: 2px;
-      background: repeating-linear-gradient(to right, rgba(0,212,170,0.9) 0px, rgba(0,212,170,0.9) 22px, transparent 22px, transparent 32px);
-      box-shadow: 0 0 5px rgba(0,212,170,0.3);
-    }
-    .grid-node { position: absolute; width: 5px; height: 5px; border-radius: 50%; background: #00D4AA; box-shadow: 0 0 7px #00D4AA; animation: nodePulse 2s ease-in-out infinite; }
-    .grid-node:nth-child(1) { top: 14px; left: 48%; animation-delay: 0s; }
-    .grid-node:nth-child(2) { top: 38px; left: 48%; animation-delay: 0.5s; }
-    .grid-node:nth-child(3) { top: 62px; left: 48%; animation-delay: 1s; }
+    .grid-icon { top: 3%; left: 3%; animation-duration: 10s; animation-delay: 0.5s; }
+
     @keyframes iconFloat { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
-    @keyframes nodePulse { 0%,100% { opacity: 0.3; transform: scale(0.8); } 50% { opacity: 1; transform: scale(1.4); } }
 
     .particles {
       position: absolute; inset: 0; overflow: hidden; pointer-events: none;
@@ -649,7 +586,107 @@
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-bg"><div class="energy-icons"><div class="energy-icon grid-icon"><div class="grid-node"></div><div class="grid-node"></div><div class="grid-node"></div></div><div class="energy-icon solar-icon"></div><div class="energy-icon inverter-icon"></div><div class="energy-icon storage-icon"><div class="storage-bar"></div></div><div class="energy-icon ev-icon"><div class="ev-wheel"></div><div class="ev-wheel"></div></div></div><div class="particles"><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div></div></div>
+  <div class="hero-bg"><div class="energy-icons">
+      <!-- Grid / Power lines -->
+      <div class="energy-icon grid-icon">
+        <svg width="70" height="90" viewBox="0 0 70 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <line x1="35" y1="0" x2="35" y2="90" stroke="#00D4AA" stroke-width="1.5" stroke-dasharray="8 6" opacity="0.9"/>
+          <line x1="0" y1="18" x2="70" y2="18" stroke="#00D4AA" stroke-width="1.5" stroke-dasharray="25 10" opacity="0.8"/>
+          <line x1="0" y1="42" x2="70" y2="42" stroke="#00D4AA" stroke-width="1.5" stroke-dasharray="25 10" opacity="0.7"/>
+          <line x1="0" y1="66" x2="70" y2="66" stroke="#00D4AA" stroke-width="1.5" stroke-dasharray="25 10" opacity="0.6"/>
+          <circle cx="35" cy="18" r="3.5" fill="#00D4AA">
+            <animate attributeName="opacity" values="0.3;1;0.3" dur="2s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="35" cy="42" r="3.5" fill="#00D4AA">
+            <animate attributeName="opacity" values="0.3;1;0.3" dur="2s" begin="0.5s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="35" cy="66" r="3.5" fill="#00D4AA">
+            <animate attributeName="opacity" values="0.3;1;0.3" dur="2s" begin="1s" repeatCount="indefinite"/>
+          </circle>
+        </svg>
+      </div>
+      <!-- Solar panel -->
+      <div class="energy-icon solar-icon">
+        <svg width="90" height="60" viewBox="0 0 90 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Panel frame -->
+          <rect x="1" y="1" width="88" height="58" rx="3" stroke="#00D4AA" stroke-width="1.5" fill="rgba(0,212,170,0.04)"/>
+          <!-- Grid lines horizontal -->
+          <line x1="1" y1="20" x2="89" y2="20" stroke="#00D4AA" stroke-width="0.8" opacity="0.6"/>
+          <line x1="1" y1="40" x2="89" y2="40" stroke="#00D4AA" stroke-width="0.8" opacity="0.6"/>
+          <!-- Grid lines vertical -->
+          <line x1="30" y1="1" x2="30" y2="59" stroke="#00D4AA" stroke-width="0.8" opacity="0.6"/>
+          <line x1="60" y1="1" x2="60" y2="59" stroke="#00D4AA" stroke-width="0.8" opacity="0.6"/>
+          <!-- Sun reflection sweep -->
+          <rect x="-20" y="0" width="25" height="60" fill="url(#sunSweep)" opacity="0.7">
+            <animate attributeName="x" from="-20" to="90" dur="5s" repeatCount="indefinite"/>
+          </rect>
+          <defs>
+            <linearGradient id="sunSweep" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stop-color="rgba(255,220,80,0)"/>
+              <stop offset="50%" stop-color="rgba(255,220,80,0.5)"/>
+              <stop offset="100%" stop-color="rgba(255,220,80,0)"/>
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+      <!-- Inverter -->
+      <div class="energy-icon inverter-icon">
+        <svg width="50" height="70" viewBox="0 0 50 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="2" y="2" width="46" height="66" rx="6" stroke="#00D4AA" stroke-width="1.5" fill="rgba(0,212,170,0.04)"/>
+          <!-- AC wave inside -->
+          <path d="M10 35 Q17 20 24 35 Q31 50 38 35" stroke="#00D4AA" stroke-width="2" fill="none" stroke-linecap="round">
+            <animate attributeName="opacity" values="1;0.15;1" dur="1.5s" repeatCount="indefinite"/>
+          </path>
+          <!-- Status LED -->
+          <circle cx="38" cy="14" r="3" fill="#00D4AA">
+            <animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite"/>
+          </circle>
+          <!-- Terminal blocks -->
+          <rect x="8" y="52" width="10" height="8" rx="1" stroke="#00D4AA" stroke-width="1.2" opacity="0.8"/>
+          <rect x="32" y="52" width="10" height="8" rx="1" stroke="#00D4AA" stroke-width="1.2" opacity="0.8"/>
+        </svg>
+      </div>
+      <!-- Battery storage -->
+      <div class="energy-icon storage-icon">
+        <svg width="56" height="36" viewBox="0 0 56 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Battery body -->
+          <rect x="1" y="1" width="44" height="34" rx="4" stroke="#00D4AA" stroke-width="1.5" fill="rgba(0,212,170,0.04)"/>
+          <!-- Battery terminal -->
+          <rect x="45" y="10" width="9" height="16" rx="2" stroke="#00D4AA" stroke-width="1.5" fill="rgba(0,212,170,0.06)"/>
+          <!-- SOC level -->
+          <rect x="5" y="26" width="36" height="5" rx="2" fill="rgba(0,212,170,0.1)"/>
+          <rect x="5" y="26" width="30" height="5" rx="2" fill="#00D4AA" opacity="0.9">
+            <animate attributeName="width" values="30;38;30" dur="3s" repeatCount="indefinite"/>
+          </rect>
+          <!-- Plus/minus poles on battery -->
+          <line x1="14" y1="8" x2="22" y2="8" stroke="#00D4AA" stroke-width="2" stroke-linecap="round"/>
+          <line x1="18" y1="4" x2="18" y2="12" stroke="#00D4AA" stroke-width="2" stroke-linecap="round"/>
+          <line x1="14" y1="20" x2="22" y2="20" stroke="#00D4AA" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <!-- EV car -->
+      <div class="energy-icon ev-icon">
+        <svg width="90" height="42" viewBox="0 0 90 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Car body -->
+          <rect x="8" y="18" width="74" height="18" rx="9" stroke="#00D4AA" stroke-width="1.5" fill="rgba(0,212,170,0.04)"/>
+          <!-- Car roof/cabin -->
+          <path d="M26 18 Q45 4 64 18" stroke="#00D4AA" stroke-width="1.5" fill="rgba(0,212,170,0.04)"/>
+          <!-- Windows -->
+          <path d="M30 17 Q45 6 60 17" stroke="#00D4AA" stroke-width="1" fill="none" opacity="0.6"/>
+          <!-- Wheels -->
+          <circle cx="26" cy="36" r="6" stroke="#00D4AA" stroke-width="1.5" fill="rgba(0,212,170,0.06)">
+            <animateTransform attributeName="transform" type="rotate" from="0 26 36" to="360 26 36" dur="3s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="64" cy="36" r="6" stroke="#00D4AA" stroke-width="1.5" fill="rgba(0,212,170,0.06)">
+            <animateTransform attributeName="transform" type="rotate" from="0 64 36" to="360 64 36" dur="3s" repeatCount="indefinite"/>
+          </circle>
+          <!-- Charging port glow -->
+          <circle cx="8" cy="27" r="3" fill="#00D4AA" opacity="0.7">
+            <animate attributeName="opacity" values="0.7;0.2;0.7" dur="2s" repeatCount="indefinite"/>
+          </circle>
+        </svg>
+      </div>
+    </div><div class="particles"><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div></div></div>
   <div class="hero-eyebrow" data-i18n="hero.badge">⚡ 工业清洁能源数字基础设施</div>
   <h1 data-i18n="hero.title">让每一座工业园区<br/>拥有<em>智慧能源大脑</em></h1>
   <p class="hero-sub" data-i18n="hero.subtitle">Solaripple 基于数字孪生、人工智能与优化算法，为工商业园区提供光储充一体化管理和虚拟电厂交易服务，降低电费、提升资产收益。</p>
