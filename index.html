@@ -26,7 +26,7 @@
     html { scroll-behavior: smooth; }
     body {
       font-family: 'Inter', 'Noto Sans SC', -apple-system, sans-serif;
-      background: var(--bg); color: var(--white);
+      background: #000000; color: #ffffff;
       overflow-x: hidden; line-height: 1.6;
       -webkit-font-smoothing: antialiased;
     }
@@ -66,11 +66,11 @@
       background: var(--bg);
     }
     #hero-canvas {
-      position: absolute; inset: 0; z-index: 0;
+      position: absolute; inset: 0; z-index: 0; pointer-events: none;
       width: 100%; height: 100%;
     }
     .hero-content {
-      position: relative; z-index: 2; padding: 0 80px; max-width: 700px;
+      position: relative; z-index: 2; padding: 0 80px; max-width: 700px; width: 100%;
     }
     .hero-badge {
       display: inline-flex; align-items: center; gap: 10px;
@@ -752,75 +752,389 @@
   });
 })();
 
-// ── MINI GLOBE for feature sections ───────────────────────
-function makeMiniGlobe(id) {
+// ═══════════════════════════════════════════════════════════
+// FEATURE 1: Energy Flow (数字孪生)
+// Solar panel → Battery → Grid energy flow visualization
+// ═══════════════════════════════════════════════════════════
+function initEnergyFlow(id) {
   const container = document.getElementById(id);
   if (!container) return;
   const c = document.createElement('canvas');
   c.style.cssText = 'width:100%;height:100%;border-radius:24px;';
   container.appendChild(c);
-  const w = container.clientWidth || 500, h = container.clientHeight || 280;
   const renderer = new THREE.WebGLRenderer({ canvas: c, antialias: true, alpha: true });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-  renderer.setSize(w, h);
+  renderer.setSize(600, 300);
+
   const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(40, w / h, 0.1, 100);
-  camera.position.z = 2.6;
+  const camera = new THREE.OrthographicCamera(-3, 3, 1.5, -1.5, 0.1, 100);
+  camera.position.z = 5;
 
-  // Stars
-  const sGeo = new THREE.BufferGeometry();
-  const sPos = new Float32Array(1000 * 3);
-  for (let i = 0; i < 1000 * 3; i++) sPos[i] = (Math.random() - 0.5) * 100;
-  sGeo.setAttribute('position', new THREE.BufferAttribute(sPos, 3));
-  scene.add(new THREE.Points(sGeo, new THREE.PointsMaterial({ color: 0xffffff, size: 0.08 })));
-
-  const earth = new THREE.Mesh(
-    new THREE.SphereGeometry(1, 48, 48),
-    new THREE.MeshBasicMaterial({ color: 0x050810 })
-  );
-  scene.add(earth);
-
-  const wire = new THREE.Mesh(
-    new THREE.SphereGeometry(1.004, 40, 40),
-    new THREE.MeshBasicMaterial({ color: 0x0A2A50, wireframe: true, transparent: true, opacity: 0.18 })
-  );
-  scene.add(wire);
-
-  for (let i = 1; i <= 2; i++) {
-    scene.add(new THREE.Mesh(
-      new THREE.SphereGeometry(1 + i * 0.07, 24, 24),
-      new THREE.MeshBasicMaterial({ color: 0x0A84FF, transparent: true, opacity: 0.04 / i, side: THREE.BackSide, depthWrite: false })
-    ));
+  // Solar panel (left)
+  const panelGeo = new THREE.PlaneGeometry(1.2, 0.8);
+  const panelMat = new THREE.MeshBasicMaterial({ color: 0x0A2A50, wireframe: true });
+  const panel = new THREE.Mesh(panelGeo, panelMat);
+  panel.position.set(-1.8, 0.3, 0);
+  scene.add(panel);
+  // Panel cells
+  for (let i = -2; i <= 2; i++) {
+    for (let j = -1; j <= 1; j++) {
+      const cell = new THREE.Mesh(
+        new THREE.PlaneGeometry(0.18, 0.18),
+        new THREE.MeshBasicMaterial({ color: 0x0A84FF, transparent: true, opacity: 0.3 })
+      );
+      cell.position.set(-1.8 + i * 0.22, 0.3 + j * 0.22, 0.01);
+      scene.add(cell);
+    }
   }
+  // Sun symbol above panel
+  const sunGeo = new THREE.CircleGeometry(0.18, 16);
+  const sun = new THREE.Mesh(sunGeo, new THREE.MeshBasicMaterial({ color: 0xFFCC00 }));
+  sun.position.set(-1.8, 0.95, 0);
+  scene.add(sun);
 
-  for (let lat = -60; lat <= 60; lat += 30) {
-    const r = Math.cos(lat * Math.PI / 180);
-    const ring = new THREE.Mesh(
-      new THREE.RingGeometry(r * 0.998, r * 1.005, 64),
-      new THREE.MeshBasicMaterial({ color: 0x0A84FF, side: THREE.DoubleSide, transparent: true, opacity: 0.08 })
+  // Battery (center)
+  const batGeo = new THREE.BoxGeometry(0.6, 1.0, 0.3);
+  const bat = new THREE.Mesh(batGeo, new THREE.MeshBasicMaterial({ color: 0x111111, wireframe: false }));
+  bat.position.set(0, 0, 0);
+  scene.add(bat);
+  const batWire = new THREE.Mesh(new THREE.BoxGeometry(0.65, 1.05, 0.35), new THREE.MeshBasicMaterial({ color: 0x0A84FF, wireframe: true, transparent: true, opacity: 0.5 }));
+  batWire.position.set(0, 0, 0);
+  scene.add(batWire);
+  // SOC bar
+  const socGeo = new THREE.PlaneGeometry(0.3, 0.7);
+  const soc = new THREE.Mesh(socGeo, new THREE.MeshBasicMaterial({ color: 0x00FF88, transparent: true, opacity: 0.8 }));
+  soc.position.set(0, -0.1, 0.16);
+  scene.add(soc);
+
+  // Grid (right)
+  const gridGeo = new THREE.BoxGeometry(0.8, 0.6, 0.2);
+  const grid = new THREE.Mesh(gridGeo, new THREE.MeshBasicMaterial({ color: 0x1A1A1A }));
+  grid.position.set(2.0, 0, 0);
+  scene.add(grid);
+  // Grid lines
+  for (let i = -2; i <= 2; i++) {
+    const line = new THREE.Mesh(
+      new THREE.PlaneGeometry(0.02, 0.6),
+      new THREE.MeshBasicMaterial({ color: 0x00D4FF, transparent: true, opacity: 0.6 })
     );
-    ring.position.y = Math.sin(lat * Math.PI / 180) * 0.999;
-    ring.rotation.x = Math.PI / 2;
-    scene.add(ring);
+    line.position.set(2.0 + i * 0.16, 0, 0.11);
+    scene.add(line);
   }
 
+  // Connection arrows with animated particles
+  const particles = [];
+  function makeArrow(fromX, fromY, toX, toY, color) {
+    const dir = new THREE.Vector3(toX - fromX, toY - fromY, 0).normalize();
+    const len = Math.sqrt((toX - fromX) ** 2 + (toY - fromY) ** 2);
+    const midX = (fromX + toX) / 2, midY = (fromY + toY) / 2;
+    const pts = [];
+    for (let t = 0; t <= 1; t += 0.05) {
+      pts.push(new THREE.Vector3(fromX + (toX - fromX) * t, fromY + (toY - fromY) * t, 0));
+    }
+    const curve = new THREE.CatmullRomCurve3(pts);
+    const tube = new THREE.Mesh(
+      new THREE.TubeGeometry(curve, 32, 0.015, 4, false),
+      new THREE.MeshBasicMaterial({ color, transparent: true, opacity: 0.4 })
+    );
+    scene.add(tube);
+    // Arrow head
+    const arrowGeo = new THREE.ConeGeometry(0.05, 0.12, 8);
+    const arrow = new THREE.Mesh(arrowGeo, new THREE.MeshBasicMaterial({ color, transparent: true, opacity: 0.7 }));
+    arrow.position.set(toX - dir.x * 0.1, toY - dir.y * 0.1, 0);
+    arrow.rotation.z = Math.atan2(dir.y, dir.x) - Math.PI / 2;
+    scene.add(arrow);
+    // Moving particle
+    const pGeo = new THREE.SphereGeometry(0.04, 6, 6);
+    const p = new THREE.Mesh(pGeo, new THREE.MeshBasicMaterial({ color, transparent: true, opacity: 0.9 }));
+    p.userData = { fromX, fromY, toX, toY, speed: 0.008 + Math.random() * 0.006, t: Math.random() };
+    scene.add(p);
+    particles.push(p);
+  }
+  makeArrow(-1.2, 0.3, -0.35, 0.2, 0xFFCC00);   // sun→batt
+  makeArrow(-1.2, -0.1, -0.35, -0.3, 0xFFCC00);  // sun→batt low
+  makeArrow(0.35, 0.3, 1.65, 0.2, 0x00FF88);     // batt→grid
+  makeArrow(0.35, -0.2, 1.65, -0.1, 0x00FF88);   // batt→grid low
+
+  // Labels via sprites (text as canvas)
+  function makeLabel(text, x, y, color) {
+    const cv = document.createElement('canvas');
+    cv.width = 256; cv.height = 64;
+    const ctx = cv.getContext('2d');
+    ctx.fillStyle = color;
+    ctx.font = 'bold 28px Inter, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText(text, 128, 42);
+    const tex = new THREE.CanvasTexture(cv);
+    const mat = new THREE.SpriteMaterial({ map: tex, transparent: true });
+    const sprite = new THREE.Sprite(mat);
+    sprite.position.set(x, y, 0.5);
+    sprite.scale.set(0.8, 0.2, 1);
+    scene.add(sprite);
+  }
+  makeLabel('PV 120kW', -1.8, -0.8, '#FFCC00');
+  makeLabel('ESS 480kWh', 0, -1.0, '#00FF88');
+  makeLabel('Grid 100kW', 2.0, -0.8, '#00D4FF');
+
+  // Floating data labels
+  const labels = [];
+  for (let i = 0; i < 6; i++) {
+    const lc = document.createElement('canvas');
+    lc.width = 128; lc.height = 40;
+    const ctx = lc.getContext('2d');
+    ctx.fillStyle = '#0A84FF';
+    ctx.font = 'bold 20px Inter';
+    const texts = ['SOC 78%', '+45kW', '-32kW', 'VPP: 80kW', 'η 98%', 'P=95kW'];
+    ctx.fillText(texts[i], 64, 28);
+    const ltex = new THREE.CanvasTexture(lc);
+    const lmat = new THREE.SpriteMaterial({ map: ltex, transparent: true, opacity: 0.7 });
+    const lsprite = new THREE.Sprite(lmat);
+    lsprite.position.set((Math.random() - 0.5) * 4, (Math.random() - 0.5) * 1.5, 0.3);
+    lsprite.scale.set(0.4, 0.12, 1);
+    scene.add(lsprite);
+    labels.push(lsprite);
+  }
+
+  let t = 0;
   function animate() {
     requestAnimationFrame(animate);
-    earth.rotation.y += 0.004;
+    t += 0.02;
+    particles.forEach(p => {
+      p.userData.t = (p.userData.t + p.userData.speed) % 1;
+      const pt = p.userData.t;
+      p.position.x = p.userData.fromX + (p.userData.toX - p.userData.fromX) * pt;
+      p.position.y = p.userData.fromY + (p.userData.toY - p.userData.fromY) * pt;
+    });
+    labels.forEach((l, i) => {
+      l.position.y += Math.sin(t + i) * 0.0005;
+      l.material.opacity = 0.5 + Math.sin(t * 0.5 + i) * 0.3;
+    });
     renderer.render(scene, camera);
   }
   animate();
-
-  const ro = new ResizeObserver(() => {
-    const rw = container.clientWidth, rh = container.clientHeight;
-    if (rw && rh) { camera.aspect = rw / rh; camera.updateProjectionMatrix(); renderer.setSize(rw, rh); }
-  });
-  ro.observe(container);
 }
+
+// ═══════════════════════════════════════════════════════════
+// FEATURE 2: IEC 104 Grid Signal Wave (VPP 交易)
+// ═══════════════════════════════════════════════════════════
+function initIEC104Wave(id) {
+  const container = document.getElementById(id);
+  if (!container) return;
+  const c = document.createElement('canvas');
+  c.style.cssText = 'width:100%;height:100%;border-radius:24px;';
+  container.appendChild(c);
+  const renderer = new THREE.WebGLRenderer({ canvas: c, antialias: true, alpha: true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setSize(600, 300);
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.OrthographicCamera(-3, 3, 1.5, -1.5, 0.1, 100);
+  camera.position.z = 5;
+
+  // Grid base line
+  const baseGeo = new THREE.PlaneGeometry(6, 0.02);
+  const base = new THREE.Mesh(baseGeo, new THREE.MeshBasicMaterial({ color: 0x333333 }));
+  base.position.z = -0.1;
+  scene.add(base);
+
+  // Multiple signal traces
+  const traces = [
+    { color: 0x0A84FF, amp: 0.5, freq: 3, y: 0.3, label: 'ASDU Type 45', phase: 0 },
+    { color: 0x00FF88, amp: 0.3, freq: 5, y: -0.1, label: 'Measured Value', phase: 1.2 },
+    { color: 0xFFCC00, amp: 0.4, freq: 7, y: -0.5, label: 'SetPoint Cmd', phase: 2.4 },
+  ];
+
+  const lineObjects = [];
+  traces.forEach(t => {
+    const pts = [];
+    for (let x = -3; x <= 3; x += 0.05) {
+      const y = t.y + t.amp * Math.sin(t.freq * x + t.phase);
+      pts.push(new THREE.Vector3(x, y, 0));
+    }
+    const curve = new THREE.BufferGeometry().setFromPoints(pts);
+    const line = new THREE.Line(curve, new THREE.LineBasicMaterial({ color: t.color, transparent: true, opacity: 0.7 }));
+    scene.add(line);
+    lineObjects.push({ line, trace: t, points: pts });
+
+    // Label
+    const lc = document.createElement('canvas');
+    lc.width = 256; lc.height = 48;
+    const ctx = lc.getContext('2d');
+    ctx.fillStyle = '#' + t.color.toString(16).padStart(6, '0');
+    ctx.font = 'bold 22px Inter';
+    ctx.fillText(t.label, 0, 30);
+    const ltex = new THREE.CanvasTexture(lc);
+    const lmat = new THREE.SpriteMaterial({ map: ltex, transparent: true });
+    const lsprite = new THREE.Sprite(lmat);
+    lsprite.position.set(-2.5, t.y + t.amp + 0.1, 0.5);
+    lsprite.scale.set(0.8, 0.15, 1);
+    scene.add(lsprite);
+  });
+
+  // Scanning vertical line
+  const scanGeo = new THREE.PlaneGeometry(0.02, 3);
+  const scan = new THREE.Mesh(scanGeo, new THREE.MeshBasicMaterial({ color: 0x0A84FF, transparent: true, opacity: 0.4 }));
+  scan.position.z = 0.5;
+  scene.add(scan);
+
+  // Data frame boxes appearing
+  const frameGeo = new THREE.BoxGeometry(0.15, 0.8, 0.1);
+  const frameMats = [0x0A84FF, 0x00FF88, 0xFFCC00, 0xFF4444].map(c => new THREE.MeshBasicMaterial({ color: c, transparent: true, opacity: 0.8 }));
+  const frames = frameMats.map(m => { const f = new THREE.Mesh(frameGeo, m); scene.add(f); return f; });
+  const frameData = [
+    { x: -2.0, y: 0.8, label: 'M_ME' },
+    { x: -0.5, y: 0.8, label: 'T_DU' },
+    { x: 1.0, y: 0.8, label: 'QDS' },
+    { x: 2.5, y: 0.8, label: 'NVA' },
+  ];
+
+  // Info label at bottom
+  const info = document.createElement('canvas');
+  info.width = 400; info.height = 60;
+  const ictx = info.getContext('2d');
+  ictx.fillStyle = '#0A84FF';
+  ictx.font = 'bold 22px Inter';
+  ictx.fillText('IEC 60870-5-104  •  5s Refresh  •  AGC Active', 0, 38);
+  const itex = new THREE.CanvasTexture(info);
+  const imat = new THREE.SpriteMaterial({ map: itex, transparent: true, opacity: 0.8 });
+  const isprite = new THREE.Sprite(imat);
+  isprite.position.set(-1.5, -1.2, 0.5);
+  isprite.scale.set(1.3, 0.18, 1);
+  scene.add(isprite);
+
+  let t = 0;
+  function animate() {
+    requestAnimationFrame(animate);
+    t += 0.015;
+    scan.position.x = Math.sin(t) * 2.5;
+    scan.material.opacity = 0.3 + Math.sin(t * 2) * 0.15;
+
+    // Pulse the frames
+    frames.forEach((f, i) => {
+      f.material.opacity = 0.3 + Math.sin(t * 1.5 + i * 0.8) * 0.4;
+      f.scale.y = 0.8 + Math.sin(t * 2 + i) * 0.15;
+    });
+
+    // Wave animation
+    lineObjects.forEach(({ line, trace }) => {
+      const pts = [];
+      for (let x = -3; x <= 3; x += 0.05) {
+        const y = trace.y + trace.amp * Math.sin(trace.freq * x + trace.phase + t);
+        pts.push(new THREE.Vector3(x, y, 0));
+      }
+      line.geometry.setFromPoints(pts);
+    });
+
+    renderer.render(scene, camera);
+  }
+  animate();
+}
+
+// ═══════════════════════════════════════════════════════════
+// FEATURE 3: Code Rendering Effect (Pretext)
+// ═══════════════════════════════════════════════════════════
+function initCodeRender(id) {
+  const container = document.getElementById(id);
+  if (!container) return;
+  const c = document.createElement('canvas');
+  c.style.cssText = 'width:100%;height:100%;border-radius:24px;';
+  container.appendChild(c);
+  const renderer = new THREE.WebGLRenderer({ canvas: c, antialias: true, alpha: true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setSize(600, 300);
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.OrthographicCamera(-3, 3, 1.5, -1.5, 0.1, 100);
+  camera.position.z = 5;
+
+  const codeLines = [
+    { text: 'const text = new Pretext();', color: 0xFF6B6B },
+    { text: 'await text.prepare(svg);', color: 0x4ECDC4 },
+    { text: 'text.measure(width);', color: 0x45B7D1 },
+    { text: '// zero DOM reflow', color: 0x888888 },
+    { text: 'ctx.fillText(glyph, x, y);', color: 0x96CEB4 },
+    { text: '', color: 0 },
+    { text: '→  rendering 3000x faster', color: 0x00FF88 },
+  ];
+
+  const sprites = [];
+  codeLines.forEach((ln, i) => {
+    if (!ln.text) {
+      sprites.push(null);
+      return;
+    }
+    const cv = document.createElement('canvas');
+    cv.width = 512; cv.height = 48;
+    const ctx = cv.getContext('2d');
+    ctx.font = 'bold 22px Courier New, monospace';
+    ctx.fillStyle = '#' + ln.color.toString(16).padStart(6, '0');
+    ctx.fillText(ln.text, 0, 34);
+    const tex = new THREE.CanvasTexture(cv);
+    const mat = new THREE.SpriteMaterial({ map: tex, transparent: true, opacity: 0 });
+    const sprite = new THREE.Sprite(mat);
+    sprite.position.set(-2.8, 1.1 - i * 0.35, 0);
+    sprite.scale.set(1.7, 0.16, 1);
+    scene.add(sprite);
+    sprites.push({ sprite, mat, targetOpacity: i < 6 ? 0.85 : 1.0, delay: i * 0.4 });
+  });
+
+  // Terminal cursor
+  const cursorGeo = new THREE.PlaneGeometry(0.08, 0.28);
+  const cursor = new THREE.Mesh(cursorGeo, new THREE.MeshBasicMaterial({ color: 0x0A84FF, transparent: true, opacity: 0 }));
+  cursor.position.set(2.2, 1.1, 0);
+  scene.add(cursor);
+
+  // Highlight box for 3000x faster
+  const boxGeo = new THREE.PlaneGeometry(1.2, 0.22);
+  const box = new THREE.Mesh(boxGeo, new THREE.MeshBasicMaterial({ color: 0x0A84FF, transparent: true, opacity: 0 }));
+  box.position.set(-0.4, 0.52, -0.1);
+  scene.add(box);
+
+  // Background grid (editor feel)
+  for (let x = -3; x <= 3; x += 0.4) {
+    const line = new THREE.Mesh(
+      new THREE.PlaneGeometry(0.008, 3),
+      new THREE.MeshBasicMaterial({ color: 0x111111, transparent: true, opacity: 0.5 })
+    );
+    line.position.set(x, 0, -0.2);
+    scene.add(line);
+  }
+  for (let y = -1.5; y <= 1.5; y += 0.35) {
+    const line = new THREE.Mesh(
+      new THREE.PlaneGeometry(6, 0.008),
+      new THREE.MeshBasicMaterial({ color: 0x111111, transparent: true, opacity: 0.5 })
+    );
+    line.position.set(0, y, -0.2);
+    scene.add(line);
+  }
+
+  let t = 0;
+  function animate() {
+    requestAnimationFrame(animate);
+    t += 0.016;
+    sprites.forEach((s, i) => {
+      if (!s) return;
+      if (t > s.delay) {
+        s.mat.opacity += (s.targetOpacity - s.mat.opacity) * 0.08;
+      }
+    });
+    // Cursor blink
+    if (t > 0.8) {
+      cursor.material.opacity = Math.sin((t - 0.8) * 8) > 0 ? 0.9 : 0;
+    }
+    // Highlight box pulse
+    if (t > sprites.length * 0.4 + 0.5) {
+      box.material.opacity = 0.1 + Math.sin(t * 2) * 0.06;
+    }
+    renderer.render(scene, camera);
+  }
+  animate();
+}
+
 setTimeout(() => {
-  makeMiniGlobe('feat1-canvas');
-  makeMiniGlobe('feat2-canvas');
-  makeMiniGlobe('feat3-canvas');
+  initEnergyFlow('feat1-canvas');
+  initIEC104Wave('feat2-canvas');
+  initCodeRender('feat3-canvas');
 }, 150);
 
 // ── SCROLL ANIMATIONS ────────────────────────────────────
