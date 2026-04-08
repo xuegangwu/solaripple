@@ -14,35 +14,33 @@
     body {
       font-family: 'Inter', -apple-system, 'PingFang SC', sans-serif;
       background: #03030A; color: #E8E8F0; overflow-x: hidden;
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
+      line-height: 1.6; -webkit-font-smoothing: antialiased;
     }
     a { color: inherit; text-decoration: none; }
 
-    /* ─── NAV ─── */
+    /* ── NAV ── */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       display: flex; justify-content: space-between; align-items: center;
       padding: 0 60px; height: 64px;
-      background: rgba(3,3,10,0.88); backdrop-filter: blur(20px);
+      background: rgba(3,3,10,0.9); backdrop-filter: blur(20px);
       border-bottom: 1px solid rgba(255,255,255,0.05);
     }
     .nav-logo { font-size: 20px; font-weight: 800; letter-spacing: -0.5px; color: #fff; }
     .nav-logo span { color: #4A9EFF; }
-    .nav-links { display: flex; gap: 36px; list-style: none; }
-    .nav-links a { font-size: 14px; color: rgba(255,255,255,0.45); transition: color 0.25s; letter-spacing: 0.01em; }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a { font-size: 13px; color: rgba(255,255,255,0.4); transition: color 0.2s; letter-spacing: 0.01em; }
     .nav-links a:hover { color: #fff; }
     .nav-cta {
       padding: 8px 20px; background: #fff; color: #03030A;
-      border-radius: 6px; font-size: 14px; font-weight: 600; transition: all 0.25s; cursor: pointer;
+      border-radius: 6px; font-size: 13px; font-weight: 600; transition: all 0.2s; cursor: pointer;
     }
     .nav-cta:hover { background: #4A9EFF; color: #fff; }
 
-    /* ─── EARTH HERO ─── */
+    /* ── HERO ── */
     .hero {
       position: relative; min-height: 100vh;
-      display: flex; align-items: center; justify-content: center;
-      overflow: hidden;
+      display: flex; align-items: center; justify-content: center; overflow: hidden;
     }
     #hero-canvas {
       position: absolute; inset: 0; z-index: 0;
@@ -50,229 +48,216 @@
     }
     .hero-content {
       position: relative; z-index: 2; text-align: center;
-      padding: 0 24px; pointer-events: none;
-      max-width: 820px;
+      padding: 0 24px; max-width: 800px;
     }
     .hero-badge {
       display: inline-flex; align-items: center; gap: 8px;
-      padding: 6px 16px; border-radius: 100px;
-      background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
-      font-size: 12px; color: rgba(255,255,255,0.55); letter-spacing: 0.05em;
+      padding: 5px 14px; border-radius: 100px;
+      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.09);
+      font-size: 11px; color: rgba(255,255,255,0.5); letter-spacing: 0.06em;
       margin-bottom: 28px;
     }
     .hero-badge .dot {
-      width: 6px; height: 6px; border-radius: 50%;
-      background: #4A9EFF; box-shadow: 0 0 8px #4A9EFF;
+      width: 5px; height: 5px; border-radius: 50%;
+      background: #4A9EFF; box-shadow: 0 0 6px #4A9EFF;
       animation: pulse-dot 2s ease-in-out infinite;
     }
-    @keyframes pulse-dot {
-      0%,100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.5; transform: scale(0.8); }
-    }
+    @keyframes pulse-dot { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(0.75)} }
     .hero h1 {
-      font-size: clamp(40px, 6vw, 72px);
-      font-weight: 800; letter-spacing: -0.03em; line-height: 1.08;
-      color: #fff; margin-bottom: 20px;
+      font-size: clamp(36px, 5.5vw, 68px); font-weight: 800;
+      letter-spacing: -0.03em; line-height: 1.06; color: #fff;
+      margin-bottom: 20px;
     }
     .hero h1 .accent { color: #4A9EFF; }
     .hero-sub {
-      font-size: clamp(15px, 2vw, 18px);
-      color: rgba(255,255,255,0.45); font-weight: 300; line-height: 1.7;
-      max-width: 580px; margin: 0 auto 40px;
+      font-size: clamp(14px, 1.8vw, 17px);
+      color: rgba(255,255,255,0.4); font-weight: 300; line-height: 1.75;
+      max-width: 540px; margin: 0 auto 36px;
     }
-    .hero-actions {
-      display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
-      pointer-events: all;
-    }
+    .hero-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
     .btn-primary {
-      padding: 14px 32px; background: #fff; color: #03030A;
-      border-radius: 8px; font-size: 15px; font-weight: 600;
-      transition: all 0.25s; cursor: pointer; border: none;
+      padding: 13px 28px; background: #fff; color: #03030A;
+      border-radius: 8px; font-size: 14px; font-weight: 600; transition: all 0.25s; cursor: pointer; border: none;
     }
     .btn-primary:hover { background: #4A9EFF; color: #fff; transform: translateY(-1px); }
     .btn-ghost {
-      padding: 14px 32px; background: transparent; color: rgba(255,255,255,0.7);
-      border: 1px solid rgba(255,255,255,0.15); border-radius: 8px;
-      font-size: 15px; font-weight: 500; transition: all 0.25s; cursor: pointer;
+      padding: 13px 28px; background: transparent; color: rgba(255,255,255,0.6);
+      border: 1px solid rgba(255,255,255,0.13); border-radius: 8px;
+      font-size: 14px; font-weight: 500; transition: all 0.25s; cursor: pointer;
     }
-    .btn-ghost:hover { background: rgba(255,255,255,0.05); color: #fff; }
+    .btn-ghost:hover { background: rgba(255,255,255,0.04); color: #fff; }
     .hero-stats {
-      display: flex; gap: 60px; justify-content: center; margin-top: 80px;
-      padding-top: 40px; border-top: 1px solid rgba(255,255,255,0.06);
+      display: flex; gap: 48px; justify-content: center; margin-top: 72px;
+      padding-top: 36px; border-top: 1px solid rgba(255,255,255,0.05);
     }
     .hero-stat { text-align: center; }
-    .hero-stat .num {
-      font-size: 32px; font-weight: 700; color: #fff; letter-spacing: -0.02em;
-    }
-    .hero-stat .label {
-      font-size: 12px; color: rgba(255,255,255,0.35); margin-top: 4px;
-      letter-spacing: 0.04em; text-transform: uppercase;
-    }
-    /* Scroll indicator */
+    .hero-stat .num { font-size: 30px; font-weight: 700; color: #fff; letter-spacing: -0.02em; }
+    .hero-stat .label { font-size: 11px; color: rgba(255,255,255,0.3); margin-top: 3px; letter-spacing: 0.05em; }
     .scroll-hint {
-      position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
-      z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 8px;
-      color: rgba(255,255,255,0.25); font-size: 11px; letter-spacing: 0.1em;
+      position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
+      z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 6px;
+      color: rgba(255,255,255,0.22); font-size: 10px; letter-spacing: 0.12em;
       animation: fadeInUp 1s ease 1.5s both;
     }
     .scroll-hint .bar {
-      width: 1px; height: 40px; background: linear-gradient(to bottom, rgba(255,255,255,0.3), transparent);
+      width: 1px; height: 36px;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.25), transparent);
       animation: scrollBar 2s ease-in-out infinite;
     }
     @keyframes scrollBar { 0%,100%{opacity:0.3;transform:scaleY(0.5)} 50%{opacity:1;transform:scaleY(1)} }
     @keyframes fadeInUp { from{opacity:0;transform:translateX(-50%) translateY(10px)} to{opacity:1;transform:translateX(-50%) translateY(0)} }
 
-    /* ─── ENERGY NETWORK SECTION ─── */
-    .network {
-      padding: 120px 60px; position: relative;
-      background: linear-gradient(180deg, #03030A 0%, #07071A 50%, #03030A 100%);
-    }
+    /* ── 8 CAPABILITIES ── */
+    .capabilities { padding: 120px 60px; background: #03030A; }
+    .capabilities-header { text-align: center; margin-bottom: 64px; }
     .section-label {
       font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase;
-      color: #4A9EFF; font-weight: 500; margin-bottom: 16px;
+      color: #4A9EFF; font-weight: 500; margin-bottom: 14px;
     }
     .section-title {
-      font-size: clamp(28px, 4vw, 48px); font-weight: 700;
-      color: #fff; letter-spacing: -0.025em; line-height: 1.15;
-      max-width: 640px; margin-bottom: 16px;
+      font-size: clamp(26px, 3.5vw, 42px); font-weight: 700;
+      color: #fff; letter-spacing: -0.022em; line-height: 1.15;
+      max-width: 560px; margin: 0 auto 12px;
     }
     .section-sub {
-      font-size: 16px; color: rgba(255,255,255,0.4); font-weight: 300;
-      max-width: 520px; line-height: 1.7; margin-bottom: 60px;
+      font-size: 15px; color: rgba(255,255,255,0.35); font-weight: 300;
+      max-width: 460px; margin: 0 auto; line-height: 1.7;
     }
-    .network-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
-      background: rgba(255,255,255,0.04); border-radius: 16px; overflow: hidden;
+    .caps-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
+      background: rgba(255,255,255,0.04); border-radius: 20px; overflow: hidden; max-width: 1200px; margin: 0 auto;
     }
-    .network-card {
-      background: rgba(255,255,255,0.02); padding: 40px 36px;
-      transition: background 0.3s; cursor: default;
+    .cap-card {
+      background: rgba(255,255,255,0.015); padding: 36px 28px;
+      transition: background 0.3s; position: relative; overflow: hidden;
     }
-    .network-card:hover { background: rgba(255,255,255,0.05); }
-    .network-card .icon {
-      width: 48px; height: 48px; border-radius: 12px;
-      background: rgba(74,158,255,0.08); border: 1px solid rgba(74,158,255,0.15);
+    .cap-card::after {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(74,158,255,0.25), transparent);
+      opacity: 0; transition: opacity 0.3s;
+    }
+    .cap-card:hover { background: rgba(255,255,255,0.04); }
+    .cap-card:hover::after { opacity: 1; }
+    .cap-icon {
+      width: 44px; height: 44px; border-radius: 11px;
+      background: rgba(74,158,255,0.07); border: 1px solid rgba(74,158,255,0.12);
       display: flex; align-items: center; justify-content: center;
-      font-size: 22px; margin-bottom: 20px;
+      font-size: 20px; margin-bottom: 18px;
     }
-    .network-card h3 {
-      font-size: 17px; font-weight: 600; color: #fff; margin-bottom: 10px;
-    }
-    .network-card p {
-      font-size: 14px; color: rgba(255,255,255,0.35); line-height: 1.65;
+    .cap-card h3 { font-size: 15px; font-weight: 600; color: #fff; margin-bottom: 8px; }
+    .cap-card p { font-size: 13px; color: rgba(255,255,255,0.3); line-height: 1.6; }
+    .cap-card .cap-tag {
+      display: inline-block; margin-top: 12px; font-size: 10px;
+      padding: 2px 9px; border-radius: 100px;
+      background: rgba(74,158,255,0.07); color: #4A9EFF;
+      border: 1px solid rgba(74,158,255,0.15);
     }
 
-    /* ─── PRODUCTS ─── */
-    .products {
-      padding: 120px 60px;
-      background: #03030A;
-    }
-    .products-header { text-align: center; margin-bottom: 64px; }
+    /* ── PRODUCTS ── */
+    .products { padding: 120px 60px; background: linear-gradient(180deg, #03030A 0%, #07070F 100%); }
+    .products-header { text-align: center; margin-bottom: 56px; }
     .products-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 1200px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
+      max-width: 1200px; margin: 0 auto;
     }
     .product-card {
-      border: 1px solid rgba(255,255,255,0.07); border-radius: 16px;
-      padding: 40px 32px; background: rgba(255,255,255,0.01);
+      border: 1px solid rgba(255,255,255,0.06); border-radius: 16px;
+      padding: 32px 24px; background: rgba(255,255,255,0.01);
       transition: all 0.35s; cursor: default; position: relative; overflow: hidden;
     }
-    .product-card::before {
-      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(74,158,255,0.3), transparent);
-      opacity: 0; transition: opacity 0.35s;
-    }
-    .product-card:hover { border-color: rgba(74,158,255,0.2); transform: translateY(-4px); }
-    .product-card:hover::before { opacity: 1; }
-    .product-icon { font-size: 32px; margin-bottom: 20px; }
-    .product-card h3 { font-size: 18px; font-weight: 600; color: #fff; margin-bottom: 10px; }
-    .product-card p { font-size: 14px; color: rgba(255,255,255,0.35); line-height: 1.65; }
+    .product-card:hover { border-color: rgba(74,158,255,0.2); transform: translateY(-3px); background: rgba(74,158,255,0.02); }
+    .product-icon { font-size: 28px; margin-bottom: 16px; }
+    .product-card h3 { font-size: 16px; font-weight: 600; color: #fff; margin-bottom: 8px; }
+    .product-card p { font-size: 13px; color: rgba(255,255,255,0.32); line-height: 1.6; }
     .product-tag {
       display: inline-block; padding: 3px 10px; border-radius: 100px;
-      font-size: 11px; background: rgba(74,158,255,0.08); color: #4A9EFF;
-      border: 1px solid rgba(74,158,255,0.2); margin-top: 16px;
+      font-size: 10px; margin-top: 14px;
+      background: rgba(74,158,255,0.07); color: #4A9EFF; border: 1px solid rgba(74,158,255,0.15);
     }
+    .product-link {
+      display: inline-flex; align-items: center; gap: 5px;
+      margin-top: 16px; font-size: 12px; color: rgba(74,158,255,0.5);
+      transition: color 0.2s;
+    }
+    .product-link:hover { color: #4A9EFF; }
 
-    /* ─── WHY SOLARIPPLE ─── */
-    .why {
-      padding: 120px 60px;
-      background: linear-gradient(180deg, #03030A 0%, #08081A 50%, #03030A 100%);
+    /* ── FEATURE DETAIL (3 rows) ── */
+    .features { padding: 120px 60px; background: #03030A; }
+    .feature-row {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 72px;
+      max-width: 1100px; margin: 0 auto 80px; align-items: center;
     }
-    .why-grid {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 80px;
-      align-items: center; max-width: 1200px; margin: 0 auto;
+    .feature-row:last-child { margin-bottom: 0; }
+    .feature-row.reverse { direction: rtl; }
+    .feature-row.reverse > * { direction: ltr; }
+    .feature-text h3 { font-size: 22px; font-weight: 700; color: #fff; margin-bottom: 14px; letter-spacing: -0.01em; }
+    .feature-text p { font-size: 14px; color: rgba(255,255,255,0.38); line-height: 1.8; margin-bottom: 20px; }
+    .feature-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .feature-list li { font-size: 13px; color: rgba(255,255,255,0.45); display: flex; align-items: center; gap: 10px; }
+    .feature-list li::before { content: '✓'; color: #4A9EFF; font-weight: 700; font-size: 12px; }
+    .feature-visual {
+      background: rgba(255,255,255,0.025); border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 16px; height: 220px; display: flex; align-items: center; justify-content: center;
+      font-size: 52px; position: relative; overflow: hidden;
     }
-    .why-left { position: relative; }
-    .why-globe-wrap {
-      width: 100%; aspect-ratio: 1; max-width: 480px;
-      border-radius: 50%; position: relative;
-      background: radial-gradient(circle at 35% 35%, rgba(74,158,255,0.12) 0%, transparent 60%);
+    .feature-visual::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(circle at 50% 50%, rgba(74,158,255,0.06) 0%, transparent 65%);
     }
-    .why-points { display: flex; flex-direction: column; gap: 28px; }
-    .why-point { display: flex; gap: 20px; align-items: flex-start; }
-    .why-point .num {
-      width: 36px; height: 36px; border-radius: 10px; flex-shrink: 0;
-      background: rgba(74,158,255,0.08); border: 1px solid rgba(74,158,255,0.15);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 13px; font-weight: 700; color: #4A9EFF;
-    }
-    .why-point h4 { font-size: 16px; font-weight: 600; color: #fff; margin-bottom: 4px; }
-    .why-point p { font-size: 14px; color: rgba(255,255,255,0.35); line-height: 1.6; }
+    .feature-visual canvas { border-radius: 16px; }
 
-    /* ─── CTA ─── */
+    /* ── CTA ── */
     .cta-section {
       padding: 120px 60px; text-align: center;
       background: #03030A; position: relative; overflow: hidden;
     }
     .cta-section::before {
       content: ''; position: absolute; inset: 0;
-      background: radial-gradient(ellipse 60% 50% at 50% 50%, rgba(74,158,255,0.06) 0%, transparent 70%);
+      background: radial-gradient(ellipse 55% 45% at 50% 50%, rgba(74,158,255,0.05) 0%, transparent 70%);
     }
     .cta-title {
-      font-size: clamp(30px, 4vw, 52px); font-weight: 700;
-      color: #fff; letter-spacing: -0.025em; margin-bottom: 16px;
-      position: relative;
+      font-size: clamp(28px, 3.8vw, 48px); font-weight: 700;
+      color: #fff; letter-spacing: -0.022em; margin-bottom: 14px; position: relative;
     }
-    .cta-sub {
-      font-size: 16px; color: rgba(255,255,255,0.4); margin-bottom: 48px;
-      position: relative;
-    }
+    .cta-sub { font-size: 15px; color: rgba(255,255,255,0.38); margin-bottom: 44px; position: relative; }
 
-    /* ─── FOOTER ─── */
+    /* ── FOOTER ── */
     footer {
       padding: 60px; background: #03030A;
-      border-top: 1px solid rgba(255,255,255,0.05);
+      border-top: 1px solid rgba(255,255,255,0.04);
     }
     .footer-grid {
-      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 60px;
-      margin-bottom: 60px;
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 56px; margin-bottom: 48px;
     }
-    .footer-brand p {
-      font-size: 14px; color: rgba(255,255,255,0.3); margin-top: 12px;
-      max-width: 280px; line-height: 1.7;
-    }
-    .footer-col h4 { font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 16px; }
+    .footer-brand p { font-size: 13px; color: rgba(255,255,255,0.28); margin-top: 10px; max-width: 260px; line-height: 1.7; }
+    .footer-col h4 { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 14px; }
     .footer-col ul { list-style: none; }
-    .footer-col ul li { margin-bottom: 10px; }
-    .footer-col a { font-size: 14px; color: rgba(255,255,255,0.3); transition: color 0.2s; }
+    .footer-col ul li { margin-bottom: 9px; }
+    .footer-col a { font-size: 13px; color: rgba(255,255,255,0.28); transition: color 0.2s; }
     .footer-col a:hover { color: rgba(255,255,255,0.7); }
     .footer-bottom {
-      text-align: center; padding-top: 32px;
+      text-align: center; padding-top: 28px;
       border-top: 1px solid rgba(255,255,255,0.04);
-      font-size: 12px; color: rgba(255,255,255,0.2);
+      font-size: 11px; color: rgba(255,255,255,0.18);
     }
 
     /* Animations */
-    .animate-on-scroll { opacity: 0; transform: translateY(24px); transition: all 0.7s cubic-bezier(0.22, 1, 0.36, 1); }
+    .animate-on-scroll { opacity: 0; transform: translateY(20px); transition: all 0.65s cubic-bezier(0.22, 1, 0.36, 1); }
     .animate-on-scroll.in-view { opacity: 1; transform: translateY(0); }
 
-    @media (max-width: 900px) {
+    @media (max-width: 1024px) {
+      .caps-grid { grid-template-columns: repeat(2, 1fr); }
+      .products-grid { grid-template-columns: repeat(2, 1fr); }
+      .feature-row { grid-template-columns: 1fr; gap: 32px; }
+      .feature-row.reverse { direction: ltr; }
+    }
+    @media (max-width: 768px) {
       nav { padding: 0 24px; }
       .nav-links { display: none; }
-      .network, .products, .why, .cta-section { padding: 80px 24px; }
-      .network-grid, .products-grid { grid-template-columns: 1fr; }
-      .why-grid { grid-template-columns: 1fr; }
-      .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
-      .hero-stats { gap: 30px; flex-wrap: wrap; }
+      .capabilities, .products, .features, .cta-section { padding: 80px 24px; }
+      .caps-grid, .products-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 36px; }
+      .hero-stats { gap: 24px; flex-wrap: wrap; }
     }
   </style>
 </head>
@@ -282,22 +267,19 @@
 <nav>
   <div class="nav-logo">Solar<span>ipple</span></div>
   <ul class="nav-links">
+    <li><a href="#capabilities">核心能力</a></li>
     <li><a href="#products">产品</a></li>
-    <li><a href="#why">技术</a></li>
-    <li><a href="#network">解决方案</a></li>
-    <li><a href="#cta">联系我们</a></li>
+    <li><a href="#features">技术详情</a></li>
+    <li><a href="#cta">关于</a></li>
   </ul>
   <a href="https://enos.solaripple.com" class="nav-cta">进入 EnOS →</a>
 </nav>
 
-<!-- HERO with Earth -->
+<!-- HERO -->
 <section class="hero">
   <canvas id="hero-canvas"></canvas>
   <div class="hero-content">
-    <div class="hero-badge">
-      <div class="dot"></div>
-      AI-Native Energy Intelligence
-    </div>
+    <div class="hero-badge"><div class="dot"></div>AI-Native Energy Intelligence</div>
     <h1>让每一度电<br/><span class="accent">更聪明</span></h1>
     <p class="hero-sub">
       Solaripple 以 AI 为能源大脑，连接全球工商业光储站点，
@@ -305,71 +287,73 @@
     </p>
     <div class="hero-actions">
       <a href="https://enos.solaripple.com" class="btn-primary">免费开始体验 →</a>
-      <a href="#products" class="btn-ghost">了解更多</a>
+      <a href="#capabilities" class="btn-ghost">了解更多</a>
     </div>
     <div class="hero-stats">
-      <div class="hero-stat">
-        <div class="num" data-count="128">0</div>
-        <div class="label">全球站点</div>
-      </div>
-      <div class="hero-stat">
-        <div class="num" data-count="4800" data-suffix="MW">0 MW</div>
-        <div class="label">管理容量</div>
-      </div>
-      <div class="hero-stat">
-        <div class="num" data-count="99.97" data-decimal="2">0%</div>
-        <div class="label">系统可用率</div>
-      </div>
-      <div class="hero-stat">
-        <div class="num" data-count="36" data-suffix="M t">0 M t</div>
-        <div class="label">年减碳排放</div>
-      </div>
+      <div class="hero-stat"><div class="num" data-count="128">0</div><div class="label">全球站点</div></div>
+      <div class="hero-stat"><div class="num" data-count="4800" data-suffix="MW">0 MW</div><div class="label">管理容量</div></div>
+      <div class="hero-stat"><div class="num" data-count="99.97" data-decimal="2">0%</div><div class="label">系统可用率</div></div>
+      <div class="hero-stat"><div class="num" data-count="36" data-suffix="M t">0 M t</div><div class="label">年减碳排放</div></div>
     </div>
   </div>
-  <div class="scroll-hint">
-    <div class="bar"></div>
-    <span>SCROLL</span>
-  </div>
+  <div class="scroll-hint"><div class="bar"></div><span>SCROLL</span></div>
 </section>
 
-<!-- ENERGY NETWORK -->
-<section class="network" id="network">
-  <div class="section-label">AI Energy Network</div>
-  <h2 class="section-title">一个平台，掌控全球能源资产</h2>
-  <p class="section-sub">
-    从电站数字孪生到 VPP 电力交易，Solaripple AI 全程自主决策，
-    让能源资产始终运行在最优状态。
-  </p>
-  <div class="network-grid">
-    <div class="network-card animate-on-scroll">
-      <div class="icon">🌐</div>
+<!-- 8 CAPABILITIES -->
+<section class="capabilities" id="capabilities">
+  <div class="capabilities-header">
+    <div class="section-label">Core Capabilities</div>
+    <h2 class="section-title">八大数字能力，全链路覆盖</h2>
+    <p class="section-sub">从数据采集到收益优化，AI 全程自主决策</p>
+  </div>
+  <div class="caps-grid">
+    <div class="cap-card animate-on-scroll">
+      <div class="cap-icon">🌐</div>
       <h3>数字孪生监控</h3>
-      <p>真实物理世界与数字模型实时同步，储能与光伏设备状态毫秒级感知，告警压缩至分钟级别。</p>
+      <p>真实物理世界与数字模型实时同步，毫秒级感知储能、光伏、充电桩状态</p>
+      <span class="cap-tag">3D + SVG 能量流</span>
     </div>
-    <div class="network-card animate-on-scroll">
-      <div class="icon">🧠</div>
-      <h3>AI 智能调度</h3>
-      <p>LSTM + Prophet 双模型预测负荷与电价，自主生成充放电策略，峰谷套利收益提升 23%。</p>
+    <div class="cap-card animate-on-scroll">
+      <div class="cap-icon">🧠</div>
+      <h3>AI 负荷预测</h3>
+      <p>LSTM + Prophet 双模型，48 小时光伏出力与负荷超前规划，精度达 96%</p>
+      <span class="cap-tag">LSTM · Prophet</span>
     </div>
-    <div class="network-card animate-on-scroll">
-      <div class="icon">⚡</div>
-      <h3>虚拟电厂交易</h3>
-      <p>聚合分布式储能参与电力现货市场，实时响应电网调度信号，容量申报与竞价全自动完成。</p>
+    <div class="cap-card animate-on-scroll">
+      <div class="cap-icon">⚡</div>
+      <h3>智能调度优化</h3>
+      <p>储能 SOC 动态约束，峰谷套利策略自动生成，收益提升 23%</p>
+      <span class="cap-tag">SOC 感知调度</span>
     </div>
-    <div class="network-card animate-on-scroll">
-      <div class="icon">🔧</div>
-      <h3>预测性维护</h3>
-      <p>AI 根因诊断引擎分析故障模式，自动生成运维工单，故障定位时间从小时级缩短至秒级。</p>
+    <div class="cap-card animate-on-scroll">
+      <div class="cap-icon">🔋</div>
+      <h3>VPP 虚拟电厂</h3>
+      <p>IEC 60870-5-104 协议，秒级响应电网 AGC 调度，参与调频辅助服务市场</p>
+      <span class="cap-tag">IEC 104 · 5秒刷新</span>
     </div>
-    <div class="network-card animate-on-scroll">
-      <div class="icon">📊</div>
-      <h3>收益优化</h3>
-      <p>峰谷套利 + 需量管理 + 需求响应三维叠加，储能资产 IRR 平均提升 6-9%。</p>
+    <div class="cap-card animate-on-scroll">
+      <div class="cap-icon">🔧</div>
+      <h3>AI 根因诊断</h3>
+      <p>RAG 知识库 + BM25 多维评分，告警压缩 5000→10 条/小时，定位 < 3 秒</p>
+      <span class="cap-tag">RAG · 故障预测</span>
     </div>
-    <div class="network-card animate-on-scroll">
-      <div class="icon">🌍</div>
+    <div class="cap-card animate-on-scroll">
+      <div class="cap-icon">📊</div>
+      <h3>收益全链路分析</h3>
+      <p>峰谷套利 + 需量管理 + 需求响应三维叠加，储能 IRR 提升 6-9%</p>
+      <span class="cap-tag">IRR 优化</span>
+    </div>
+    <div class="cap-card animate-on-scroll">
+      <div class="cap-icon">🌍</div>
       <h3>碳排放追踪</h3>
-      <p>实时量化每一千瓦时的绿色价值，生成符合国际标准的碳资产报告，对接碳交易市场。</p>
+      <p>实时量化每千瓦时绿色价值，生成国际标准碳资产报告，对接碳交易市场</p>
+      <span class="cap-tag">碳信用</span>
+    </div>
+    <div class="cap-card animate-on-scroll">
+      <div class="cap-icon">🔄</div>
+      <h3>预测性维护</h3>
+      <p>基于历史故障模式分析，自动生成运维工单，故障率降低 70%</p>
+      <span class="cap-tag">自动化工单</span>
     </div>
   </div>
 </section>
@@ -377,77 +361,86 @@
 <!-- PRODUCTS -->
 <section class="products" id="products">
   <div class="products-header">
-    <div class="section-label">Core Products</div>
-    <h2 class="section-title" style="margin:0 auto">三大核心产品，全链路覆盖</h2>
+    <div class="section-label">Product Matrix</div>
+    <h2 class="section-title">四大核心产品，全栈能源数字化</h2>
   </div>
   <div class="products-grid">
     <div class="product-card animate-on-scroll">
       <div class="product-icon">⚡</div>
       <h3>Ripple EnOS</h3>
-      <p>工商业光储数字孪生平台 · AI调度 · VPP交易 · 实时监控</p>
+      <p>数字孪生平台 · AI调度 · VPP交易 · 实时监控</p>
       <span class="product-tag">数字孪生</span>
+      <a href="https://enos.solaripple.com" class="product-link">立即体验 →</a>
     </div>
     <div class="product-card animate-on-scroll">
-      <div class="product-icon">🔋</div>
-      <h3>Ripple Storage</h3>
-      <p>全系列储能产品 · SiC功率器件 · 极致转换效率 · 标准化交付</p>
-      <span class="product-tag">储能硬件</span>
+      <div class="product-icon">🎛️</div>
+      <h3>Ripple Master</h3>
+      <p>IEC 104 协议 · AGC 自动调度 · 收益全链路分析</p>
+      <span class="product-tag">VPP 交易</span>
+      <a href="https://master.solaripple.com" class="product-link">进入平台 →</a>
     </div>
     <div class="product-card animate-on-scroll">
-      <div class="product-icon">🚀</div>
-      <h3>RippleOps</h3>
-      <p>AI驱动的智能运维平台 · 自动派工 · 根因诊断 · 备件管理</p>
-      <span class="product-tag">智能运维</span>
+      <div class="product-icon">📊</div>
+      <h3>Ripple Monitor</h3>
+      <p>能源情报聚合 · 电力现货 · 碳市场 · 大宗商品</p>
+      <span class="product-tag">能源情报</span>
+      <a href="https://monitor.solaripple.com" class="product-link">查看情报 →</a>
+    </div>
+    <div class="product-card animate-on-scroll">
+      <div class="product-icon">⚡≈</div>
+      <h3>RippleText</h3>
+      <p>极速渲染引擎 · 零 DOM 回流 · 比传统方案快 3000 倍</p>
+      <span class="product-tag">渲染引擎</span>
+      <a href="https://rippletext.solaripple.com" class="product-link">开源项目 →</a>
     </div>
   </div>
 </section>
 
-<!-- WHY SOLARIPPLE -->
-<section class="why" id="why">
-  <div class="why-grid">
-    <div class="why-left">
-      <div class="why-globe-wrap">
-        <canvas id="mini-globe" style="width:100%;height:100%;border-radius:50%;"></canvas>
-      </div>
+<!-- FEATURES DETAIL -->
+<section class="features" id="features">
+  <div class="section-label" style="text-align:center">Deep Dive</div>
+  <h2 class="section-title" style="margin:0 auto 60px;text-align:center">核心技术深度解析</h2>
+
+  <div class="feature-row animate-on-scroll">
+    <div class="feature-text">
+      <h3>群体智能数字孪生</h3>
+      <p>EnOS 平台将物理电站映射为实时数字孪生体。LSTM 神经网络预测 48 小时光伏出力，结合储能 SOC 动态调度策略，实现峰谷套利收益最大化。</p>
+      <ul class="feature-list">
+        <li>3D 可视化 + 实时 SVG 能量流</li>
+        <li>LSTM 预测：光伏/负荷 48h 超前规划</li>
+        <li>储能 AI 调度：SOC 最优充放策略</li>
+        <li>InfluxDB 时序数据，5 分钟分辨率</li>
+      </ul>
     </div>
-    <div class="why-right">
-      <div class="section-label">Why Solaripple</div>
-      <h2 class="section-title">以AI重新定义<br/>能源资产运营</h2>
-      <p class="section-sub" style="margin-bottom:40px">
-        我们相信，最好的能源管理是让人类从重复决策中解放，
-        将精力投入真正的创新与创造。
-      </p>
-      <div class="why-points">
-        <div class="why-point animate-on-scroll">
-          <div class="num">01</div>
-          <div>
-            <h4>告警压缩 · 5000→10</h4>
-            <p>AI 引擎将海量 IoT 告警压缩至 10-20 条/小时，根因定位 < 3 秒</p>
-          </div>
-        </div>
-        <div class="why-point animate-on-scroll">
-          <div class="num">02</div>
-          <div>
-            <h4>调度优化 · IRR+6-9%</h4>
-            <p>LSTM 负荷预测 + Prophet 电价预测，自主生成充放电策略</p>
-          </div>
-        </div>
-        <div class="why-point animate-on-scroll">
-          <div class="num">03</div>
-          <div>
-            <h4>预测性维护 · 故障率↓70%</h4>
-            <p>RAG 知识库 + BM25 多维评分，自动生成运维工单</p>
-          </div>
-        </div>
-        <div class="why-point animate-on-scroll">
-          <div class="num">04</div>
-          <div>
-            <h4>VPP 交易 · 全自动</h4>
-            <p>容量聚合 → 市场申报 → 调度信号响应 → 收益结算，端到端无人值守</p>
-          </div>
-        </div>
-      </div>
+    <div class="feature-visual" id="feat1-canvas"></div>
+  </div>
+
+  <div class="feature-row reverse animate-on-scroll">
+    <div class="feature-text">
+      <h3>虚拟电厂（VPP）IEC 104 交易</h3>
+      <p>Master 平台模拟 IEC 60870-5-104 协议，实时接收电网 AGC 调度指令。储能作为灵活资源参与调频辅助服务市场，秒级响应频率偏差。</p>
+      <ul class="feature-list">
+        <li>IEC 104 M_ME_TF_1 / C_SE_TF_1 协议</li>
+        <li>AGC 自动调度信号，5 秒刷新</li>
+        <li>日/月/年收益全链路报告</li>
+        <li>支持多储能资源聚合</li>
+      </ul>
     </div>
+    <div class="feature-visual" id="feat2-canvas"></div>
+  </div>
+
+  <div class="feature-row animate-on-scroll">
+    <div class="feature-text">
+      <h3>Pretext — 极速渲染引擎</h3>
+      <p>自研 Pretext 文本渲染引擎，通过一次性 Canvas 预测量 + 纯算术分行，替代传统 DOM offsetWidth 测量。SVG 标签宽度预计算，零 DOM 访问，零回流抖动。</p>
+      <ul class="feature-list">
+        <li>Gzip 压缩后仅 1.2KB，零依赖</li>
+        <li>prepare() + layout() 两阶段 API</li>
+        <li>SVG / ECharts / Recharts 通用</li>
+        <li>GitHub 开源：xuegangwu/pretext</li>
+      </ul>
+    </div>
+    <div class="feature-visual" id="feat3-canvas"></div>
   </div>
 </section>
 
@@ -473,16 +466,18 @@
       <h4>产品</h4>
       <ul>
         <li><a href="https://enos.solaripple.com">Ripple EnOS</a></li>
-        <li><a href="#products">Ripple Storage</a></li>
-        <li><a href="#products">RippleOps</a></li>
+        <li><a href="https://master.solaripple.com">Ripple Master</a></li>
+        <li><a href="https://monitor.solaripple.com">Ripple Monitor</a></li>
+        <li><a href="https://rippletext.solaripple.com">RippleText</a></li>
       </ul>
     </div>
     <div class="footer-col">
-      <h4>解决方案</h4>
+      <h4>技术</h4>
       <ul>
-        <li><a href="#network">数字孪生</a></li>
-        <li><a href="#network">AI 调度</a></li>
-        <li><a href="#network">虚拟电厂</a></li>
+        <li><a href="https://enos.solaripple.com">数字孪生</a></li>
+        <li><a href="https://enos.solaripple.com">AI 调度</a></li>
+        <li><a href="https://enos.solaripple.com">虚拟电厂</a></li>
+        <li><a href="https://github.com/xuegangwu/ems">GitHub 开源</a></li>
       </ul>
     </div>
     <div class="footer-col">
@@ -493,15 +488,13 @@
       </ul>
     </div>
   </div>
-  <div class="footer-bottom">
-    © 2026 光之涟漪 (Solaripple) · 沪ICP备2026009101号 · 版权所有
-  </div>
+  <div class="footer-bottom">© 2026 光之涟漪 (Solaripple) · 沪ICP备2026009101号 · 版权所有</div>
 </footer>
 
-<!-- Three.js Earth + Stars -->
+<!-- Three.js -->
 <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
 <script>
-// ── HERO: Earth with Atmosphere ──────────────────────────
+// ── HERO EARTH ────────────────────────────────────────────
 (function() {
   const canvas = document.getElementById('hero-canvas');
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
@@ -512,38 +505,32 @@
   const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
   camera.position.z = 3.2;
 
-  // Stars background
+  // Stars
   const starsGeo = new THREE.BufferGeometry();
-  const starCount = 3000;
-  const starPos = new Float32Array(starCount * 3);
-  for (let i = 0; i < starCount * 3; i++) {
-    starPos[i] = (Math.random() - 0.5) * 600;
-  }
+  const starPos = new Float32Array(3000 * 3);
+  for (let i = 0; i < 3000 * 3; i++) starPos[i] = (Math.random() - 0.5) * 600;
   starsGeo.setAttribute('position', new THREE.BufferAttribute(starPos, 3));
-  const starsMat = new THREE.PointsMaterial({ color: 0xffffff, size: 0.15, sizeAttenuation: true });
-  scene.add(new THREE.Points(starsGeo, starsMat));
+  scene.add(new THREE.Points(starsGeo, new THREE.PointsMaterial({ color: 0xffffff, size: 0.14 })));
 
   // Earth sphere
-  const earthGeo = new THREE.SphereGeometry(1, 64, 64);
-  const earthMat = new THREE.MeshBasicMaterial({
-    color: 0x0a0f1e, wireframe: false,
-  });
-  const earth = new THREE.Mesh(earthGeo, earthMat);
+  const earth = new THREE.Mesh(
+    new THREE.SphereGeometry(1, 64, 64),
+    new THREE.MeshBasicMaterial({ color: 0x080C1A })
+  );
   scene.add(earth);
 
-  // Wireframe grid on Earth
-  const wireMat = new THREE.MeshBasicMaterial({ color: 0x1a3060, wireframe: true, transparent: true, opacity: 0.25 });
-  const wireSphere = new THREE.Mesh(new THREE.SphereGeometry(1.003, 48, 48), wireMat);
-  scene.add(wireSphere);
+  // Grid wireframe
+  const wireMat = new THREE.MeshBasicMaterial({ color: 0x1a3060, wireframe: true, transparent: true, opacity: 0.22 });
+  scene.add(new THREE.Mesh(new THREE.SphereGeometry(1.003, 48, 48), wireMat));
 
   // Latitude rings
   for (let lat = -60; lat <= 60; lat += 20) {
     const r = Math.cos(lat * Math.PI / 180);
-    const y = Math.sin(lat * Math.PI / 180);
-    const ringGeo = new THREE.RingGeometry(r * 0.995, r * 1.005, 128);
-    const ringMat = new THREE.MeshBasicMaterial({ color: 0x4A9EFF, side: THREE.DoubleSide, transparent: true, opacity: 0.12 });
-    const ring = new THREE.Mesh(ringGeo, ringMat);
-    ring.position.y = y * 0.998;
+    const ring = new THREE.Mesh(
+      new THREE.RingGeometry(r * 0.996, r * 1.006, 128),
+      new THREE.MeshBasicMaterial({ color: 0x4A9EFF, side: THREE.DoubleSide, transparent: true, opacity: 0.1 })
+    );
+    ring.position.y = Math.sin(lat * Math.PI / 180) * 0.998;
     ring.rotation.x = Math.PI / 2;
     scene.add(ring);
   }
@@ -552,9 +539,9 @@
   for (let lon = 0; lon < 180; lon += 15) {
     const points = [];
     for (let lat = -80; lat <= 80; lat += 4) {
-      const r = 1.001;
       const theta = lon * Math.PI / 180;
       const phi = (90 - lat) * Math.PI / 180;
+      const r = 1.001;
       points.push(new THREE.Vector3(
         r * Math.sin(phi) * Math.cos(theta),
         r * Math.cos(phi),
@@ -562,25 +549,22 @@
       ));
     }
     const curve = new THREE.CatmullRomCurve3(points);
-    const tubeGeo = new THREE.TubeGeometry(curve, 32, 0.003, 4, false);
-    const tubeMat = new THREE.MeshBasicMaterial({ color: 0x4A9EFF, transparent: true, opacity: 0.12 });
-    scene.add(new THREE.Mesh(tubeGeo, tubeMat));
+    const tube = new THREE.Mesh(
+      new THREE.TubeGeometry(curve, 32, 0.003, 4, false),
+      new THREE.MeshBasicMaterial({ color: 0x4A9EFF, transparent: true, opacity: 0.1 })
+    );
+    scene.add(tube);
   }
 
-  // Atmosphere glow (Fresnel-like: layered transparent spheres)
+  // Atmosphere glow
   for (let i = 1; i <= 3; i++) {
-    const atmoGeo = new THREE.SphereGeometry(1 + i * 0.04, 32, 32);
-    const atmoMat = new THREE.MeshBasicMaterial({
-      color: 0x4A9EFF,
-      transparent: true,
-      opacity: 0.04 / i,
-      side: THREE.BackSide,
-      depthWrite: false,
-    });
-    scene.add(new THREE.Mesh(atmoGeo, atmoMat));
+    scene.add(new THREE.Mesh(
+      new THREE.SphereGeometry(1 + i * 0.045, 32, 32),
+      new THREE.MeshBasicMaterial({ color: 0x4A9EFF, transparent: true, opacity: 0.04 / i, side: THREE.BackSide, depthWrite: false })
+    ));
   }
 
-  // Energy pulse particles
+  // Energy particles
   const pCount = 400;
   const pGeo = new THREE.BufferGeometry();
   const pPos = new Float32Array(pCount * 3);
@@ -589,38 +573,35 @@
     const theta = Math.random() * Math.PI * 2;
     const phi = Math.acos(2 * Math.random() - 1);
     const r = 1.05 + Math.random() * 0.5;
-    pPos[i * 3] = r * Math.sin(phi) * Math.cos(theta);
-    pPos[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
-    pPos[i * 3 + 2] = r * Math.cos(phi);
+    pPos[i*3] = r * Math.sin(phi) * Math.cos(theta);
+    pPos[i*3+1] = r * Math.sin(phi) * Math.sin(theta);
+    pPos[i*3+2] = r * Math.cos(phi);
     pData.push({ speed: 0.003 + Math.random() * 0.005, offset: Math.random() * Math.PI * 2, r });
   }
   pGeo.setAttribute('position', new THREE.BufferAttribute(pPos, 3));
-  const pMat = new THREE.PointsMaterial({ color: 0x4A9EFF, size: 0.025, transparent: true, opacity: 0.7, sizeAttenuation: true });
-  const particles = new THREE.Points(pGeo, pMat);
+  const particles = new THREE.Points(pGeo, new THREE.PointsMaterial({ color: 0x4A9EFF, size: 0.022, transparent: true, opacity: 0.65, sizeAttenuation: true }));
   scene.add(particles);
 
-  // Energy connection arcs between nodes
+  // Node arcs
   const nodes = [
     [0.5, 0.3, 0.8], [-0.6, 0.1, 0.7], [0.1, 0.8, 0.5],
     [-0.3, -0.5, 0.8], [0.8, -0.2, 0.4], [-0.7, 0.4, -0.3],
     [0.2, -0.8, 0.4], [0.9, 0.1, -0.2]
   ];
   nodes.forEach((n, i) => {
-    const nodeMat = new THREE.MeshBasicMaterial({ color: 0x4A9EFF, transparent: true, opacity: 0.8 });
-    const node = new THREE.Mesh(new THREE.SphereGeometry(0.025, 8, 8), nodeMat);
-    node.position.set(...n);
-    scene.add(node);
-    // Arc to next node
+    scene.add(Object.assign(new THREE.Mesh(
+      new THREE.SphereGeometry(0.025, 8, 8),
+      new THREE.MeshBasicMaterial({ color: 0x4A9EFF, transparent: true, opacity: 0.8 })
+    ), { position: new THREE.Vector3(...n) }));
     const next = nodes[(i + 2) % nodes.length];
-    const mid = n.map((v, j) => (v + next[j]) / 2 + 0.2);
+    const mid = n.map((v, j) => (v + next[j]) / 2 + 0.18);
     const curve = new THREE.QuadraticBezierCurve3(
-      new THREE.Vector3(...n),
-      new THREE.Vector3(...mid),
-      new THREE.Vector3(...next)
+      new THREE.Vector3(...n), new THREE.Vector3(...mid), new THREE.Vector3(...next)
     );
-    const arcGeo = new THREE.TubeGeometry(curve, 32, 0.004, 4, false);
-    const arcMat = new THREE.MeshBasicMaterial({ color: 0x4A9EFF, transparent: true, opacity: 0.15 });
-    scene.add(new THREE.Mesh(arcGeo, arcMat));
+    scene.add(new THREE.Mesh(
+      new THREE.TubeGeometry(curve, 32, 0.004, 4, false),
+      new THREE.MeshBasicMaterial({ color: 0x4A9EFF, transparent: true, opacity: 0.12 })
+    ));
   });
 
   let t = 0;
@@ -628,28 +609,15 @@
     requestAnimationFrame(animate);
     t += 0.008;
     earth.rotation.y += 0.002;
-    wireSphere.rotation.y += 0.002;
-    // Rotate particles with earth
     particles.rotation.y += 0.001;
-    // Pulse atmosphere
     scene.children.forEach((c, i) => {
       if (c.material && c.material.opacity !== undefined && i > 1 && i < 6) {
         c.scale.setScalar(1 + Math.sin(t * 0.5 + i) * 0.015);
       }
     });
-    // Particle twinkle
-    const pos = particles.geometry.attributes.position.array;
-    for (let i = 0; i < pCount; i++) {
-      const d = pData[i];
-      const idx = i * 3;
-      const base = d.r + Math.sin(t * d.speed * 100 + d.offset) * 0.1;
-      pos[idx] *= 0.9998; pos[idx+1] *= 0.9998; pos[idx+2] *= 0.9998;
-    }
-    particles.geometry.attributes.position.needsUpdate = true;
     renderer.render(scene, camera);
   }
   animate();
-
   window.addEventListener('resize', () => {
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
@@ -657,69 +625,71 @@
   });
 })();
 
-// ── MINI GLOBE (Why section) ──────────────────────────────
-(function() {
-  const canvas = document.getElementById('mini-globe');
-  if (!canvas) return;
-  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+// ── FEATURE CANVASES (mini globes) ────────────────────────
+function makeMiniGlobe(containerId) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+  const c = document.createElement('canvas');
+  c.style.cssText = 'width:100%;height:100%;border-radius:16px;';
+  container.appendChild(c);
+  const rect = { width: container.clientWidth || 400, height: container.clientHeight || 220 };
+  const renderer = new THREE.WebGLRenderer({ canvas: c, antialias: true, alpha: true });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-  const rect = canvas.parentElement.getBoundingClientRect();
   renderer.setSize(rect.width, rect.height);
 
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(40, 1, 0.1, 100);
-  camera.position.z = 2.8;
+  camera.position.z = 2.6;
 
-  // Mini stars
+  // Stars
   const sGeo = new THREE.BufferGeometry();
-  const sPos = new Float32Array(1500 * 3);
-  for (let i = 0; i < 1500 * 3; i++) sPos[i] = (Math.random() - 0.5) * 200;
+  const sPos = new Float32Array(800 * 3);
+  for (let i = 0; i < 800 * 3; i++) sPos[i] = (Math.random() - 0.5) * 100;
   sGeo.setAttribute('position', new THREE.BufferAttribute(sPos, 3));
-  scene.add(new THREE.Points(sGeo, new THREE.PointsMaterial({ color: 0xffffff, size: 0.1 })));
+  scene.add(new THREE.Points(sGeo, new THREE.PointsMaterial({ color: 0xffffff, size: 0.08 })));
 
   const earth = new THREE.Mesh(
-    new THREE.SphereGeometry(1, 48, 48),
-    new THREE.MeshBasicMaterial({ color: 0x0a0f1e })
+    new THREE.SphereGeometry(1, 36, 36),
+    new THREE.MeshBasicMaterial({ color: 0x080C1A })
   );
   scene.add(earth);
 
-  const wireMat = new THREE.MeshBasicMaterial({ color: 0x1a3060, wireframe: true, transparent: true, opacity: 0.25 });
-  scene.add(new THREE.Mesh(new THREE.SphereGeometry(1.003, 32, 32), wireMat));
+  const wireMat = new THREE.MeshBasicMaterial({ color: 0x1a3060, wireframe: true, transparent: true, opacity: 0.2 });
+  scene.add(new THREE.Mesh(new THREE.SphereGeometry(1.004, 28, 28), wireMat));
 
-  // Atmosphere layers
   for (let i = 1; i <= 2; i++) {
-    const m = new THREE.Mesh(
-      new THREE.SphereGeometry(1 + i * 0.06, 24, 24),
-      new THREE.MeshBasicMaterial({ color: 0x4A9EFF, transparent: true, opacity: 0.05 / i, side: THREE.BackSide, depthWrite: false })
-    );
-    scene.add(m);
+    scene.add(new THREE.Mesh(
+      new THREE.SphereGeometry(1 + i * 0.07, 20, 20),
+      new THREE.MeshBasicMaterial({ color: 0x4A9EFF, transparent: true, opacity: 0.045 / i, side: THREE.BackSide, depthWrite: false })
+    ));
   }
 
-  // Data flow rings
   for (let lat = -60; lat <= 60; lat += 30) {
     const r = Math.cos(lat * Math.PI / 180);
     const ring = new THREE.Mesh(
-      new THREE.RingGeometry(r * 0.998, r * 1.004, 64),
-      new THREE.MeshBasicMaterial({ color: 0x4A9EFF, side: THREE.DoubleSide, transparent: true, opacity: 0.1 })
+      new THREE.RingGeometry(r * 0.997, r * 1.005, 64),
+      new THREE.MeshBasicMaterial({ color: 0x4A9EFF, side: THREE.DoubleSide, transparent: true, opacity: 0.08 })
     );
     ring.position.y = Math.sin(lat * Math.PI / 180) * 0.998;
     ring.rotation.x = Math.PI / 2;
     scene.add(ring);
   }
 
+  // Feature-specific overlay text via sprite (skip for perf)
   function animate() {
     requestAnimationFrame(animate);
     earth.rotation.y += 0.003;
     renderer.render(scene, camera);
   }
   animate();
+}
 
-  const ro = new ResizeObserver(() => {
-    const r = canvas.parentElement.getBoundingClientRect();
-    renderer.setSize(r.width, r.height);
-  });
-  ro.observe(canvas.parentElement);
-})();
+// Feature canvases - wait for DOM
+setTimeout(() => {
+  makeMiniGlobe('feat1-canvas');
+  makeMiniGlobe('feat2-canvas');
+  makeMiniGlobe('feat3-canvas');
+}, 100);
 
 // ── SCROLL ANIMATIONS ────────────────────────────────────
 (function() {
@@ -732,11 +702,11 @@
         io.unobserve(item.target);
       }
     });
-  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+  }, { threshold: 0.06, rootMargin: '0px 0px -30px 0px' });
   els.forEach(el => io.observe(el));
 })();
 
-// ── COUNTER ANIMATION ────────────────────────────────────
+// ── COUNTER ANIMATION ─────────────────────────────────────
 (function() {
   const counters = document.querySelectorAll('[data-count]');
   const observer = new IntersectionObserver(entries => {
@@ -753,11 +723,7 @@
         const progress = Math.min(elapsed / duration, 1);
         const eased = 1 - Math.pow(1 - progress, 3);
         const current = target * eased;
-        if (decimal > 0) {
-          el.textContent = current.toFixed(decimal) + suffix;
-        } else {
-          el.textContent = Math.floor(current) + suffix;
-        }
+        el.textContent = (decimal > 0 ? current.toFixed(decimal) : Math.floor(current)) + suffix;
         if (progress < 1) requestAnimationFrame(update);
       }
       requestAnimationFrame(update);
